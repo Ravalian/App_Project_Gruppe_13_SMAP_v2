@@ -1,5 +1,45 @@
 <resources>
-    <string name="app_name">SMAP_App_Project_Grp_13_Carlog</string>
+    <string name="app_name">Carlog</string>
+
+    <!--Activity login-->
+    <string name="txt_ActivityLogin_Username">Username</string>
+    <string name="txt_ActivityLogin_Password">Password</string>
+    <string name="btn_ActivityLogin_Login">Login</string>
+    <string name="btn_ActivityLogin_SignUp">Sign UP</string>
+
+    <!--Activity register vehicle-->
+    <string name="txt_ActivityRegisterVehicle_LicencePlate">Enter your licence plate</string>
+    <string name="edit_ActivityRegisterVehicle_LicencePlate">Licence Plate</string>
+    <string name="btn_ActivityRegisterVehicle_Back">Back</string>
+
+    <!--Activity registered vehicles-->
+    <string name="txt_ActivityRegisteredVehicles_VehicleName">Vehicle Name</string>
+    <string name="btn_ActivityRegisteredVehicles_Back">Back</string>
+
+    <!--Activity user interface-->
+    <string name="btn_ActivityUserInterface_YourVehicles">Your Vehicles</string>
+    <string name="btn_ActivityUserInterface_YourLogs">Your Logs</string>
+    <string name="btn_ActivityUserInterface_RegisterVehicle">Register Vehicle</string>
+    <string name="btn_ActivityUserInterface_RegisteredVehicles">Registered Vehicles</string>
+
+    <!--Activity vehicle details-->
+    <string name="txt_ActivityVehicleDetails_Vehicle_Name">Vehicle name</string>
+    <string name="btn_ActivityVehicleDetails_Back">Back</string>
+    <string name="txt_ActivityVehicleDetails_Date">Date</string>
+    <string name="txt_ActivityVehicleDetails_Name">Name</string>
+
+    <!--Activity vehicle log-->
+
+    <!--Activity your logs-->
+    <string name="txt_ActivityYourLogs_YourLogs">Your logs</string>
+    <string name="btn_ActivityYourLogs_Back">Back</string>
+
+    <!--Activity your vehicles-->
+    <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
+    <string name="btn_ActivityYourVehicles_Back">Back</string>
+
+    <!--Activity all list item -->
+    <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
     <string name="Loginbtn">Login</string>
     <string name="welcome">Welcome To Carlog</string>
     <string name="LogoutBtn">Logout</string>
