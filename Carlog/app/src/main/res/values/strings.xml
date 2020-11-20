@@ -40,4 +40,7 @@
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
+    <string name="Loginbtn">Login</string>
+    <string name="welcome">Welcome To Carlog</string>
+    <string name="LogoutBtn">Logout</string>
 </resources>

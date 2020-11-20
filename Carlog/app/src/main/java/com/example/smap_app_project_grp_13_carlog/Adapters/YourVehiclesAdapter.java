@@ -25,6 +25,7 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
     private IYourVehiclesItemClickedListener listener;
 
+    /*
     private List<DBPlaceHolder> YVList = new List<DBPlaceHolder>() {
         @Override
         public int size() {
@@ -147,6 +148,7 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
             return null;
         }
     };
+    */
 
     public YourVehiclesAdapter(IYourVehiclesItemClickedListener listener) {
         this.listener = listener;
@@ -189,7 +191,7 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
         @Override
         public void onClick(View view) {
-            listener.onYourVehiclesClicked(YVList.get(getAdapterPosition()).getYVID());
+            //listener.onYourVehiclesClicked(YVList.get(getAdapterPosition()).getYVID());
         }
     }
 

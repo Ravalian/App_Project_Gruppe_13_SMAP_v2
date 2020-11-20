@@ -24,6 +24,7 @@ public class VehicleDetailsAdapter extends RecyclerView.Adapter<VehicleDetailsAd
 
     private IVehicleDetailsItemClickedListener listener;
 
+    /*
     private List<DBPlaceHolder> VDList = new List<DBPlaceHolder>() {
         @Override
         public int size() {
@@ -146,6 +147,7 @@ public class VehicleDetailsAdapter extends RecyclerView.Adapter<VehicleDetailsAd
             return null;
         }
     };
+    */
 
     public VehicleDetailsAdapter(IVehicleDetailsItemClickedListener listener) {
         this.listener = listener;
@@ -188,7 +190,7 @@ public class VehicleDetailsAdapter extends RecyclerView.Adapter<VehicleDetailsAd
 
         @Override
         public void onClick(View view) {
-            listener.onVehicleDetailsClicked(VDList.get(getAdapterPosition()).getVDID());
+            //listener.onVehicleDetailsClicked(VDList.get(getAdapterPosition()).getVDID());
         }
     }
 

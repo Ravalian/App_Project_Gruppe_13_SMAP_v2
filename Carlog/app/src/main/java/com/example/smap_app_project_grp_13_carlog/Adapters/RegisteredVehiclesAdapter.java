@@ -29,6 +29,7 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
 
     private ArrayList<VehicleDataFirebase> vehicles;
 
+    /*
     private List<DBPlaceHolder> RVList = new List<DBPlaceHolder>() {
         @Override
         public int size() {
@@ -151,6 +152,7 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
             return null;
         }
     };
+    */
 
     public RegisteredVehiclesAdapter(ArrayList<VehicleDataFirebase> v, IRegisteredVehiclesItemClickedListener listener) {
         this.listener = listener;
@@ -196,7 +198,7 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
 
         @Override
         public void onClick(View view) {
-            listener.onRegisteredVehicleClicked(RVList.get(getAdapterPosition()).getRVID());
+            //listener.onRegisteredVehicleClicked(RVList.get(getAdapterPosition()).getRVID());
         }
     }
 

@@ -23,6 +23,7 @@ public class YourLogsAdapter extends RecyclerView.Adapter<YourLogsAdapter.YourLo
 
     private IYourLogsItemClickedListener listener;
 
+    /*
     private List<DBPlaceHolder> YLList = new List<DBPlaceHolder>() {
         @Override
         public int size() {
@@ -145,14 +146,15 @@ public class YourLogsAdapter extends RecyclerView.Adapter<YourLogsAdapter.YourLo
             return null;
         }
     };
+    */
 
     public YourLogsAdapter(IYourLogsItemClickedListener listener) { this.listener = listener; }
 
     @NonNull
     @Override
-    public YourLogsAdapter.YourLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public YourLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_your_logs_list_item);
+        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_your_logs_list_item, parent, false);
         YourLogsViewHolder vh = new YourLogsViewHolder(v, listener);
         return vh;
     }
@@ -179,7 +181,7 @@ public class YourLogsAdapter extends RecyclerView.Adapter<YourLogsAdapter.YourLo
 
         @Override
         public void onClick(View view) {
-            listener.onYourLogsAdapterClicked(YLList.get(getAdapterPosition()).getYLID());
+            //listener.onYourLogsAdapterClicked(YLList.get(getAdapterPosition()).getYLID());
         }
     }
 

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "944457749699",
+    "firebase_url": "https://app-project-group13-carlog.firebaseio.com",
+    "project_id": "app-project-group13-carlog",
+    "storage_bucket": "app-project-group13-carlog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944457749699:android:05923e7172b7a1589d3e76",
+        "android_client_info": {
+          "package_name": "com.App_Project_Group_13.carlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944457749699-7bbs58erlvfntnhneknt1f24288fdb95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0CsRxDcXmrhNt1u6oqma2H21ycVOggBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944457749699-7bbs58erlvfntnhneknt1f24288fdb95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944457749699:android:acb8aa525e5466a09d3e76",
+        "android_client_info": {
+          "package_name": "com.example.smap_app_project_grp_13_carlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944457749699-7bbs58erlvfntnhneknt1f24288fdb95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0CsRxDcXmrhNt1u6oqma2H21ycVOggBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944457749699-7bbs58erlvfntnhneknt1f24288fdb95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

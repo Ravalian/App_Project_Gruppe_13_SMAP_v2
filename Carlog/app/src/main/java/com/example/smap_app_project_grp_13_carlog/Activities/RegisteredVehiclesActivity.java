@@ -69,7 +69,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
                 }
                 if(vehicles.size()>0){
                     if(adapter==null){
-                        adapter = new RegisteredVehiclesAdapter(vehicles, RegisteredVehiclesActivity.this);
+                        //adapter = new RegisteredVehiclesAdapter(vehicles, RegisteredVehiclesActivity.this);
                         rcvList.setAdapter(adapter);
                     }else{
                         adapter.setList(vehicles);
@@ -109,9 +109,11 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
     @Override
     public void onRegisteredVehicleClicked(int RVID) {
         Intent intent = new Intent(this, com.app_project_group_13.carlog.Activities.VehicleDetails.class);
         intent.putExtra(constants.ID, RVID);
     }
+    */
 }
