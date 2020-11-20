@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button loginBtn = findViewById(R.id.loginBtn);
-        Button logoutBtn = findViewById(R.id.logoutBtn);
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,12 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
+
 
         if(mAuth == null){
             mAuth = FirebaseAuth.getInstance();
@@ -54,25 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             gotoUserInterface();
         }
 
-    }
-
-    private void signOut() {
-        Log.d("logout: onComplete", "Do something ");
-        if(mAuth == null){
-            mAuth = FirebaseAuth.getInstance();
-        }
-        if(mAuth.getCurrentUser()!=null) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                        }
-                    });
-        }else{
-            Toast.makeText(this, "Not Logged In", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
@@ -107,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
+            //IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String uid = mAuth.getCurrentUser().getUid();
-                Toast.makeText(this, "User Logged In\n" +uid, Toast.LENGTH_SHORT).show();
+                //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                //String uid = mAuth.getCurrentUser().getUid();
+                //Toast.makeText(this, "User Logged In\n" +uid, Toast.LENGTH_SHORT).show();
                 gotoUserInterface();
             } else {
                 // Sign in failed. If response is null the user canceled the
