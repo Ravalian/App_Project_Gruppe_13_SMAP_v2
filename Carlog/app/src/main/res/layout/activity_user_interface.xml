@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".Activities.UserInterfaceActivity">
 
+    <Button
+        android:id="@+id/btnYourVehicles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="@string/btn_ActivityUserInterface_YourVehicles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnYourLogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnYourVehicles"
+        app:layout_constraintStart_toStartOf="@+id/btnYourVehicles"
+        app:layout_constraintTop_toBottomOf="@+id/btnYourVehicles"
+        tools:text="@string/btn_ActivityUserInterface_YourLogs" />
+
+    <Button
+        android:id="@+id/btnRegisterVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnYourLogs"
+        app:layout_constraintStart_toStartOf="@+id/btnYourLogs"
+        app:layout_constraintTop_toBottomOf="@+id/btnYourLogs"
+        tools:text="@string/btn_ActivityUserInterface_RegisterVehicle" />
+
+    <Button
+        android:id="@+id/btnRegisteredVehicles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegisterVehicle"
+        app:layout_constraintStart_toStartOf="@+id/btnRegisterVehicle"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterVehicle"
+        tools:text="@string/btn_ActivityUserInterface_RegisteredVehicles" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

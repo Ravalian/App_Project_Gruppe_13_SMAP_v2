@@ -6,4 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".Activities.RegisterVehicleActivity">
 
+    <EditText
+        android:id="@+id/editLicencePlate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/edit_ActivityRegisterVehicle_LicencePlate"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLicencePlate" />
+
+    <TextView
+        android:id="@+id/txtLicencePlate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/editLicencePlate"
+        app:layout_constraintStart_toStartOf="@+id/editLicencePlate"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:text="@string/txt_ActivityRegisterVehicle_LicencePlate" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/img_ActivityAllListItem_ImgOfVehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/btn_ActivityRegisterVehicle_Back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
