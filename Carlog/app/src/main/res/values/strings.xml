@@ -50,4 +50,7 @@
     <string name="CancelBtn">Cancel</string>
     <string name="UI_RegisteredVehiclesBtn">Registered Vehicles</string>
     <string name="txt_ActivityRegisteredVehicles_OwnerName">Owner Name</string>
+    <string name="txtWriteLog">Write Log</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_Stop">Stop</string>
 </resources>
