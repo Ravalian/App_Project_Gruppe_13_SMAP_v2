@@ -1,7 +1,8 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,17 +18,14 @@ import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 
+import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RegisteredVehiclesActivity extends AppCompatActivity {
+public class RegisteredVehiclesActivity extends AppCompatActivity implements RegisteredVehiclesAdapter.IRegisteredVehiclesItemClickedListener {
 
     //widgets
     private TextView txtVehicleName;
@@ -37,6 +35,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
     private ArrayList<VehicleDataFirebase> vehicles;
     private RegisteredVehiclesAdapter adapter;
     private Constants constants;
+    private RegisteredVehiclesActivityVM vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,57 +43,36 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registered_vehicles);
 
         //init ui
-        setupUI();
+        //setupUI();
+        vm = new ViewModelProvider(this).get(RegisteredVehiclesActivityVM.class);
+        vm.getVehicles().observe(this, new Observer<List<VehicleDataFirebase>>() {
+            @Override
+            public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
+                if (adapter==null){
+                    setupUI(vehicleDataFirebases);
+                }
+                Log.d("Tester", vehicleDataFirebases.get(1).getRegistrationNumber());
+                adapter.updateVehicles(vehicleDataFirebases);
+            }
+        });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-            setupFirebaseListener();
+
         }
     }
 
-    private void setupFirebaseListener() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reference = database.getReference(""); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //This is called when initialised and when data is changed.
-
-                vehicles = new ArrayList<VehicleDataFirebase>();
-                Iterable<DataSnapshot> snapshots = snapshot.getChildren();
-                while(snapshots.iterator().hasNext()){
-                    vehicles.add(snapshots.iterator().next().getValue(VehicleDataFirebase.class));
-                }
-                if(vehicles.size()>0){
-                    if(adapter==null){
-                        //adapter = new RegisteredVehiclesAdapter(vehicles, RegisteredVehiclesActivity.this);
-                        rcvList.setAdapter(adapter);
-                    }else{
-                        adapter.setList(vehicles);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Error", "failed to read value"); //Jeg er ikke sikker på hvad dette er, det er i demo 2.
-            }
-        });
-    }
-
-    private void setupUI() {
-        setContentView(R.layout.activity_registered_vehicles);
+    private void setupUI(List<VehicleDataFirebase> vehicleDataFirebases) {
+        //setContentView(R.layout.activity_registered_vehicles_v2);
 
         //set up recyclerview with adapter and layout manager
-        //adapter = new RegisteredVehiclesAdapter(this); //skal ses på
-        rcvList = findViewById(R.id.rcvRegisteredVehicles);
+        adapter = new RegisteredVehiclesAdapter(vehicleDataFirebases, this);
+        rcvList = findViewById(R.id.rcvRV);
         rcvList.setLayoutManager(new LinearLayoutManager(this));
-        //rcvList.setAdapter(adapter); //skal ses på
+        rcvList.setAdapter(adapter);
 
-        txtVehicleName = findViewById(R.id.txtRVVehicleName);
+        txtVehicleName = findViewById(R.id.txtRVRegisteredVehicle);
 
         btnBack = findViewById(R.id.btnRVBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +85,13 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
 
     private void Back() {
         finish();
+    }
+
+    @Override
+    public void onRegisteredVehicleClicked(int position) {
+        Intent intent = new Intent(this, VehicleDetailsActivity.class);
+        intent.putExtra(constants.ID, vehicles.get(position).getRegistrationNumber());
+        startActivityForResult(intent, 101);
     }
 
     /*

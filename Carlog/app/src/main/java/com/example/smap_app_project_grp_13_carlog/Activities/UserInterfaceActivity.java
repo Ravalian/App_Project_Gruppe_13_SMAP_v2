@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class UserInterfaceActivity extends AppCompatActivity {
 
     //Ui widgets
-    private Button logoutBtn, registerVehicleBtn;
+    private Button logoutBtn, registerVehicleBtn, registeredVehicleBtn;
 
     //Firebase
     FirebaseAuth mAuth;
@@ -30,7 +30,7 @@ public class UserInterfaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_interface);
 
         //Setup Login button
-        logoutBtn = findViewById(R.id.logoutbtn);
+        logoutBtn = findViewById(R.id.btnlogout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +46,20 @@ public class UserInterfaceActivity extends AppCompatActivity {
                 GotoRegisterVehicle();
             }
         });
+
+        //Setup Registered Vehicle button
+        registeredVehicleBtn = findViewById(R.id.UI_RegisteredVehiclesBtn);
+        registeredVehicleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToRegisteredVehicles();
+            }
+        });
+    }
+
+    private void goToRegisteredVehicles() {
+        Intent intent = new Intent(this, RegisteredVehiclesActivity.class);
+        startActivity(intent);
     }
 
     //What happens when Register Vehicle is pressed

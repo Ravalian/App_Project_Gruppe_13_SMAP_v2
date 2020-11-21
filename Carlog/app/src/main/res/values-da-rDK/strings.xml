@@ -3,19 +3,17 @@
     <string name="app_name">Carlog</string>
 
     <!--Activity login-->
-    <string name="txt_ActivityLogin_Username">Brugernavn</string>
-    <string name="txt_ActivityLogin_Password">Adgangskode</string>
+    <string name="txt_ActivityLogin_Welcome">Velkommen til Carlog</string>
     <string name="btn_ActivityLogin_Login">Log på</string>
     <string name="btn_ActivityLogin_SignUp">Tilmelde</string>
 
     <!--Activity register vehicle-->
     <string name="txt_ActivityRegisterVehicle_LicencePlate">Indtast din nummerplade</string>
     <string name="edit_ActivityRegisterVehicle_LicencePlate">Nummerplade</string>
-    <string name="btn_ActivityRegisterVehicle_Back">Tilbage</string>
+    <string name="btn_Back">Tilbage</string>
 
     <!--Activity registered vehicles-->
     <string name="txt_ActivityRegisteredVehicles_VehicleName">Køretøjets navn</string>
-    <string name="btn_ActivityRegisteredVehicles_Back">Tilbage</string>
 
     <!--Activity user interface-->
     <string name="btn_ActivityUserInterface_YourVehicles">Dine køretøjer</string>
@@ -33,12 +31,11 @@
 
     <!--Activity your logs-->
     <string name="txt_ActivityYourLogs_YourLogs">Dine logfiler</string>
-    <string name="btn_ActivityYourLogs_Back">Tilbage</string>
 
     <!--Activity your vehicles-->
-    <string name="btn_ActivityYourVehicles_Back">Tilbage</string>
     <string name="txt_ActivityYourVehicles_VehicleName">Køretøjets navn</string>
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img af køretøj</string>
+    <string name="btn_ActivityUserInterface_Logout">Logud</string>
 </resources>

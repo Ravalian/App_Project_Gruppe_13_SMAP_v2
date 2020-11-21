@@ -74,9 +74,9 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //This is called when initialised and when data is changed.
-                
+
                 vehicles.setValue(toVehicles(snapshot));
-                Log.d("Tester", vehicles.getValue().get(0).getRegistrationNumber());
+                Log.d(Constants.REPOTAG, vehicles.getValue().get(0).getRegistrationNumber());
                 //Skal sættes ind i activities
                 /*if(vehicles.size()>0){
                     if(adapter==null){
@@ -200,6 +200,12 @@ public class Repository {
     }
     ////////////////////////////////////////////////////////
 
+    ////////////////////Get functions to VMs////////////////
 
+    public MutableLiveData<List<VehicleDataFirebase>> getVehicles(){
+        return vehicles;
+    }
+
+    ////////////////////////////////////////////////////////
 
 }
