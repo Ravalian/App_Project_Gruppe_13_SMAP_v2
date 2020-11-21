@@ -2,8 +2,7 @@
     <string name="app_name">Carlog</string>
 
     <!--Activity login-->
-    <string name="txt_ActivityLogin_Username">Username</string>
-    <string name="txt_ActivityLogin_Password">Password</string>
+    <string name="txt_ActivityLogin_Welcome">Welcome to Carlog</string>
     <string name="btn_ActivityLogin_Login">Login</string>
     <string name="btn_ActivityLogin_SignUp">Sign UP</string>
 
@@ -20,6 +19,7 @@
     <string name="btn_ActivityUserInterface_YourLogs">Your Logs</string>
     <string name="btn_ActivityUserInterface_RegisterVehicle">Register Vehicle</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registered Vehicles</string>
+    <string name="btn_ActivityUserInterface_Logout">Logout</string>
 
     <!--Activity vehicle details-->
     <string name="txt_ActivityVehicleDetails_Vehicle_Name">Vehicle name</string>
@@ -32,14 +32,36 @@
     <!--Activity your logs-->
     <string name="txt_ActivityYourLogs_YourLogs">Your logs</string>
 
+    <string name="txt_ActivityYourLogs_Date">Date</string>
+    <string name="txt_ActivityYourLogs_Name">Name</string>
+
+    <!--Activity your logs fragment list-->
+    <string name="txt_ActivityYourLogsFragList_YourLogs">Your Logs</string>
+    <string name="txt_ActivityYourLogsFragList_LogDate">Log date</string>
+
+    <!--Activity your logs fragment details-->
+    <string name="txt_ActivityYourLogsFragDetails_LogName">Log name</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogDate">Log date</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogDistance">Log distance</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogTime">Log time</string>
+    <string name="txt_ActivityYourLogsFragDetails_Log">Log</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogDescription">Log description...</string>
+    <string name="txt_ActivityYourLogsFragDetails_GoogleMaps">Google maps</string>
+
     <!--Activity your vehicles-->
     <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
+    <string name="btn_ActivityYourVehicles_Back">Back</string>
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
     <string name="Loginbtn">Login</string>
     <string name="welcome">Welcome To Carlog</string>
     <string name="LogoutBtn">Logout</string>
+
+
+
+
+
     <string name="RegisterVHAddBtn">Add Vehicle</string>
     <string name="RegisterVehicleTitletxt">Register your vehicle</string>
     <string name="RegisterVehicleInputFieldHeader">Enter vehicles registration plate: </string>

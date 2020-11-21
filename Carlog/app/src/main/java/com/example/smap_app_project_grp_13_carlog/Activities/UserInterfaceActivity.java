@@ -30,7 +30,7 @@ public class UserInterfaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_interface);
 
         //Setup Login button
-        logoutBtn = findViewById(R.id.logoutbtn);
+        logoutBtn = findViewById(R.id.btnlogout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

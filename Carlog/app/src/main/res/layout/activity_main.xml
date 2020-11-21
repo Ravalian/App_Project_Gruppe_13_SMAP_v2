@@ -7,22 +7,22 @@
     tools:context=".Activities.LoginActivity">
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/btnlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Loginbtn"
+        android:text="@string/btn_ActivityLogin_Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="@string/welcome"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        android:text="@string/txt_ActivityLogin_Welcome"
+        app:layout_constraintBottom_toTopOf="@+id/btnlogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
