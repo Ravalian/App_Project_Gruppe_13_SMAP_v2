@@ -52,7 +52,14 @@ public class RegisterVehicleActivity extends AppCompatActivity {
 
     //What happens when add vehicle btn is pressed
     private void AddVehicle() {
-        registerVehicleActivityVM.addVehicletoFirebase(registerInput.getText().toString());
+        //Input from Edittext field
+        String vehicleInput = registerInput.getText().toString();
+        //Validation
+        if(vehicleInput.length() == 0){
+            registerInput.setError("Please enter vehicle registration nr.");
+        }
+
+        registerVehicleActivityVM.addVehicletoFirebase(vehicleInput);
     }
 
     //What happens when cancel btn

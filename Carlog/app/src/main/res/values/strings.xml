@@ -51,4 +51,6 @@
     <string name="RegisterVehicleUploadBtn">Upload image</string>
     <string name="UI_RegisterVehicleBtn">Register Vehicle</string>
     <string name="CancelBtn">Cancel</string>
+    <string name="VehicleAlreadyRegisteredString">The vehicle is already registered</string>
+    <string name="EnterReqNrString">Please enter a vehicle registration nr.</string>
 </resources>

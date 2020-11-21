@@ -2,6 +2,7 @@ package com.example.smap_app_project_grp_13_carlog.Repository;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataAPI;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
+import com.example.smap_app_project_grp_13_carlog.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,6 +51,7 @@ public class Repository {
     private RequestQueue queue;
     private VehicleDataAPI vehicleDataAPI;
     private String ACCESS_TOKEN = "pl2ycyljhhb2zxveesxl5xajupkm4v3n";
+    private Boolean vehicleAlreadyRegistered = false;
 
 
 
@@ -139,7 +142,6 @@ public class Repository {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String,String>();
                 headers.put("X-AUTH-TOKEN", ACCESS_TOKEN);
-                //headers.put("Authorization", ACCESS_TOKEN);
                 return headers;
             }
         };
@@ -156,19 +158,22 @@ public class Repository {
 
         //Check if the car is already in the firebase database
         //this has to be done on a unique key, this will be reg nr. (number plate)
-        //Inspiration: https://stackoverflow.com/questions/39800547/read-data-from-firebase-database
-        //Build a reference to the object
-        /*DatabaseReference ref = mDatabase.child("Vehicles"); //Vehicles is not a child in the database yet, so it does not work yet!
-        Query vehicleQuary = ref.orderByChild(registrationNumber).equalTo(vehicleDataAPI.getRegistrationNumber())
-
-        //Waiting a little with this
-         */
-        boolean temp = false;
+        for(VehicleDataFirebase vehicle : vehicles.getValue()){
+            if(vehicle.getRegistrationNumber().equals(vehicleDataAPI.getRegistrationNumber())){
+                //the vehicle is already in the database
+                //set boolean to true
+                Log.d(Constants.REPOTAG, "Do we enter here?");
+                vehicleAlreadyRegistered = true;
+            }
+        }
 
         //If the car does not exists
         //Make If statement when check is done
-        if(temp){
+        if(vehicleAlreadyRegistered){
             //Tell the user a car with that reg nr. is already in the database
+            Log.d(Constants.REPOTAG, "Vehicle already registered: " + vehicleDataAPI.getRegistrationNumber());
+            Toast.makeText(application.getApplicationContext(), R.string.VehicleAlreadyRegisteredString, Toast.LENGTH_SHORT).show();
+            vehicleAlreadyRegistered = false;
         } else{
             VehicleDataFirebase newVehicle = new VehicleDataFirebase();
             newVehicle.setOwner("test"); // this has to the the UserID from the Firebase Authentication
@@ -193,13 +198,6 @@ public class Repository {
             Log.d(Constants.REPOTAG, "Vehicle added to database: " + newVehicle.getRegistrationNumber());
         }
     }
-
-
-
-
-
-
-
     ////////////////////////////////////////////////////////
 
 
