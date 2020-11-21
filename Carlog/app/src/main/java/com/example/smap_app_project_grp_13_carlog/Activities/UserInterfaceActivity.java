@@ -17,13 +17,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserInterfaceActivity extends AppCompatActivity {
+
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_interface);
 
-        Button logoutBtn = findViewById(R.id.logoutbtn);
+        Button logoutBtn = findViewById(R.id.btnlogout);
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
