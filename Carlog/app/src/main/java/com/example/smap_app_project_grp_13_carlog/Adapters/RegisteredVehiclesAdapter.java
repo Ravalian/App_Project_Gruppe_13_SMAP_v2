@@ -193,7 +193,7 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
             super(itemView);
 
             //get references from the layout file
-            img = itemView.findViewById(R.id.imgRVVehicle);
+            //img = itemView.findViewById(R.id.imgRVVehicle);
             txtVehicleName = itemView.findViewById(R.id.txtRVLIVehicleName);
             txtOwnerName = itemView.findViewById(R.id.txtRVLIOwnerName);
             listener = RegisteredVehiclesItemClickedListener;

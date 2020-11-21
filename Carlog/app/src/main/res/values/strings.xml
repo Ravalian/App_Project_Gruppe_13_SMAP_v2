@@ -9,11 +9,10 @@
     <!--Activity register vehicle-->
     <string name="txt_ActivityRegisterVehicle_LicencePlate">Enter your licence plate</string>
     <string name="edit_ActivityRegisterVehicle_LicencePlate">Licence Plate</string>
-    <string name="btn_ActivityRegisterVehicle_Back">Back</string>
+    <string name="btn_Back">Back</string>
 
     <!--Activity registered vehicles-->
     <string name="txt_ActivityRegisteredVehicles_VehicleName">Vehicle Name</string>
-    <string name="btn_ActivityRegisteredVehicles_Back">Back</string>
 
     <!--Activity user interface-->
     <string name="btn_ActivityUserInterface_YourVehicles">Your Vehicles</string>
@@ -32,7 +31,6 @@
 
     <!--Activity your logs-->
     <string name="txt_ActivityYourLogs_YourLogs">Your logs</string>
-    <string name="btn_ActivityYourLogs_Back">Back</string>
 
     <string name="txt_ActivityYourLogs_Date">Date</string>
     <string name="txt_ActivityYourLogs_Name">Name</string>
@@ -61,7 +59,6 @@
     <string name="LogoutBtn">Logout</string>
     <!--Activity your vehicles-->
     <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
-    <string name="btn_ActivityYourVehicles_Back">Back</string>
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>

@@ -1,6 +1,5 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,11 +21,6 @@ import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +64,15 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
 
 
     private void setupUI(List<VehicleDataFirebase> vehicleDataFirebases) {
-        setContentView(R.layout.activity_registered_vehicles);
+        //setContentView(R.layout.activity_registered_vehicles_v2);
 
         //set up recyclerview with adapter and layout manager
         adapter = new RegisteredVehiclesAdapter(vehicleDataFirebases, this);
-        rcvList = findViewById(R.id.rcvRegisteredVehicles);
+        rcvList = findViewById(R.id.rcvRV);
         rcvList.setLayoutManager(new LinearLayoutManager(this));
         rcvList.setAdapter(adapter);
 
-        txtVehicleName = findViewById(R.id.txtRVVehicleName);
+        txtVehicleName = findViewById(R.id.txtRVRegisteredVehicle);
 
         btnBack = findViewById(R.id.btnRVBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
