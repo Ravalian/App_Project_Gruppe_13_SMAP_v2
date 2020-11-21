@@ -62,8 +62,8 @@ public class YourLogsAdapter extends BaseAdapter {
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtYLListItemDate);
             txtDate.setText((CharSequence) yourlog.getDate());
 
-            TextView txtName = (TextView) convertView.findViewById(R.id.txtYLListItemName);
-            txtName.setText(yourlog.getLogID());
+            TextView txtUser = (TextView) convertView.findViewById(R.id.txtYLListItemName);
+            txtUser.setText(yourlog.getuser());
 
         }
         return convertView;

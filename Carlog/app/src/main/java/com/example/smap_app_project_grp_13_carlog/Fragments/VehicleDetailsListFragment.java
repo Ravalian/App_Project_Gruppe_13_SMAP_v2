@@ -38,7 +38,7 @@ public class VehicleDetailsListFragment extends Fragment {
         VDListView = (ListView) v.findViewById(R.id.LVVDFragmentList);
         imgVDFragList = (ImageView) v.findViewById(R.id.imgVDFragList);
 
-        //updateVD();
+        updateVD();
 
         return v;
     }
@@ -68,7 +68,6 @@ public class VehicleDetailsListFragment extends Fragment {
         vehicledetails = (ArrayList<Logs>) VDList.clone();
     }
 
-    /*
     private void updateVD() {
         if (vehicleDetailsSelector != null) {
             vehicledetails = vehicleDetailsSelector.getVehicleDetailsList();
@@ -80,6 +79,4 @@ public class VehicleDetailsListFragment extends Fragment {
             VDListView.setOnItemClickListener(((adapterView, view, position, id) -> onVDSelected(position)));
         }
     }
-
-     */
 }

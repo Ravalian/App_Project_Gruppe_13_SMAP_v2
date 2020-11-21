@@ -68,12 +68,12 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
 
             vehicleDetailsList.setVD(vehicledetails);
-            //vehicleDetailsDetails.setVD(vehicledetails.get(selectedVDIndex));
+            vehicleDetailsDetails.setVD(vehicledetails.get(selectedVDIndex));
 
             //add the first two fragments to container (one will be invisible if in portrait mode)
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.VD_list_container, vehicleDetailsList, LIST_FRAG)
-                    //.add(R.id.VD_details_container, vehicleDetailsDetails, DETAILS_FRAG)
+                    .add(R.id.VD_details_container, vehicleDetailsDetails, DETAILS_FRAG)
                     .commit();
         } else {
             //got restarted with persisted state, probably due to orientation change
@@ -89,13 +89,10 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             if (vehicleDetailsList == null) {
                 vehicleDetailsList = new VehicleDetailsListFragment();
             }
-            /*
             vehicleDetailsDetails = (VehicleDetailsDetailsFragment)getSupportFragmentManager().findFragmentByTag(DETAILS_FRAG);
             if (vehicleDetailsDetails == null) {
                 vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
             }
-
-             */
         }
 
         btnBack = findViewById(R.id.btnVDBack);
@@ -159,7 +156,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             Logs selectedVD = vehicledetails.get(position);
             if (selectedVD != null) {
                 selectedVDIndex = position;
-                //vehicledetails.setVD(selectedVD);
+                vehicleDetailsDetails.setVD(selectedVD);
             }
         }
         updateFragmentViewState(UserMode.DETAIL_VIEW);

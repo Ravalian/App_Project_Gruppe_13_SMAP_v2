@@ -17,7 +17,7 @@ import com.google.android.gms.maps.MapView;
 
 public class YourLogsDetailsFragment extends Fragment {
 
-    private TextView txtYLFragDName, txtYLFragDDate, txtYLFragDDistance,
+    private TextView txtYLFragDUser, txtYLFragDDate, txtYLFragDDistance,
             txtYLFragDTime, txtYLFragDLog, txtYLFragDLogDescription;
     private ImageView imgYLFragDVehicle;
     private MapView mapYLFragDGoogle;
@@ -34,7 +34,7 @@ public class YourLogsDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_your_logs_fragment_details, container, false);
 
         //get references to UI widgets
-        txtYLFragDName = (TextView) view.findViewById(R.id.txtYLFragDUser);
+        txtYLFragDUser = (TextView) view.findViewById(R.id.txtYLFragDUser);
         txtYLFragDDate = (TextView) view.findViewById(R.id.txtYLFragDDate);
         txtYLFragDDistance = (TextView) view.findViewById(R.id.txtYLFragDDistance);
         txtYLFragDTime = (TextView) view.findViewById(R.id.txtYLFragDTime);
@@ -59,10 +59,10 @@ public class YourLogsDetailsFragment extends Fragment {
     }
 
     public void setLogs(Logs logs) {
-        if (txtYLFragDName != null && txtYLFragDDate != null && txtYLFragDDistance != null
+        if (txtYLFragDUser != null && txtYLFragDDate != null && txtYLFragDDistance != null
                 && txtYLFragDTime != null && txtYLFragDLogDescription != null) {
 
-            txtYLFragDName.setText(logs.getLogID());
+            txtYLFragDUser.setText(logs.getuser());
             txtYLFragDDate.setText((CharSequence) logs.getDate());
             txtYLFragDDistance.setText(logs.getDistance());
             txtYLFragDTime.setText(logs.getTime());
