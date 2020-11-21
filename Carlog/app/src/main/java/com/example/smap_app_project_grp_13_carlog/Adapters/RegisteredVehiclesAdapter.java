@@ -21,13 +21,17 @@ import java.util.ListIterator;
 
 public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVehiclesAdapter.RegisteredVehiclesViewHolder> {
 
+    public void updateVehicles(List<VehicleDataFirebase> vehicleDataFirebases) {
+        vehicles = vehicleDataFirebases;
+    }
+
     public interface IRegisteredVehiclesItemClickedListener {
         void onRegisteredVehicleClicked(int RVID);
     }
 
     private IRegisteredVehiclesItemClickedListener listener;
 
-    private ArrayList<VehicleDataFirebase> vehicles;
+    private List<VehicleDataFirebase> vehicles;
 
     /*
     private List<DBPlaceHolder> RVList = new List<DBPlaceHolder>() {
@@ -154,9 +158,9 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
     };
     */
 
-    public RegisteredVehiclesAdapter(ArrayList<VehicleDataFirebase> v, IRegisteredVehiclesItemClickedListener listener) {
+    public RegisteredVehiclesAdapter(List<VehicleDataFirebase> vehicles, IRegisteredVehiclesItemClickedListener listener) {
         this.listener = listener;
-        this.vehicles = v;
+        this.vehicles=vehicles;
     }
 
     public void setList(ArrayList<VehicleDataFirebase> vehicles) {this.vehicles = vehicles;}
@@ -172,14 +176,15 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
 
     @Override
     public void onBindViewHolder(@NonNull RegisteredVehiclesAdapter.RegisteredVehiclesViewHolder holder, int position) {
-
+        holder.txtVehicleName.setText(vehicles.get(position).registrationNumber);
+        holder.txtOwnerName.setText(vehicles.get(position).getOwner());
     }
 
     public class RegisteredVehiclesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //ViewHolder ui widget references
         ImageView img;
-        TextView txtVehicleName;
+        TextView txtVehicleName, txtOwnerName;
 
         IRegisteredVehiclesItemClickedListener listener;
 
@@ -190,6 +195,7 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
             //get references from the layout file
             img = itemView.findViewById(R.id.imgRVVehicle);
             txtVehicleName = itemView.findViewById(R.id.txtRVLIVehicleName);
+            txtOwnerName = itemView.findViewById(R.id.txtRVLIOwnerName);
             listener = RegisteredVehiclesItemClickedListener;
 
             //set click listener for whole list item
@@ -198,12 +204,12 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
 
         @Override
         public void onClick(View view) {
-            //listener.onRegisteredVehicleClicked(RVList.get(getAdapterPosition()).getRVID());
+            listener.onRegisteredVehicleClicked(getAdapterPosition());
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return vehicles.size();
     }
 }

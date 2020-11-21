@@ -6,49 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".Activities.RegisterVehicleActivity">
 
-    <EditText
-        android:id="@+id/editLicencePlate"
+    <Button
+        android:id="@+id/RegisterVHAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/RegisterVHAddBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/RegisterVehicleTitletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="@string/RegisterVehicleTitletxt"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/RegisterVehicleInputField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         android:ems="10"
-        android:hint="@string/edit_ActivityRegisterVehicle_LicencePlate"
+        android:hint="@string/RegisterVehicleInputHint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLicencePlate" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterVehicleTitletxt" />
 
     <TextView
-        android:id="@+id/txtLicencePlate"
+        android:id="@+id/RegisterVehicleInputHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editLicencePlate"
-        app:layout_constraintStart_toStartOf="@+id/editLicencePlate"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:text="@string/txt_ActivityRegisterVehicle_LicencePlate" />
+        android:text="@string/RegisterVehicleInputFieldHeader"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterVehicleInputField"
+        app:layout_constraintStart_toStartOf="@+id/RegisterVehicleInputField" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/img_ActivityAllListItem_ImgOfVehicle"
+        android:id="@+id/RegisterVehicleImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterVehicleUploadBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterVehicleInputField"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/btnBack"
+    <TextView
+        android:id="@+id/RegisterVehicleImageHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/btn_ActivityRegisterVehicle_Back" />
+        android:text="@string/RegisterVehicleImageHeader"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterVehicleImage"
+        app:layout_constraintStart_toStartOf="@+id/RegisterVehicleImage" />
 
+    <Button
+        android:id="@+id/RegisterVehicleUploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="@string/RegisterVehicleUploadBtn"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterVHAddBtn"
+        app:layout_constraintEnd_toEndOf="@+id/RegisterVehicleImage"
+        app:layout_constraintStart_toStartOf="@+id/RegisterVehicleImage" />
+
+    <Button
+        android:id="@+id/RegisterVehicleCancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/CancelBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,9 @@ package com.example.smap_app_project_grp_13_carlog.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+//Class is created with the online resource: http://www.jsonschema2pojo.org/
 public class VehicleDataAPI {
+
     @SerializedName("registration_number")
     @Expose
     private String registrationNumber;
@@ -290,4 +292,5 @@ public class VehicleDataAPI {
     public void setRegistrationZipcode(Object registrationZipcode) {
         this.registrationZipcode = registrationZipcode;
     }
+
 }

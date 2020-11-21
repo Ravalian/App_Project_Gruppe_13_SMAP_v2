@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/registered_vehicles_list_item"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgRVVehicle"
@@ -12,7 +12,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/img_ActivityAllListItem_ImgOfVehicle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
@@ -21,11 +23,26 @@
         android:id="@+id/txtRVLIVehicleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgRVVehicle"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgRVVehicle"
         app:layout_constraintTop_toTopOf="@+id/imgRVVehicle"
         tools:text="@string/txt_ActivityRegisteredVehicles_VehicleName" />
+
+    <TextView
+        android:id="@+id/txtRVLIOwnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/txt_ActivityRegisteredVehicles_OwnerName"
+        app:layout_constraintBottom_toBottomOf="@+id/txtRVLIVehicleName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtRVLIVehicleName"
+        app:layout_constraintTop_toTopOf="@+id/txtRVLIVehicleName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

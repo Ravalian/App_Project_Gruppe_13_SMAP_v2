@@ -56,6 +56,28 @@
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
+    <string name="Loginbtn">Login</string>
+    <string name="welcome">Welcome To Carlog</string>
+    <string name="LogoutBtn">Logout</string>
+    <!--Activity your vehicles-->
+    <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
+    <string name="btn_ActivityYourVehicles_Back">Back</string>
+
+    <!--Activity all list item -->
+    <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
+    <string name="Loginbtn">Login</string>
+    <string name="welcome">Welcome To Carlog</string>
+    <string name="LogoutBtn">Logout</string>
 
 
+    <string name="RegisterVHAddBtn">Add Vehicle</string>
+    <string name="RegisterVehicleTitletxt">Register your vehicle</string>
+    <string name="RegisterVehicleInputFieldHeader">Enter vehicles registration plate: </string>
+    <string name="RegisterVehicleInputHint">Registration plate</string>
+    <string name="RegisterVehicleImageHeader">Image of Vehicle</string>
+    <string name="RegisterVehicleUploadBtn">Upload image</string>
+    <string name="UI_RegisterVehicleBtn">Register Vehicle</string>
+    <string name="CancelBtn">Cancel</string>
+    <string name="UI_RegisteredVehiclesBtn">Registered Vehicles</string>
+    <string name="txt_ActivityRegisteredVehicles_OwnerName">Owner Name</string>
 </resources>

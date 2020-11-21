@@ -18,6 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserInterfaceActivity extends AppCompatActivity {
 
+    //Ui widgets
+    private Button logoutBtn, registerVehicleBtn, registeredVehicleBtn;
+
+    //Firebase
     FirebaseAuth mAuth;
 
     @Override
@@ -25,16 +29,46 @@ public class UserInterfaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_interface);
 
-        Button logoutBtn = findViewById(R.id.btnlogout);
-
+        //Setup Login button
+        logoutBtn = findViewById(R.id.logoutbtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
+
+        //Setup Register Vehicle button
+        registerVehicleBtn = findViewById(R.id.UI_RegisterVehicleBtn);
+        registerVehicleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GotoRegisterVehicle();
+            }
+        });
+
+        //Setup Registered Vehicle button
+        registeredVehicleBtn = findViewById(R.id.UI_RegisteredVehiclesBtn);
+        registeredVehicleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToRegisteredVehicles();
+            }
+        });
     }
 
+    private void goToRegisteredVehicles() {
+        Intent intent = new Intent(this, RegisteredVehiclesActivity.class);
+        startActivity(intent);
+    }
+
+    //What happens when Register Vehicle is pressed
+    private void GotoRegisterVehicle() {
+        Intent intent = new Intent(this, RegisterVehicleActivity.class);
+        startActivity(intent);
+    }
+
+    //What happens when logout button is pressed
     private void signOut() {
         Log.d("logout: onComplete", "Do something ");
         if(mAuth == null){
@@ -54,6 +88,7 @@ public class UserInterfaceActivity extends AppCompatActivity {
         }
     }
 
+    //Method for returning to login activity
     private void gotoLoginActivity() {
         Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, LoginActivity.class);
