@@ -28,6 +28,7 @@ public class VehicleDataFirebase {
     public String engineVolume;
     public String enginePower;
     public String fuelType;
+    public String registeredUser;
 
     //Get and set methods for each value
     public String getOwner() {
