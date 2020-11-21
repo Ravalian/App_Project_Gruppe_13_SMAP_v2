@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.smap_app_project_grp_13_carlog.Models.LogsTest;
+import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.R;
-import com.example.smap_app_project_grp_13_carlog.YourLogsSelectorInterface;
+import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
 import com.google.android.gms.maps.MapView;
 
 public class YourLogsDetailsFragment extends Fragment {
@@ -34,7 +34,7 @@ public class YourLogsDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_your_logs_fragment_details, container, false);
 
         //get references to UI widgets
-        txtYLFragDName = (TextView) view.findViewById(R.id.txtYLFragDName);
+        txtYLFragDName = (TextView) view.findViewById(R.id.txtYLFragDUser);
         txtYLFragDDate = (TextView) view.findViewById(R.id.txtYLFragDDate);
         txtYLFragDDistance = (TextView) view.findViewById(R.id.txtYLFragDDistance);
         txtYLFragDTime = (TextView) view.findViewById(R.id.txtYLFragDTime);
@@ -58,11 +58,11 @@ public class YourLogsDetailsFragment extends Fragment {
         }
     }
 
-    public void setLogs(LogsTest logs) {
+    public void setLogs(Logs logs) {
         if (txtYLFragDName != null && txtYLFragDDate != null && txtYLFragDDistance != null
                 && txtYLFragDTime != null && txtYLFragDLogDescription != null) {
 
-            txtYLFragDName.setText(logs.getName());
+            txtYLFragDName.setText(logs.getLogID());
             txtYLFragDDate.setText((CharSequence) logs.getDate());
             txtYLFragDDistance.setText(logs.getDistance());
             txtYLFragDTime.setText(logs.getTime());

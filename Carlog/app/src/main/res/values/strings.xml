@@ -54,18 +54,6 @@
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
-    <string name="Loginbtn">Login</string>
-    <string name="welcome">Welcome To Carlog</string>
-    <string name="LogoutBtn">Logout</string>
-    <!--Activity your vehicles-->
-    <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
-
-    <!--Activity all list item -->
-    <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
-    <string name="Loginbtn">Login</string>
-    <string name="welcome">Welcome To Carlog</string>
-    <string name="LogoutBtn">Logout</string>
-
 
     <string name="RegisterVHAddBtn">Add Vehicle</string>
     <string name="RegisterVehicleTitletxt">Register your vehicle</string>

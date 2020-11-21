@@ -20,7 +20,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txtYLFragDName"
+        android:id="@+id/txtYLFragDUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -37,7 +37,7 @@
         android:id="@+id/txtYLFragDDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtYLFragDName"
+        android:layout_below="@+id/txtYLFragDUser"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -57,8 +57,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_toEndOf="@+id/txtYLFragDName"
-        android:layout_toRightOf="@+id/txtYLFragDName"
+        android:layout_toEndOf="@+id/txtYLFragDUser"
+        android:layout_toRightOf="@+id/txtYLFragDUser"
         tools:text="@string/txt_ActivityYourLogsFragDetails_LogDistance" />
 
     <TextView

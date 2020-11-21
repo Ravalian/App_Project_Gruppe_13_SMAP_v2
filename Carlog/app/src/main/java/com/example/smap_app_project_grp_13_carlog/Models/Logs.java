@@ -2,23 +2,27 @@ package com.example.smap_app_project_grp_13_carlog.Models;
 
 import java.util.Date;
 
-public class LogsTest {
+public class Logs {
 
-    private String name, logDescription;
-    private Date date;
-    private int time, distance;
+    public String logID, logDescription, user, vehicle;
+    public Date date;
+    public int time, distance;
 
-    public LogsTest(String logName, Date datetime, int Distance, int Time, String LogDescription ) {
-        name = logName;
+    public Logs() {
+
+    }
+
+    public Logs(String logid, Date datetime, int Distance, int Time, String LogDescription ) {
+        logID = logid;
         date = datetime;
         distance = Distance;
         time = Time;
         logDescription = LogDescription;
     }
 
-    public String getName() { return name; }
+    public String getLogID() { return logID; }
 
-    public void setName(String name) { this.name = name; }
+    public void setLogID(String logID) { this.logID = logID; }
 
     public Date getDate() { return date; }
 
@@ -35,4 +39,12 @@ public class LogsTest {
     public String getLogDescription() { return logDescription; }
 
     public void setLogDescription(String logDescription) { this.logDescription = logDescription; }
+
+    public String getuser() { return user; }
+
+    public void setuser(String user) { this.user = user; }
+
+    public String getvehicle() { return vehicle; }
+
+    public void setvehicle(String vehicle) { this.vehicle = vehicle; }
 }

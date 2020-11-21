@@ -6,15 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smap_app_project_grp_13_carlog.R;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class VehicleDetailsAdapter extends RecyclerView.Adapter<VehicleDetailsAdapter.VehicleDetailsViewHolder> {
 
@@ -181,7 +175,7 @@ public class VehicleDetailsAdapter extends RecyclerView.Adapter<VehicleDetailsAd
 
             //get references from the layout file
             txtDate = itemView.findViewById(R.id.txtVDLIDate);
-            txtName = itemView.findViewById(R.id.txtVDLIName);
+            txtName = itemView.findViewById(R.id.txtVDLIUser);
             listener = VehicleDetailsItemClickedListener;
 
             //set click listener for whole list item

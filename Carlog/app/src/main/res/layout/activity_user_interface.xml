@@ -27,14 +27,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/UI_YourLogsBtn"
+        android:id="@+id/btnUIYourLogs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Not Implemented"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UI_YourVehiclesBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/UI_YourVehiclesBtn"
+        tools:text="@string/btn_ActivityUserInterface_YourLogs" />
 
     <Button
         android:id="@+id/UI_RegisterVehicleBtn"
@@ -44,7 +44,7 @@
         android:text="@string/UI_RegisterVehicleBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UI_YourLogsBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUIYourLogs" />
 
     <Button
         android:id="@+id/UI_RegisteredVehiclesBtn"

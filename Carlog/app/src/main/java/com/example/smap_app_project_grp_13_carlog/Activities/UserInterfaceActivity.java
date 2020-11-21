@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class UserInterfaceActivity extends AppCompatActivity {
 
     //Ui widgets
-    private Button logoutBtn, registerVehicleBtn, registeredVehicleBtn;
+    private Button btnlogout, btnregisterVehicle, btnregisteredVehicle, btnYourLogs;
 
     //Firebase
     FirebaseAuth mAuth;
@@ -30,17 +30,25 @@ public class UserInterfaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_interface);
 
         //Setup Login button
-        logoutBtn = findViewById(R.id.logoutbtn);
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        btnlogout = findViewById(R.id.btnlogout);
+        btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
 
+        btnYourLogs = findViewById(R.id.btnUIYourLogs);
+        btnYourLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoToYourLogs();
+            }
+        });
+
         //Setup Register Vehicle button
-        registerVehicleBtn = findViewById(R.id.UI_RegisterVehicleBtn);
-        registerVehicleBtn.setOnClickListener(new View.OnClickListener() {
+        btnregisterVehicle = findViewById(R.id.UI_RegisterVehicleBtn);
+        btnregisterVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GotoRegisterVehicle();
@@ -48,13 +56,18 @@ public class UserInterfaceActivity extends AppCompatActivity {
         });
 
         //Setup Registered Vehicle button
-        registeredVehicleBtn = findViewById(R.id.UI_RegisteredVehiclesBtn);
-        registeredVehicleBtn.setOnClickListener(new View.OnClickListener() {
+        btnregisteredVehicle = findViewById(R.id.UI_RegisteredVehiclesBtn);
+        btnregisteredVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToRegisteredVehicles();
             }
         });
+    }
+
+    private void GoToYourLogs() {
+        Intent intent = new Intent(this, YourLogsActivity.class);
+        startActivity(intent);
     }
 
     private void goToRegisteredVehicles() {
