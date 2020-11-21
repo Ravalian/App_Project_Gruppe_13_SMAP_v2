@@ -96,7 +96,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity {
 
         txtVehicleName = findViewById(R.id.txtRVVehicleName);
 
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnRVBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -12,22 +12,22 @@ public class VehicleDataFirebase {
     }
 
     //Values
-    private String owner; // might have have to change to int or something, depends what UserID from firebase is
-    private String registrationNumber;
-    private String totalWeight;
-    private String seats;
-    private String doors;
-    private String make;
-    private String model;
-    private String variant;
-    private String modelType;
-    private String modelYear;
-    private String color;
-    private String chassisType;
-    private String engineCylinders;
-    private String engineVolume;
-    private String enginePower;
-    private String fuelType;
+    public String owner; // might have have to change to int or something, depends what UserID from firebase is
+    public String registrationNumber;
+    public String totalWeight;
+    public String seats;
+    public String doors;
+    public String make;
+    public String model;
+    public String variant;
+    public String modelType;
+    public String modelYear;
+    public String color;
+    public String chassisType;
+    public String engineCylinders;
+    public String engineVolume;
+    public String enginePower;
+    public String fuelType;
 
     //Get and set methods for each value
     public String getOwner() {
