@@ -38,12 +38,11 @@ public class Repository {
 
     //General Internals
     private Application application;
-    private LiveData<List<VehicleDataFirebase>> vehicles;
-    Map<String, VehicleDataFirebase> Vehicles;
+    private MutableLiveData<List<VehicleDataFirebase>> vehicles;
+
 
     //Firebase
     private DatabaseReference mDatabase;
-    DatabaseReference vehiclesRef;
 
     //Networking
     private String BaseAPIURL = "https://v1.motorapi.dk/vehicles/";
@@ -56,8 +55,8 @@ public class Repository {
     public Repository (Application app) {
         application = app;
         mDatabase = FirebaseDatabase.getInstance().getReference("/vehicles");
-        vehiclesRef = mDatabase.child("vehicles");
-        Vehicles = new HashMap<>();
+        vehicles = new MutableLiveData<>();
+
         setupFirebaseListener();
     }
 
@@ -72,18 +71,10 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //This is called when initialised and when data is changed.
-                //Log.d("Tester", "Hejsa:  "+snapshot.getChildren().iterator().next().getValue().toString());
-
-
-                //vehicles = new MutableLiveData();
-                //Iterable<DataSnapshot> snapshots = snapshot.getChildren();
-                //while(snapshots.iterator().hasNext()){
-                    //vehicles.postValue(snapshots.iterator().next().getValue(VehicleDataFirebase.class));
-                //}
-                List<VehicleDataFirebase> v = toVehicles(snapshot);
-                Log.d("Tester", v.get(0).getRegistrationNumber()+" "+v.get(1).registrationNumber+" "+v.get(2).getRegistrationNumber());
-                //vehicles.postValue(toVehicles(snapshot));
-                //Log.d("Tester", ""+vehicles.toString());
+                
+                vehicles.setValue(toVehicles(snapshot));
+                Log.d("Tester", vehicles.getValue().get(0).getRegistrationNumber());
+                //Skal sættes ind i activities
                 /*if(vehicles.size()>0){
                     if(adapter==null){
                         adapter = new RegisteredVehiclesAdapter(vehicles, RegisteredVehicles.this);
@@ -108,7 +99,6 @@ public class Repository {
         while(snapshots.iterator().hasNext()){
             VehicleDataFirebase ve = snapshots.iterator().next().getValue(VehicleDataFirebase.class);
             V.add(ve);
-            Vehicles.put(ve.registrationNumber, ve);
         }
         return V;
     }
@@ -199,7 +189,6 @@ public class Repository {
             newVehicle.setFuelType(vehicleDataAPI.getFuelType());
 
             //Adding car to Firebase
-
             mDatabase.child(newVehicle.getRegistrationNumber()).setValue(newVehicle);
             Log.d(Constants.REPOTAG, "Vehicle added to database: " + newVehicle.getRegistrationNumber());
         }
