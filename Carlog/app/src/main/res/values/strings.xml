@@ -54,6 +54,13 @@
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
+    <string name="Loginbtn">Login</string>
+    <string name="welcome">Welcome To Carlog</string>
+    <string name="LogoutBtn">Logout</string>
+
+
+
+
 
     <string name="RegisterVHAddBtn">Add Vehicle</string>
     <string name="RegisterVehicleTitletxt">Register your vehicle</string>
@@ -63,6 +70,11 @@
     <string name="RegisterVehicleUploadBtn">Upload image</string>
     <string name="UI_RegisterVehicleBtn">Register Vehicle</string>
     <string name="CancelBtn">Cancel</string>
+    <string name="VehicleAlreadyRegisteredString">The vehicle is already registered</string>
+    <string name="EnterReqNrString">Please enter a vehicle registration nr.</string>
     <string name="UI_RegisteredVehiclesBtn">Registered Vehicles</string>
     <string name="txt_ActivityRegisteredVehicles_OwnerName">Owner Name</string>
+    <string name="txtWriteLog">Write Log</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_Stop">Stop</string>
 </resources>
