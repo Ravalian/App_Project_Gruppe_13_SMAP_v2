@@ -32,7 +32,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
     private RecyclerView rcvList;
     //private Adapter = adaptor;
     private Button btnBack;
-    private ArrayList<VehicleDataFirebase> vehicles;
+    private List<VehicleDataFirebase> vehicles;
     private RegisteredVehiclesAdapter adapter;
     private Constants constants;
     private RegisteredVehiclesActivityVM vm;
@@ -42,23 +42,25 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered_vehicles);
 
-        //init ui
-        //setupUI();
+        //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(RegisteredVehiclesActivityVM.class);
         vm.getVehicles().observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
+                //Setup UI if there are no adapter
                 if (adapter==null){
                     setupUI(vehicleDataFirebases);
                 }
-                Log.d("Tester", vehicleDataFirebases.get(1).getRegistrationNumber());
+                Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(1).getRegistrationNumber());
+                //Update data
                 adapter.updateVehicles(vehicleDataFirebases);
+                vehicles = vehicleDataFirebases;
             }
         });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-
+            Log.d(constants.REGISTEREDTAG, user.getEmail());
         }
     }
 
@@ -91,14 +93,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
     public void onRegisteredVehicleClicked(int position) {
         Intent intent = new Intent(this, VehicleDetailsActivity.class);
         intent.putExtra(constants.ID, vehicles.get(position).getRegistrationNumber());
-        startActivityForResult(intent, 101);
+        startActivity(intent);
     }
 
-    /*
-    @Override
-    public void onRegisteredVehicleClicked(int RVID) {
-        Intent intent = new Intent(this, com.app_project_group_13.carlog.Activities.VehicleDetails.class);
-        intent.putExtra(constants.ID, RVID);
-    }
-    */
 }

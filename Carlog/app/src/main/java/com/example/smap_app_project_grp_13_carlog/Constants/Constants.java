@@ -4,6 +4,7 @@ public class Constants {
 
     //Logging tags
     public static final String REPOTAG = "REPOSOTORYTAG";
+    public static final String REGISTEREDTAG = "REGISTEREDTAG";
 
     //Intent tags
     public static final String ID = "ID";

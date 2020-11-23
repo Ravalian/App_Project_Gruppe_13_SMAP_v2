@@ -9,18 +9,21 @@ import androidx.lifecycle.LiveData;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
+import java.util.List;
+
 public class VehicleLogVM extends AndroidViewModel {
 
-    LiveData<VehicleDataFirebase> vehicle;
+    LiveData<List<VehicleDataFirebase>> vehicle;
     Repository repository;
 
     public VehicleLogVM(@NonNull Application application) {
         super(application);
+        repository = new Repository(application);
     }
 
-    public LiveData<VehicleDataFirebase> getVehicle(String id) {
+    public LiveData<List<VehicleDataFirebase>> getVehicle() {
         if (vehicle==null){
-            //repository.getvehicle(id);
+            vehicle = repository.getVehicles();
         }
         return vehicle;
     }

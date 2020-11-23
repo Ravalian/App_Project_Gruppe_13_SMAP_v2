@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -15,11 +16,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
+import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataAPI;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +45,7 @@ public class Repository {
     //General Internals
     private Application application;
     private MutableLiveData<List<VehicleDataFirebase>> vehicles;
+    private MutableLiveData<List<Logs>> logs;
 
 
     //Firebase
@@ -56,11 +61,15 @@ public class Repository {
 
 
     public Repository (Application app) {
-        application = app;
-        mDatabase = FirebaseDatabase.getInstance().getReference("/vehicles");
-        vehicles = new MutableLiveData<>();
-
-        setupFirebaseListener();
+        if (application==null) {
+            application = app;
+            mDatabase = FirebaseDatabase.getInstance().getReference("/vehicles");
+            vehicles = new MutableLiveData<>();
+            logs = new MutableLiveData<>();
+            setupFirebaseListener();
+        } else{
+            return;
+        }
     }
 
     /////////////////// Firebase Handling /////////////////////
@@ -107,6 +116,48 @@ public class Repository {
     }
 
 
+    public void setupFirebaseLogsListener(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = database.getReference("/logs"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
+
+        reference.orderByChild("vehicle").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.postValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.setValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Error", "It did not work");
+            }
+        });
+    }
+
+    private List<Logs> tologs(DataSnapshot snapshot){
+        ArrayList L = new ArrayList();
+        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+        while(snapshots.iterator().hasNext()){
+            Logs l = snapshots.iterator().next().getValue(Logs.class);
+            L.add(l);
+        }
+        return L;
+    }
     //////////////////////////////////////////////////////////
 
 
@@ -205,6 +256,24 @@ public class Repository {
     public MutableLiveData<List<VehicleDataFirebase>> getVehicles(){
         return vehicles;
     }
+
+    public LiveData<List<Logs>> getLogs() {
+        //setupFirebaseLogsListener(id);
+        return logs;
+    }
+
+    public MutableLiveData<VehicleDataFirebase> getvehicle(String id) {
+        MutableLiveData<VehicleDataFirebase> v = new MutableLiveData<>();
+        for (VehicleDataFirebase vehicle:
+             vehicles.getValue()) {
+            Log.d("Tester", vehicle.getRegistrationNumber()+" og "+id);
+            if (vehicle.getRegistrationNumber()==id){
+                v.setValue(vehicle);
+            }
+        }
+        return v;
+    }
+
 
     ////////////////////////////////////////////////////////
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleLogVM;
+
+import java.util.List;
 
 
 public class VehicleLogActivity extends AppCompatActivity {
@@ -32,17 +35,24 @@ public class VehicleLogActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ID = intent.getStringExtra(Constants.ID);
-
+        Log.d("Tester", ID);
         started = false;
 
         setupIU();
         
         
         vm = new ViewModelProvider(this).get(VehicleLogVM.class);
-        vm.getVehicle(ID).observe(this, new Observer<VehicleDataFirebase>() {
+        vm.getVehicle().observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
-            public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
-                vehicle = vehicleDataFirebase;
+            public void onChanged(List<VehicleDataFirebase> vehicleDataFirebase) {
+                for (VehicleDataFirebase v:
+                     vehicleDataFirebase) {
+                    Log.d("Tester", ID+" og "+v.getRegistrationNumber());
+                    if (ID.contains(v.getRegistrationNumber().trim())){
+                        Log.d("Tester", "Hejsa");
+                        vehicle=v;
+                    }
+                }
                 updateUI();
             }
         });
@@ -64,7 +74,12 @@ public class VehicleLogActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stop();
+                if (started){
+                    started = false;
+                    stop.setText("Save");
+                    stop();
+                }
+                save();
             }
         });
         
@@ -78,21 +93,19 @@ public class VehicleLogActivity extends AppCompatActivity {
         
     }
 
+    private void save() {
+    }
+
     private void back() {
     }
 
     private void stop() {
-        if (started){
-            started = false;
-            stop.setText("Save");
-            //stop the ride
-        }
-        //save
+        
     }
 
     private void start() {
         stop.setText("Stop");
-        started = false;
+        started = true;
     }
 
     private void updateUI() {

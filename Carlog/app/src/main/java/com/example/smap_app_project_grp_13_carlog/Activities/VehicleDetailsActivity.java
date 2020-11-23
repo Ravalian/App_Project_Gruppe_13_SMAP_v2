@@ -1,19 +1,26 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsDetailsFragment;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsListFragment;
 import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
+import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleDetailsActivity extends AppCompatActivity {
 
@@ -36,16 +43,24 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     private LinearLayout detailsContainer;
 
     //list of vehicles
-    private ArrayList<Logs> vehicledetails;
+    private List<Logs> vehicledetails;
     private int selectedVDIndex;
 
-    //
-    private Button btnBack;
+    //Views
+    private Button btnBack, btnNew;
+    private VehicleDetailsVM vm;
+    private String id;
+    private Constants constants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_details_fragment_list);
+
+        Intent data = getIntent();
+        id = data.getStringExtra(constants.ID);
+        vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
+        vm.fetch(id);
 
         //get container views
         listContainer = (LinearLayout)findViewById(R.id.VD_list_container);
@@ -58,42 +73,54 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             phoneMode = PhoneMode.LANDSCAPE;
         }
 
-        if (savedInstanceState == null) {
-            //no persisted state, start the app in list view mode and selected index = 0
-            selectedVDIndex = 0;
-            userMode = UserMode.LIST_VIEW;
 
-            //initialize fragments
-            vehicleDetailsList = new VehicleDetailsListFragment();
-            vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
+        vm.getLogs().observe(this, new Observer<List<Logs>>() {
+            @Override
+            public void onChanged(List<Logs> logs) {
 
-            vehicleDetailsList.setVD(vehicledetails);
-            vehicleDetailsDetails.setVD(vehicledetails.get(selectedVDIndex));
+                vehicledetails = logs;
 
-            //add the first two fragments to container (one will be invisible if in portrait mode)
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.VD_list_container, vehicleDetailsList, LIST_FRAG)
-                    .add(R.id.VD_details_container, vehicleDetailsDetails, DETAILS_FRAG)
-                    .commit();
-        } else {
-            //got restarted with persisted state, probably due to orientation change
-            selectedVDIndex = savedInstanceState.getInt("Vehicle_Details_position");
-            userMode = (UserMode) savedInstanceState.getSerializable("User_mode");
+                if (savedInstanceState == null) {
+                    //no persisted state, start the app in list view mode and selected index = 0
+                    selectedVDIndex = 0;
+                    userMode = UserMode.LIST_VIEW;
 
-            if (userMode == null) {
-                userMode = UserMode.LIST_VIEW; //default value if none saved
+                    //initialize fragments
+                    vehicleDetailsList = new VehicleDetailsListFragment();
+                    vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
+
+                    vehicleDetailsList.setVD((ArrayList<Logs>) vehicledetails);
+                    vehicleDetailsDetails.setVD(vehicledetails.get(selectedVDIndex));
+
+                    //add the first two fragments to container (one will be invisible if in portrait mode)
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.VD_list_container, vehicleDetailsList, LIST_FRAG)
+                            .add(R.id.VD_details_container, vehicleDetailsDetails, DETAILS_FRAG)
+                            .commit();
+                } else {
+                    //got restarted with persisted state, probably due to orientation change
+                    selectedVDIndex = savedInstanceState.getInt("Vehicle_Details_position");
+                    userMode = (UserMode) savedInstanceState.getSerializable("User_mode");
+
+                    if (userMode == null) {
+                        userMode = UserMode.LIST_VIEW; //default value if none saved
+                    }
+
+                    ////check if FragmentManager already holds instance of Fragments, else create them
+                    vehicleDetailsList = (VehicleDetailsListFragment)getSupportFragmentManager().findFragmentByTag(LIST_FRAG);
+                    if (vehicleDetailsList == null) {
+                        vehicleDetailsList = new VehicleDetailsListFragment();
+                    }
+                    vehicleDetailsDetails = (VehicleDetailsDetailsFragment)getSupportFragmentManager().findFragmentByTag(DETAILS_FRAG);
+                    if (vehicleDetailsDetails == null) {
+                        vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
+                    }
+                }
+
             }
+        });
 
-            ////check if FragmentManager already holds instance of Fragments, else create them
-            vehicleDetailsList = (VehicleDetailsListFragment)getSupportFragmentManager().findFragmentByTag(LIST_FRAG);
-            if (vehicleDetailsList == null) {
-                vehicleDetailsList = new VehicleDetailsListFragment();
-            }
-            vehicleDetailsDetails = (VehicleDetailsDetailsFragment)getSupportFragmentManager().findFragmentByTag(DETAILS_FRAG);
-            if (vehicleDetailsDetails == null) {
-                vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
-            }
-        }
+
 
         btnBack = findViewById(R.id.btnVDBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +130,20 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnNew = findViewById(R.id.btnStart);
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoNewLog();
+            }
+        });
         updateFragmentViewState(userMode);
+    }
+
+    private void gotoNewLog() {
+        Intent intent = new Intent(this, VehicleLogActivity.class);
+        intent.putExtra(constants.ID, id);
+        startActivity(intent);
     }
 
     @Override
@@ -163,7 +203,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     }
 
     //ved ikke om den skal bruges sådan her eller det er firebase
-    public ArrayList<Logs> getVDList() { return vehicledetails; }
+    public ArrayList<Logs> getVDList() { return (ArrayList<Logs>) vehicledetails; }
 
     public Logs getCurrentSelection() {
         if (vehicledetails != null) {
