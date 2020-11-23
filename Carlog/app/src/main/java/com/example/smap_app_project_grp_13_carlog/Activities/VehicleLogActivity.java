@@ -76,7 +76,7 @@ public class VehicleLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (started){
                     started = false;
-                    stop.setText("Save");
+                    stop.setText(R.string.btn_save);
                     stop();
                 }
                 save();
@@ -104,7 +104,7 @@ public class VehicleLogActivity extends AppCompatActivity {
     }
 
     private void start() {
-        stop.setText("Stop");
+        stop.setText(R.string.btn_Stop);
         started = true;
     }
 

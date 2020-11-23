@@ -38,4 +38,6 @@
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img af køretøj</string>
     <string name="btn_ActivityUserInterface_Logout">Logud</string>
+    <string name="btn_Stop">Stop</string>
+    <string name="btn_save">Gem</string>
 </resources>

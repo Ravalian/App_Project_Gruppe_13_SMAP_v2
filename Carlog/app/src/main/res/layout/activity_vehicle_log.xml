@@ -71,7 +71,7 @@
         android:layout_marginLeft="193dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/btn_Stop"
+        android:text="@string/btn_save"
         app:layout_constraintBottom_toBottomOf="@+id/btnVLStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnVLStart"
