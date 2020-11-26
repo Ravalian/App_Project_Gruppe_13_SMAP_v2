@@ -60,10 +60,10 @@ public class VehicleDetailsAdapter extends BaseAdapter {
 
         VDlog = VDlogs.get(position);
         if (VDlog != null) {
-            Date date = VDlog.getDate();
+            Long date = VDlog.getDate();
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtVDListItemDate);
-            txtDate.setText((CharSequence) VDlog.getDate());
+            txtDate.setText((CharSequence) new Date(VDlog.getDate()));
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtVDListItemUser);
             txtUser.setText(VDlog.getuser());

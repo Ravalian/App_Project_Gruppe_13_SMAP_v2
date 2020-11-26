@@ -57,10 +57,10 @@ public class YourLogsAdapter extends BaseAdapter {
 
         yourlog = yourlogs.get(position);
         if (yourlog != null) {
-            Date date = yourlog.getDate();
+            Long date = yourlog.getDate();
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtYLListItemDate);
-            txtDate.setText((CharSequence) yourlog.getDate());
+            txtDate.setText((CharSequence) new Date(yourlog.getDate()));
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtYLListItemName);
             txtUser.setText(yourlog.getuser());

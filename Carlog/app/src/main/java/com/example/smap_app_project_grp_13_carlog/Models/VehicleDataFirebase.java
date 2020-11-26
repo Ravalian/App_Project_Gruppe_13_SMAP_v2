@@ -12,7 +12,7 @@ public class VehicleDataFirebase {
     }
 
     //Values
-    public String owner; // might have have to change to int or something, depends what UserID from firebase is
+    public String owner;
     public String registrationNumber;
     public String totalWeight;
     public String seats;

@@ -13,14 +13,18 @@ import androidx.fragment.app.Fragment;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.R;
-import com.google.android.gms.maps.MapView;
+//Kam ikke importeres af en eller anden grund
+//import com.google.android.gms.maps.MapView;
+
+import java.util.Date;
 
 public class VehicleDetailsDetailsFragment extends Fragment {
 
     private TextView txtVDFragDUser, txtVDFragDDate, txtVDLFragDDistance,
             txtVDFragDTime, txtVDFragDLog, txtVDFragDLogDescription;
     private ImageView imgYLFragDVehicle;
-    private MapView mapYLFragDGoogle;
+    //Den virker ikke lige nu
+    //private MapView mapYLFragDGoogle;
 
     private VehicleDetailsSelectorInterface VDSelector;
 
@@ -63,7 +67,7 @@ public class VehicleDetailsDetailsFragment extends Fragment {
                 && txtVDFragDTime != null && txtVDFragDLogDescription != null) {
 
             txtVDFragDUser.setText(logs.getuser());
-            txtVDFragDDate.setText((CharSequence) logs.getDate());
+            txtVDFragDDate.setText((CharSequence) new Date(logs.getDate()));
             txtVDLFragDDistance.setText(logs.getDistance());
             txtVDFragDTime.setText(logs.getTime());
             txtVDFragDLogDescription.setText(logs.getLogDescription());

@@ -50,6 +50,7 @@ public class Repository {
 
     //Firebase
     private DatabaseReference mDatabase;
+    private DatabaseReference LogDatabase;
 
     //Networking
     private String BaseAPIURL = "https://v1.motorapi.dk/vehicles/";
@@ -64,6 +65,7 @@ public class Repository {
         if (application==null) {
             application = app;
             mDatabase = FirebaseDatabase.getInstance().getReference("/vehicles");
+            LogDatabase = FirebaseDatabase.getInstance().getReference("/logs");
             vehicles = new MutableLiveData<>();
             logs = new MutableLiveData<>();
             setupFirebaseListener();
@@ -121,7 +123,7 @@ public class Repository {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = database.getReference("/logs"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
 
-        reference.orderByChild("vehicle").addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("vehicle").equalTo(id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 logs.postValue(tologs(snapshot));
@@ -151,11 +153,14 @@ public class Repository {
 
     private List<Logs> tologs(DataSnapshot snapshot){
         ArrayList L = new ArrayList();
-        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+        /*Iterable<DataSnapshot> snapshots = snapshot.getChildren();
         while(snapshots.iterator().hasNext()){
+            Log.d(Constants.REPOTAG, ""+snapshots.iterator().next().getValue());
             Logs l = snapshots.iterator().next().getValue(Logs.class);
             L.add(l);
-        }
+        }*/
+        L.add(snapshot.getValue(Logs.class));
+        Log.d("Tester", ""+snapshot.getValue());
         return L;
     }
     //////////////////////////////////////////////////////////
@@ -272,6 +277,13 @@ public class Repository {
             }
         }
         return v;
+    }
+
+    public void saveLog(Logs log) {
+        String ID = LogDatabase.push().getKey();
+        Log.d("Tester", "Er der en dato? "+log.date);
+        LogDatabase.child(ID).setValue(log);
+
     }
 
 

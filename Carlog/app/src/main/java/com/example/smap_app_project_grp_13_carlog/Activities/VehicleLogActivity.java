@@ -12,10 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
+import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleLogVM;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -66,6 +71,8 @@ public class VehicleLogActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stop.setText(R.string.btn_Stop);
+                started = true;
                 start();
             }
         });
@@ -94,9 +101,23 @@ public class VehicleLogActivity extends AppCompatActivity {
     }
 
     private void save() {
+        Logs log = new Logs();
+        Long now = System.currentTimeMillis();
+        Log.d("Tester", ""+now);
+        log.date = now;
+        Log.d("Tester", "Hvad med dette? "+log.date);
+        log.vehicle = ID;
+        log.logDescription = vehicleLog.getText().toString();
+        String uname = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("Tester", "Hvem er du? "+uname);
+        log.user = uname;
+        log.time = 1;
+        log.distance = 1;
+        vm.saveLog(log);
     }
 
     private void back() {
+        finish();
     }
 
     private void stop() {
@@ -104,8 +125,7 @@ public class VehicleLogActivity extends AppCompatActivity {
     }
 
     private void start() {
-        stop.setText(R.string.btn_Stop);
-        started = true;
+
     }
 
     private void updateUI() {

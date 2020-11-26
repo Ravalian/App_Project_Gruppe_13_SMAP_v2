@@ -13,14 +13,18 @@ import androidx.fragment.app.Fragment;
 import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
-import com.google.android.gms.maps.MapView;
+//Kan ikke importeres af en eller anden grund
+//import com.google.android.gms.maps.MapView;
+
+import java.util.Date;
 
 public class YourLogsDetailsFragment extends Fragment {
 
     private TextView txtYLFragDUser, txtYLFragDDate, txtYLFragDDistance,
             txtYLFragDTime, txtYLFragDLog, txtYLFragDLogDescription;
     private ImageView imgYLFragDVehicle;
-    private MapView mapYLFragDGoogle;
+    //Den virker ikke lige nu
+    //private MapView mapYLFragDGoogle;
 
     private YourLogsSelectorInterface yourLogsSelector;
 
@@ -63,7 +67,7 @@ public class YourLogsDetailsFragment extends Fragment {
                 && txtYLFragDTime != null && txtYLFragDLogDescription != null) {
 
             txtYLFragDUser.setText(logs.getuser());
-            txtYLFragDDate.setText((CharSequence) logs.getDate());
+            txtYLFragDDate.setText((CharSequence) new Date(logs.getDate()));
             txtYLFragDDistance.setText(logs.getDistance());
             txtYLFragDTime.setText(logs.getTime());
             txtYLFragDLogDescription.setText(logs.getLogDescription());
