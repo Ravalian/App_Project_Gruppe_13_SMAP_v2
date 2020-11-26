@@ -114,6 +114,7 @@ public class VehicleLogActivity extends AppCompatActivity {
         log.time = 1;
         log.distance = 1;
         vm.saveLog(log);
+        finish();
     }
 
     private void back() {

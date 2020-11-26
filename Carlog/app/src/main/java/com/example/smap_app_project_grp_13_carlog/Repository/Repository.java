@@ -46,6 +46,7 @@ public class Repository {
     private Application application;
     private MutableLiveData<List<VehicleDataFirebase>> vehicles;
     private MutableLiveData<List<Logs>> logs;
+    private MutableLiveData<VehicleDataFirebase> vehicle;
 
 
     //Firebase
@@ -68,6 +69,7 @@ public class Repository {
             LogDatabase = FirebaseDatabase.getInstance().getReference("/logs");
             vehicles = new MutableLiveData<>();
             logs = new MutableLiveData<>();
+            vehicle = new MutableLiveData<>();
             setupFirebaseListener();
         } else{
             return;
@@ -162,6 +164,37 @@ public class Repository {
         L.add(snapshot.getValue(Logs.class));
         Log.d("Tester", ""+snapshot.getValue());
         return L;
+    }
+
+    private void getVehicleFromFirebase(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("/vehicles");
+        reference.orderByChild("registrationNumber").equalTo(id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                vehicle.setValue(snapshot.getValue(VehicleDataFirebase.class));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     //////////////////////////////////////////////////////////
 
@@ -268,19 +301,21 @@ public class Repository {
     }
 
     public MutableLiveData<VehicleDataFirebase> getvehicle(String id) {
-        MutableLiveData<VehicleDataFirebase> v = new MutableLiveData<>();
-        for (VehicleDataFirebase vehicle:
+        //MutableLiveData<VehicleDataFirebase> v = new MutableLiveData<>();
+        /*for (VehicleDataFirebase vehicle:
              vehicles.getValue()) {
             Log.d("Tester", vehicle.getRegistrationNumber()+" og "+id);
             if (vehicle.getRegistrationNumber()==id){
                 v.setValue(vehicle);
             }
-        }
-        return v;
+        }*/
+        getVehicleFromFirebase(id);
+        return vehicle;
     }
 
+
     public void saveLog(Logs log) {
-        String ID = LogDatabase.push().getKey();
+        String ID = LogDatabase.push().getKey(); //https://firebase.google.com/docs/database/admin/save-data#getting-the-unique-key-generated-by-push
         Log.d("Tester", "Er der en dato? "+log.date);
         LogDatabase.child(ID).setValue(log);
 
