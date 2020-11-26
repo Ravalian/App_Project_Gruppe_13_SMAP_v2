@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsDetailsFragment;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsListFragment;
+import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
@@ -22,7 +24,7 @@ import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleDetailsActivity extends AppCompatActivity {
+public class VehicleDetailsActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
     //keeping track of phone mode (portrait or landscape) and user mode (which view the user has selected)
     public enum PhoneMode {PORTRAIT, LANDSCAPE}
@@ -43,7 +45,8 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     private LinearLayout detailsContainer;
 
     //list of vehicles
-    private List<Logs> vehicledetails;
+    private List<Logs> logs;
+    private VehicleDataFirebase vehicle;
     private int selectedVDIndex;
 
     //Views
@@ -74,11 +77,19 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         }
 
 
+        vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
+            @Override
+            public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
+                vehicle = vehicleDataFirebase;
+                Log.d("Tester", vehicle.getRegistrationNumber());
+                //vehicleDetailsList.setVD((ArrayList<Logs>) logs, vehicle);
+            }
+        });
         vm.getLogs().observe(this, new Observer<List<Logs>>() {
             @Override
             public void onChanged(List<Logs> logs) {
 
-                vehicledetails = logs;
+                logs = logs;
 
                 if (savedInstanceState == null) {
                     //no persisted state, start the app in list view mode and selected index = 0
@@ -89,8 +100,8 @@ public class VehicleDetailsActivity extends AppCompatActivity {
                     vehicleDetailsList = new VehicleDetailsListFragment();
                     vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
 
-                    vehicleDetailsList.setVD((ArrayList<Logs>) vehicledetails);
-                    vehicleDetailsDetails.setVD(vehicledetails.get(selectedVDIndex));
+                    vehicleDetailsList.setVD((ArrayList<Logs>) logs, vehicle);
+                    vehicleDetailsDetails.setVD(logs.get(selectedVDIndex));
 
                     //add the first two fragments to container (one will be invisible if in portrait mode)
                     getSupportFragmentManager().beginTransaction()
@@ -193,7 +204,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
 
     public void onVehicleDetailsSelected(int position) {
         if (vehicleDetailsDetails != null) {
-            Logs selectedVD = vehicledetails.get(position);
+            Logs selectedVD = logs.get(position);
             if (selectedVD != null) {
                 selectedVDIndex = position;
                 vehicleDetailsDetails.setVD(selectedVD);
@@ -202,12 +213,17 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         updateFragmentViewState(UserMode.DETAIL_VIEW);
     }
 
+    @Override
+    public ArrayList<Logs> getVehicleDetailsList() {
+        return (ArrayList) logs;
+    }
+
     //ved ikke om den skal bruges sådan her eller det er firebase
-    public ArrayList<Logs> getVDList() { return (ArrayList<Logs>) vehicledetails; }
+    public ArrayList<Logs> getVDList() { return (ArrayList<Logs>) logs; }
 
     public Logs getCurrentSelection() {
-        if (vehicledetails != null) {
-            return vehicledetails.get(selectedVDIndex);
+        if (logs != null) {
+            return logs.get(selectedVDIndex);
         } else {
             return null;
         }
