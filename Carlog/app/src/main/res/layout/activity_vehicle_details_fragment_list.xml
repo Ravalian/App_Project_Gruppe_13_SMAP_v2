@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,9 +19,9 @@
         app:layout_constraintBottom_toTopOf="@+id/btnVDBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVDName"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDEnginePower"
         tools:itemCount="10"
-        tools:listitem="@layout/activity_vehicle_details_list_item" >
+        tools:listitem="@layout/activity_vehicle_details_list_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -70,4 +70,68 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtVDModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Model"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDName" />
+
+    <TextView
+        android:id="@+id/txtVDNumberPlate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Numberplate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDName" />
+
+    <TextView
+        android:id="@+id/txtVDKmL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Km/L"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDModel" />
+
+    <TextView
+        android:id="@+id/txtVDNumberofSeats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Number of seats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDNumberPlate" />
+
+    <TextView
+        android:id="@+id/txtVDFuelType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="fuelType"
+        app:layout_constraintEnd_toStartOf="@+id/txtVDNumberPlate"
+        app:layout_constraintStart_toEndOf="@+id/txtVDModel"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDName" />
+
+    <TextView
+        android:id="@+id/txtVDEnginePower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="enginePower"
+        app:layout_constraintEnd_toStartOf="@+id/txtVDNumberofSeats"
+        app:layout_constraintStart_toEndOf="@+id/txtVDKmL"
+        app:layout_constraintTop_toBottomOf="@+id/txtVDFuelType" />
+
+</RelativeLayout>
