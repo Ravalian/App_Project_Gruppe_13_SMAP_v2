@@ -9,4 +9,5 @@ public interface VehicleDetailsSelectorInterface {
     public void onVehicleDetailsSelected(int position);
     public ArrayList<Logs> getVehicleDetailsList();
     public Logs getCurrentSelection();
+    public void back();
 }

@@ -74,6 +74,16 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     public void back(){
         finish();
     }
+
+    @Override
+    public void onBackPressed(){
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+    }
+
     private void updateFragmentState() {
     }
 

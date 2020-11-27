@@ -230,6 +230,11 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
         }
     }
 
+    @Override
+    public void back() {
+
+    }
+
     private void Back() {
         finish();
     }

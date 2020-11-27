@@ -1,6 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
+import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Logs;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
@@ -35,6 +38,7 @@ public class VehicleDetailFragment extends Fragment {
     private VehicleDataFirebase vehicle;
     private ImageView vehicleImg;
     private VehicleDetailsSelectorInterface InterFace;
+    private Constants constants;
 
     public VehicleDetailFragment() {
         // Required empty public constructor
@@ -78,12 +82,18 @@ public class VehicleDetailFragment extends Fragment {
     }
 
     private void newLog() {
-        //create new log
+        Intent intent = new Intent(getActivity(), VehicleLogActivity.class);
+        intent.putExtra(constants.ID, vehicle.getRegistrationNumber());
+        startActivity(intent);
+        
+
     }
 
     private void Back() {
-        //go back
+        InterFace.back();
     }
+
+
 
     @Override
     public void onAttach(Context activity){
