@@ -295,8 +295,8 @@ public class Repository {
         return vehicles;
     }
 
-    public LiveData<List<Logs>> getLogs() {
-        //setupFirebaseLogsListener(id);
+    public LiveData<List<Logs>> getLogs(String id) {
+        setupFirebaseLogsListener(id);
         return logs;
     }
 

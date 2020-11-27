@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SMAP_App_Project_Grp_13_Carlog">
+        <activity android:name=".Activities.VehicleDetailActivity"></activity>
         <activity android:name=".Activities.YourLogsActivity" />
         <activity android:name=".Activities.YourVehiclesActivity" />
         <activity android:name=".Activities.VehicleLogActivity" />

@@ -91,7 +91,8 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
 
     @Override
     public void onRegisteredVehicleClicked(int position) {
-        Intent intent = new Intent(this, VehicleDetailsActivity.class);
+        //Intent intent = new Intent(this, VehicleDetailsActivity.class);
+        Intent intent = new Intent(this, VehicleDetailActivity.class);
         intent.putExtra(constants.ID, vehicles.get(position).getRegistrationNumber());
         startActivity(intent);
     }
