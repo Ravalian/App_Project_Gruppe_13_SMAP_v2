@@ -16,14 +16,15 @@ import com.example.smap_app_project_grp_13_carlog.R;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class VehicleDetailsAdapter extends BaseAdapter {
 
-    Context context;
-    ArrayList<Logs> VDlogs;
-    Logs VDlog = null;
+    private Context context;
+    private List<Logs> VDlogs;
+    private Logs VDlog = null;
 
-    public VehicleDetailsAdapter(Context c, ArrayList<Logs> VDlogsList) {
+    public VehicleDetailsAdapter(Context c, List<Logs> VDlogsList) {
         VDlogs = VDlogsList;
         context = c;
     }
@@ -45,6 +46,7 @@ public class VehicleDetailsAdapter extends BaseAdapter {
         return null;
     }
 
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -63,7 +65,7 @@ public class VehicleDetailsAdapter extends BaseAdapter {
             Long date = VDlog.getDate();
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtVDListItemDate);
-            txtDate.setText((CharSequence) new Date(VDlog.getDate()));
+            txtDate.setText((CharSequence) new Date(VDlog.getDate()).toString());
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtVDListItemUser);
             txtUser.setText(VDlog.getuser());

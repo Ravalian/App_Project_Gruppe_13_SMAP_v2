@@ -70,11 +70,11 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
         detailsContainer = (LinearLayout)findViewById(R.id.VD_details_container);
 
         //determine orientation
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             phoneMode = PhoneMode.PORTRAIT;
         } else {
             phoneMode = PhoneMode.LANDSCAPE;
-        }
+        }*/
 
 
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
@@ -85,7 +85,7 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
                 //vehicleDetailsList.setVD((ArrayList<Logs>) logs, vehicle);
             }
         });
-        vm.getLogs().observe(this, new Observer<List<Logs>>() {
+        vm.getLogs(id).observe(this, new Observer<List<Logs>>() {
             @Override
             public void onChanged(List<Logs> logs) {
 
@@ -172,6 +172,7 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
         }
     }
 
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt("VD_position", selectedVDIndex);
         outState.putSerializable("user_mode", userMode);

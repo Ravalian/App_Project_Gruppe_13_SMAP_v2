@@ -24,9 +24,9 @@ public class VehicleDetailsVM extends AndroidViewModel {
         //repository.setupFirebaseLogsListener(id);
     }
 
-    public LiveData<List<Logs>> getLogs() {
+    public LiveData<List<Logs>> getLogs(String id) {
         if (logs==null){
-            logs = repository.getLogs();
+            logs = repository.getLogs(id);
         }
         return logs;
     }
