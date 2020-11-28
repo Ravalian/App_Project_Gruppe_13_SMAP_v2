@@ -74,8 +74,6 @@ public class VehicleDetailFragment extends Fragment {
             }
         });
 
-
-        Log.d("Tester", "pls");
         updateList();
 
         return view;
@@ -91,6 +89,10 @@ public class VehicleDetailFragment extends Fragment {
 
     private void Back() {
         InterFace.back();
+    }
+
+    public void update(){
+        updateList();
     }
 
 
@@ -118,8 +120,6 @@ public class VehicleDetailFragment extends Fragment {
         if (logs!=null){
             adapter = new VehicleDetailsAdapter(getActivity(), logs);
             logList.setAdapter(adapter);
-            Log.d("Tester", "Er vi der?");
-
             logList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -128,7 +128,6 @@ public class VehicleDetailFragment extends Fragment {
             });
         }
         if (vehicle!=null){
-            Log.d("Tester", "Er der en vehicle?");
             vName.setText(vehicle.getRegistrationNumber());
             owner.setText(vehicle.getOwner());
             model.setText(vehicle.getModel());
@@ -137,7 +136,6 @@ public class VehicleDetailFragment extends Fragment {
             kml.setText("9999999km/l");
             numseats.setText(vehicle.getSeats());
         }
-        Log.d("Tester", "Bliver jeg kørt?");
     }
 
     private void onLogSelected(int position){
@@ -151,7 +149,6 @@ public class VehicleDetailFragment extends Fragment {
     }
 
     public void setVehicle(VehicleDataFirebase v){
-        Log.d("Tester", "Kommer du herind?");
         vehicle=v;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

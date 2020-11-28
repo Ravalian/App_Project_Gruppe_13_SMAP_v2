@@ -44,27 +44,24 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         id = data.getStringExtra(constants.ID);
 
         vehicleDetails = new VehicleDetailFragment();
-        Log.d("Tester", "Komer vi her til?");
 
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
-                Log.d("Tester", "Hvad med her?");
                 vehicle = vehicleDataFirebase;
                 vehicleDetails.setVehicle(vehicleDataFirebase);
-
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.DetailContainer, vehicleDetails, "detail_fragment")
+                        .commit();
             }
         });
         vm.getLogs(id).observe(this, new Observer<List<Logs>>() {
             @Override
             public void onChanged(List<Logs> logs) {
-                Log.d("Tester", "Får jeg en log?");
                 logList = logs;
                 vehicleDetails.setLogs(logList);
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.DetailContainer, vehicleDetails, "detail_fragment")
-                        .commit();
+
                 updateFragmentState();
 
             }
@@ -85,6 +82,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     }
 
     private void updateFragmentState() {
+        vehicleDetails.update();
     }
 
     @Override

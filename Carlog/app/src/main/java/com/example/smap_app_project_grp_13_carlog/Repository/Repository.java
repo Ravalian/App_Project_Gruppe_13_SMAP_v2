@@ -128,9 +128,7 @@ public class Repository {
         reference.orderByChild("vehicle").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //Log.d(Constants.REPOTAG, ""+snapshot);
-                //logs.postValue(tologs(snapshot));
-                logs.postValue(tologs(snapshot));
+                logs.setValue(tologs(snapshot));
             }
 
             @Override
@@ -156,20 +154,15 @@ public class Repository {
     }
 
     private List<Logs> tologs(DataSnapshot snapshot){
-        //Log.d(Constants.REPOTAG, "Hello"+snapshot);
         ArrayList L = new ArrayList();
-        //Iterable<DataSnapshot> snapshots = snapshot.getChildren();
-        //while(snapshots.iterator().hasNext()){
-                /*Log.d(Constants.REPOTAG, "" + snapshots.iterator().next().getValue());
-                Logs l = snapshots.iterator().next().getValue(Logs.class);
-                Log.d(Constants.REPOTAG, "Er det her");
-                L.add(l);
-                //L.add(snapshot.getValue(Logs.class));
-                //Log.d(Constants.REPOTAG, "Eller er det her");*/
-        //}
 
+        if (logs.getValue()!=null) {
+            for (Logs l :
+                    logs.getValue()) {
+                L.add(l);
+            }
+        }
         L.add(snapshot.getValue(Logs.class));
-        Log.d("Tester", "Hejsa"+snapshot.getValue());
         return L;
     }
 
