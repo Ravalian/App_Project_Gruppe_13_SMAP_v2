@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.example.smap_app_project_grp_13_carlog.Fragments.YourLogsDetailsFragment;
 import com.example.smap_app_project_grp_13_carlog.Fragments.YourLogsListFragment;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
 
@@ -36,7 +36,7 @@ public class YourLogsActivity extends AppCompatActivity implements YourLogsSelec
     private LinearLayout detailsContainer;
 
     //list of logs
-    private ArrayList<Logs> yourlogs;
+    private ArrayList<Log> yourlogs;
     private int selectedLogIndex;
 
     @Override
@@ -142,7 +142,7 @@ public class YourLogsActivity extends AppCompatActivity implements YourLogsSelec
 
     public void onYourLogSelected(int position) {
         if (yourLogsDetails != null) {
-            Logs selectedLog = yourlogs.get(position);
+            Log selectedLog = yourlogs.get(position);
             if (selectedLog != null) {
                 selectedLogIndex = position;
                 yourLogsDetails.setLogs(selectedLog);
@@ -152,9 +152,9 @@ public class YourLogsActivity extends AppCompatActivity implements YourLogsSelec
     }
 
     //ved ikke om den skal bruges sådan her eller det er firebase
-    public ArrayList<Logs> getYourLogsList() { return yourlogs; }
+    public ArrayList<Log> getYourLogsList() { return yourlogs; }
 
-    public Logs getCurrentSelection() {
+    public Log getCurrentSelection() {
         if (yourlogs != null) {
             return yourlogs.get(selectedLogIndex);
         } else {

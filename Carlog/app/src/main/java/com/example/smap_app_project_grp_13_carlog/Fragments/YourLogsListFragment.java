@@ -11,7 +11,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.YourLogsAdapter;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
 
@@ -21,7 +21,7 @@ public class YourLogsListFragment extends Fragment {
 
     private ListView yourlogsListView;
     private YourLogsAdapter adapter;
-    private ArrayList<Logs> yourlogs;
+    private ArrayList<Log> yourlogs;
 
     private ImageView imgYLFragList;
 
@@ -66,8 +66,8 @@ public class YourLogsListFragment extends Fragment {
         }
     }
 
-    public void setLogs(ArrayList<Logs> logsList) {
-        yourlogs = (ArrayList<Logs>) logsList.clone();
+    public void setLogs(ArrayList<Log> logsList) {
+        yourlogs = (ArrayList<Log>) logsList.clone();
     }
 
     private void updateYourLogs() {

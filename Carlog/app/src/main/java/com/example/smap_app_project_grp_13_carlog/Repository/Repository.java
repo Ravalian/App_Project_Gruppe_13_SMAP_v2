@@ -1,7 +1,6 @@
 package com.example.smap_app_project_grp_13_carlog.Repository;
 
 import android.app.Application;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,19 +15,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataAPI;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,7 +43,7 @@ public class Repository {
     //General Internals
     private Application application;
     private MutableLiveData<List<VehicleDataFirebase>> vehicles;
-    private MutableLiveData<List<Logs>> logs;
+    private MutableLiveData<List<Log>> logs;
     private MutableLiveData<VehicleDataFirebase> vehicle;
 
 
@@ -89,7 +87,7 @@ public class Repository {
                 //This is called when initialised and when data is changed.
 
                 vehicles.setValue(toVehicles(snapshot));
-                Log.d(Constants.REPOTAG, vehicles.getValue().get(0).getRegistrationNumber());
+                android.util.Log.d(Constants.REPOTAG, vehicles.getValue().get(0).getRegistrationNumber());
                 //Skal sættes ind i activities
                 /*if(vehicles.size()>0){
                     if(adapter==null){
@@ -104,7 +102,7 @@ public class Repository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Error", "failed to read value"); //Jeg er ikke sikker på hvad dette er, det er i demo 2.
+                android.util.Log.d("Error", "failed to read value"); //Jeg er ikke sikker på hvad dette er, det er i demo 2.
             }
         });
     }
@@ -148,21 +146,21 @@ public class Repository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Error", "It did not work");
+                android.util.Log.d("Error", "It did not work");
             }
         });
     }
 
-    private List<Logs> tologs(DataSnapshot snapshot){
+    private List<Log> tologs(DataSnapshot snapshot){
         ArrayList L = new ArrayList();
 
         if (logs.getValue()!=null) {
-            for (Logs l :
+            for (Log l :
                     logs.getValue()) {
                 L.add(l);
             }
         }
-        L.add(snapshot.getValue(Logs.class));
+        L.add(snapshot.getValue(Log.class));
         return L;
     }
 
@@ -204,7 +202,7 @@ public class Repository {
 
     //Get Vehicle from API by vin
     public void GetVehiclefromAPI(final String VehicleVIN){
-        Log.d(Constants.REPOTAG, "GETVehiclefromAPI: baseurl + input: " + BaseAPIURL+VehicleVIN);
+        android.util.Log.d(Constants.REPOTAG, "GETVehiclefromAPI: baseurl + input: " + BaseAPIURL+VehicleVIN);
 
 
         if(queue == null){
@@ -214,7 +212,7 @@ public class Repository {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, BaseAPIURL+VehicleVIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(Constants.REPOTAG, "GETVehiclefromAPI response: " + response);
+                android.util.Log.d(Constants.REPOTAG, "GETVehiclefromAPI response: " + response);
                 //Do something here - Either store data internally or redirect to another function
                 //Maybe call firebase add function
                 parseAPIVehicleData(response);
@@ -222,7 +220,7 @@ public class Repository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(Constants.REPOTAG, "GetVehiclefromApi: Did not work!!!!");
+                android.util.Log.e(Constants.REPOTAG, "GetVehiclefromApi: Did not work!!!!");
             }
         }) {
             //Adding authentication header to API Request
@@ -245,13 +243,17 @@ public class Repository {
         Type typeMyType = new TypeToken<VehicleDataAPI>(){}.getType(); //Inspiration: https://stackoverflow.com/questions/27253555/com-google-gson-internal-linkedtreemap-cannot-be-cast-to-my-class
         vehicleDataAPI = gson.fromJson(response, typeMyType);
 
+        //get the current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        android.util.Log.d(Constants.REPOTAG, ""+user.getDisplayName());
+
         //Check if the car is already in the firebase database
         //this has to be done on a unique key, this will be reg nr. (number plate)
         for(VehicleDataFirebase vehicle : vehicles.getValue()){
             if(vehicle.getRegistrationNumber().equals(vehicleDataAPI.getRegistrationNumber())){
                 //the vehicle is already in the database
                 //set boolean to true
-                Log.d(Constants.REPOTAG, "Do we enter here?");
+                android.util.Log.d(Constants.REPOTAG, "Do we enter here?");
                 vehicleAlreadyRegistered = true;
             }
         }
@@ -260,12 +262,12 @@ public class Repository {
         //Make If statement when check is done
         if(vehicleAlreadyRegistered){
             //Tell the user a car with that reg nr. is already in the database
-            Log.d(Constants.REPOTAG, "Vehicle already registered: " + vehicleDataAPI.getRegistrationNumber());
+            android.util.Log.d(Constants.REPOTAG, "Vehicle already registered: " + vehicleDataAPI.getRegistrationNumber());
             Toast.makeText(application.getApplicationContext(), R.string.VehicleAlreadyRegisteredString, Toast.LENGTH_SHORT).show();
             vehicleAlreadyRegistered = false;
         } else{
             VehicleDataFirebase newVehicle = new VehicleDataFirebase();
-            newVehicle.setOwner("test"); // this has to the the UserID from the Firebase Authentication
+            newVehicle.setOwner(user.getDisplayName()); // this has to the the UserID from the Firebase Authentication
             newVehicle.setRegistrationNumber(vehicleDataAPI.getRegistrationNumber());
             newVehicle.setTotalWeight(vehicleDataAPI.getTotalWeight());
             newVehicle.setSeats(vehicleDataAPI.getSeats());
@@ -278,13 +280,14 @@ public class Repository {
             newVehicle.setColor(vehicleDataAPI.getColor());
             newVehicle.setChassisType(vehicleDataAPI.getChassisType());
             newVehicle.setEngineCylinders(vehicleDataAPI.getEngineCylinders());
-            newVehicle.setEnginePower(vehicleDataAPI.getEnginePower());
+            float hp =  Float.parseFloat(vehicleDataAPI.getEnginePower())*(float)1.34102209;
+            newVehicle.setEnginePower(String.valueOf((int)hp)); //Vi skal gange med 1.341 for at få til HP
             newVehicle.setEngineVolume(vehicleDataAPI.getEngineVolume());
             newVehicle.setFuelType(vehicleDataAPI.getFuelType());
 
             //Adding car to Firebase
             mDatabase.child(newVehicle.getRegistrationNumber()).setValue(newVehicle);
-            Log.d(Constants.REPOTAG, "Vehicle added to database: " + newVehicle.getRegistrationNumber());
+            android.util.Log.d(Constants.REPOTAG, "Vehicle added to database: " + newVehicle.getRegistrationNumber());
         }
     }
     ////////////////////////////////////////////////////////
@@ -295,7 +298,7 @@ public class Repository {
         return vehicles;
     }
 
-    public LiveData<List<Logs>> getLogs(String id) {
+    public LiveData<List<Log>> getLogs(String id) {
         setupFirebaseLogsListener(id);
         return logs;
     }
@@ -314,9 +317,9 @@ public class Repository {
     }
 
 
-    public void saveLog(Logs log) {
+    public void saveLog(Log log) {
         String ID = LogDatabase.push().getKey(); //https://firebase.google.com/docs/database/admin/save-data#getting-the-unique-key-generated-by-push
-        Log.d("Tester", "Er der en dato? "+log.date);
+        android.util.Log.d("Tester", "Er der en dato? "+log.date);
         LogDatabase.child(ID).setValue(log);
 
     }

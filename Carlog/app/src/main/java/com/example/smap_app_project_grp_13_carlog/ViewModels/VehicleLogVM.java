@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
@@ -29,7 +29,7 @@ public class VehicleLogVM extends AndroidViewModel {
         return vehicle;
     }
 
-    public void saveLog(Logs log) {
+    public void saveLog(Log log) {
         repository.saveLog(log);
     }
 }

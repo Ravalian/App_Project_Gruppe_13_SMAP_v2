@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 
@@ -34,7 +33,7 @@ public class VehicleDetailFragment extends Fragment {
     private TextView vName, owner, model, fuel, kml, hp, numseats;
     private Button btnBack, btnNew;
     private VehicleDetailsAdapter adapter;
-    private List<Logs> logs;
+    private List<Log> logs;
     private VehicleDataFirebase vehicle;
     private ImageView vehicleImg;
     private VehicleDetailsSelectorInterface InterFace;
@@ -49,6 +48,7 @@ public class VehicleDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vehicle_detail, container, false);
+
 
         logList = (ListView) view.findViewById(R.id.ListView);
         vName = view.findViewById(R.id.TxtRegNum);
@@ -144,8 +144,8 @@ public class VehicleDetailFragment extends Fragment {
         }
     }
 
-    public void setLogs(List<Logs> logList){
-        logs = (List<Logs>) logList;
+    public void setLogs(List<Log> logList){
+        logs = (List<Log>) logList;
     }
 
     public void setVehicle(VehicleDataFirebase v){

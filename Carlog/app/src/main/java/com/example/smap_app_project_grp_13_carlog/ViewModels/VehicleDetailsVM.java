@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
 import java.util.List;
 
 public class VehicleDetailsVM extends AndroidViewModel {
-    LiveData<List<Logs>> logs;
+    LiveData<List<Log>> logs;
     LiveData<VehicleDataFirebase> vehicle;
     Repository repository;
     //VehicleDataFirebase vehicle;
@@ -24,7 +24,7 @@ public class VehicleDetailsVM extends AndroidViewModel {
         //repository.setupFirebaseLogsListener(id);
     }
 
-    public LiveData<List<Logs>> getLogs(String id) {
+    public LiveData<List<Log>> getLogs(String id) {
         if (logs==null){
             logs = repository.getLogs(id);
         }

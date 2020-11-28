@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailFragment;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
@@ -26,7 +25,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
     private LinearLayout listContainer;
 
-    private List<Logs> logList;
+    private List<Log> logList;
     private int selectedLog;
     private VehicleDataFirebase vehicle;
     private VehicleDetailsVM vm;
@@ -56,9 +55,9 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                         .commit();
             }
         });
-        vm.getLogs(id).observe(this, new Observer<List<Logs>>() {
+        vm.getLogs(id).observe(this, new Observer<List<Log>>() {
             @Override
-            public void onChanged(List<Logs> logs) {
+            public void onChanged(List<Log> logs) {
                 logList = logs;
                 vehicleDetails.setLogs(logList);
 
@@ -91,12 +90,12 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     }
 
     @Override
-    public ArrayList<Logs> getVehicleDetailsList() {
-        return (ArrayList<Logs>) logList;
+    public ArrayList<Log> getVehicleDetailsList() {
+        return (ArrayList<Log>) logList;
     }
 
     @Override
-    public Logs getCurrentSelection() {
+    public Log getCurrentSelection() {
         return logList.get(selectedLog);
     }
 }

@@ -1,31 +1,25 @@
 package com.example.smap_app_project_grp_13_carlog.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.TimeoutError;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class VehicleDetailsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Logs> VDlogs;
-    private Logs VDlog = null;
+    private List<Log> VDlogs;
+    private Log VDlog = null;
 
-    public VehicleDetailsAdapter(Context c, List<Logs> VDlogsList) {
+    public VehicleDetailsAdapter(Context c, List<Log> VDlogsList) {
         VDlogs = VDlogsList;
         context = c;
     }
@@ -69,7 +63,7 @@ public class VehicleDetailsAdapter extends BaseAdapter {
             txtDate.setText((CharSequence) new Date(VDlog.getDate()).toString());
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtVDListItemUser);
-            txtUser.setText(VDlog.getuser());
+            txtUser.setText(VDlog.getUserName());
         }
         return convertView;
     }

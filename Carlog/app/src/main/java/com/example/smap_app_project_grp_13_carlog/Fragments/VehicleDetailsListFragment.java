@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 
@@ -22,7 +22,7 @@ public class VehicleDetailsListFragment extends Fragment {
 
     private ListView VDListView;
     private VehicleDetailsAdapter adapter;
-    private ArrayList<Logs> logs;
+    private ArrayList<Log> logs;
     private VehicleDataFirebase vehicle;
 
     private ImageView imgVDFragList;
@@ -67,8 +67,8 @@ public class VehicleDetailsListFragment extends Fragment {
         }
     }
 
-    public void setVD(ArrayList<Logs> VDList, VehicleDataFirebase vehicle) {
-        logs = (ArrayList<Logs>) VDList.clone();
+    public void setVD(ArrayList<Log> VDList, VehicleDataFirebase vehicle) {
+        logs = (ArrayList<Log>) VDList.clone();
         this.vehicle = vehicle;
     }
 

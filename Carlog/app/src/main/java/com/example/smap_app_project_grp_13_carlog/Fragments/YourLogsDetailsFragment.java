@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
 //Kan ikke importeres af en eller anden grund
@@ -62,7 +62,7 @@ public class YourLogsDetailsFragment extends Fragment {
         }
     }
 
-    public void setLogs(Logs logs) {
+    public void setLogs(Log logs) {
         if (txtYLFragDUser != null && txtYLFragDDate != null && txtYLFragDDistance != null
                 && txtYLFragDTime != null && txtYLFragDLogDescription != null) {
 

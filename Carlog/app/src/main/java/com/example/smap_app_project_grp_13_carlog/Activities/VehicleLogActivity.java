@@ -6,21 +6,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleLogVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -40,7 +37,7 @@ public class VehicleLogActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ID = intent.getStringExtra(Constants.ID);
-        Log.d("Tester", ID);
+        android.util.Log.d("Tester", ID);
         started = false;
 
         setupIU();
@@ -52,9 +49,9 @@ public class VehicleLogActivity extends AppCompatActivity {
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebase) {
                 for (VehicleDataFirebase v:
                      vehicleDataFirebase) {
-                    Log.d("Tester", ID+" og "+v.getRegistrationNumber());
+                    android.util.Log.d("Tester", ID+" og "+v.getRegistrationNumber());
                     if (ID.contains(v.getRegistrationNumber().trim())){
-                        Log.d("Tester", "Hejsa");
+                        android.util.Log.d("Tester", "Hejsa");
                         vehicle=v;
                     }
                 }
@@ -101,18 +98,16 @@ public class VehicleLogActivity extends AppCompatActivity {
     }
 
     private void save() {
-        Logs log = new Logs();
+        Log log = new Log();
         Long now = System.currentTimeMillis();
-        Log.d("Tester", ""+now);
         log.date = now;
-        Log.d("Tester", "Hvad med dette? "+log.date);
         log.vehicle = ID;
         log.logDescription = vehicleLog.getText().toString();
         String uname = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("Tester", "Hvem er du? "+uname);
         log.user = uname;
         log.time = 1;
         log.distance = 1;
+        log.userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         vm.saveLog(log);
         finish();
     }

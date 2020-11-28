@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 //Kam ikke importeres af en eller anden grund
 //import com.google.android.gms.maps.MapView;
@@ -62,7 +62,7 @@ public class VehicleDetailsDetailsFragment extends Fragment {
         }
     }
 
-    public void setVD(Logs logs) {
+    public void setVD(Log logs) {
         if (txtVDFragDUser != null && txtVDFragDDate != null && txtVDLFragDDistance != null
                 && txtVDFragDTime != null && txtVDFragDLogDescription != null) {
 

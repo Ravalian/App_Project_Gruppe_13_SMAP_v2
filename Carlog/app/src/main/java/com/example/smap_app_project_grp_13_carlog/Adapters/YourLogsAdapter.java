@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import java.util.Date;
 public class YourLogsAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Logs> yourlogs;
-    Logs yourlog = null;
+    ArrayList<Log> yourlogs;
+    Log yourlog = null;
 
-    public YourLogsAdapter(Context c, ArrayList<Logs> yourlogsList) {
+    public YourLogsAdapter(Context c, ArrayList<Log> yourlogsList) {
         yourlogs = yourlogsList;
         context = c;
     }

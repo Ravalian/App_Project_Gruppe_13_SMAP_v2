@@ -5,9 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -16,7 +14,7 @@ import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsDetailsFragment;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsListFragment;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
@@ -45,7 +43,7 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
     private LinearLayout detailsContainer;
 
     //list of vehicles
-    private List<Logs> logs;
+    private List<Log> logs;
     private VehicleDataFirebase vehicle;
     private int selectedVDIndex;
 
@@ -81,13 +79,13 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
                 vehicle = vehicleDataFirebase;
-                Log.d("Tester", vehicle.getRegistrationNumber());
+                android.util.Log.d("Tester", vehicle.getRegistrationNumber());
                 //vehicleDetailsList.setVD((ArrayList<Logs>) logs, vehicle);
             }
         });
-        vm.getLogs(id).observe(this, new Observer<List<Logs>>() {
+        vm.getLogs(id).observe(this, new Observer<List<Log>>() {
             @Override
-            public void onChanged(List<Logs> logs) {
+            public void onChanged(List<Log> logs) {
 
                 logs = logs;
 
@@ -100,7 +98,7 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
                     vehicleDetailsList = new VehicleDetailsListFragment();
                     vehicleDetailsDetails = new VehicleDetailsDetailsFragment();
 
-                    vehicleDetailsList.setVD((ArrayList<Logs>) logs, vehicle);
+                    vehicleDetailsList.setVD((ArrayList<Log>) logs, vehicle);
                     vehicleDetailsDetails.setVD(logs.get(selectedVDIndex));
 
                     //add the first two fragments to container (one will be invisible if in portrait mode)
@@ -205,7 +203,7 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
 
     public void onVehicleDetailsSelected(int position) {
         if (vehicleDetailsDetails != null) {
-            Logs selectedVD = logs.get(position);
+            Log selectedVD = logs.get(position);
             if (selectedVD != null) {
                 selectedVDIndex = position;
                 vehicleDetailsDetails.setVD(selectedVD);
@@ -215,14 +213,14 @@ public class VehicleDetailsActivity extends AppCompatActivity implements Vehicle
     }
 
     @Override
-    public ArrayList<Logs> getVehicleDetailsList() {
+    public ArrayList<Log> getVehicleDetailsList() {
         return (ArrayList) logs;
     }
 
     //ved ikke om den skal bruges sådan her eller det er firebase
-    public ArrayList<Logs> getVDList() { return (ArrayList<Logs>) logs; }
+    public ArrayList<Log> getVDList() { return (ArrayList<Log>) logs; }
 
-    public Logs getCurrentSelection() {
+    public Log getCurrentSelection() {
         if (logs != null) {
             return logs.get(selectedVDIndex);
         } else {
