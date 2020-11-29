@@ -56,25 +56,20 @@
         android:id="@+id/btnVLStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="96dp"
         android:text="@string/btn_start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/btnVLStop"
+        app:layout_constraintStart_toEndOf="@+id/btnVLBack"
+        app:layout_constraintTop_toTopOf="@+id/btnVLBack" />
 
     <Button
         android:id="@+id/btnVLStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="193dp"
-        android:layout_marginLeft="193dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="@string/btn_save"
         app:layout_constraintBottom_toBottomOf="@+id/btnVLStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnVLStart"
         app:layout_constraintTop_toTopOf="@+id/btnVLStart" />
 
 
@@ -102,10 +97,11 @@
         android:id="@+id/btnVLBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/btn_Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnVLStop"
-        app:layout_constraintStart_toEndOf="@+id/btnVLStart" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,16 +19,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class VehicleLogActivity extends AppCompatActivity {
 
-    TextView vehicleName, vehicleLog;
-    Button start, stop, back;
-    String ID;
-    VehicleLogVM vm;
-    VehicleDataFirebase vehicle;
-    Boolean started;
+    private TextView vehicleName, vehicleLog;
+    private Button start, stop, back;
+    private String ID;
+    private VehicleLogVM vm;
+    private VehicleDataFirebase vehicle;
+    private Boolean started;
+    private int duration;
+    private Long startTime;
+
+    private ExecutorService executor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,8 @@ public class VehicleLogActivity extends AppCompatActivity {
         ID = intent.getStringExtra(Constants.ID);
         android.util.Log.d("Tester", ID);
         started = false;
-
+        duration = 0;
+        
         setupIU();
         
         
@@ -82,8 +89,9 @@ public class VehicleLogActivity extends AppCompatActivity {
                     started = false;
                     stop.setText(R.string.btn_save);
                     stop();
+                }else {
+                    save();
                 }
-                save();
             }
         });
         
@@ -105,7 +113,7 @@ public class VehicleLogActivity extends AppCompatActivity {
         log.logDescription = vehicleLog.getText().toString();
         String uname = FirebaseAuth.getInstance().getCurrentUser().getUid();
         log.user = uname;
-        log.time = 1;
+        log.time = duration;
         log.distance = 1;
         log.userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         vm.saveLog(log);
@@ -117,10 +125,13 @@ public class VehicleLogActivity extends AppCompatActivity {
     }
 
     private void stop() {
+        duration = (int) ((System.currentTimeMillis()-startTime)/1000)+duration;
+        android.util.Log.d("Tester", ""+duration);
         
     }
 
     private void start() {
+        startTime = System.currentTimeMillis();
 
     }
 

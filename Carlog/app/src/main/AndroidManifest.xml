@@ -16,7 +16,7 @@
         <activity android:name=".Activities.YourLogsActivity" />
         <activity android:name=".Activities.YourVehiclesActivity" />
         <activity android:name=".Activities.VehicleLogActivity" />
-        <activity android:name=".Activities.VehicleDetailsActivity" />
+        <activity android:name=".Deprecated.Activities.VehicleDetailsActivity" />
         <activity android:name=".Activities.UserInterfaceActivity" />
         <activity android:name=".Activities.RegisterVehicleActivity" />
         <activity android:name=".Activities.RegisteredVehiclesActivity" />

@@ -88,16 +88,6 @@ public class Repository {
 
                 vehicles.setValue(toVehicles(snapshot));
                 android.util.Log.d(Constants.REPOTAG, vehicles.getValue().get(0).getRegistrationNumber());
-                //Skal sættes ind i activities
-                /*if(vehicles.size()>0){
-                    if(adapter==null){
-                        adapter = new RegisteredVehiclesAdapter(vehicles, RegisteredVehicles.this);
-                        rcvList.setAdapter(adapter);
-                    }else{
-                        adapter.setList(vehicles);
-                        adapter.notifyDataSetChanged();
-                    }
-                }*/
             }
 
             @Override

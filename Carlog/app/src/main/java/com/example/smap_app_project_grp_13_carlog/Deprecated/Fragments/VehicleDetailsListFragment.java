@@ -1,4 +1,4 @@
-package com.example.smap_app_project_grp_13_carlog.Fragments;
+package com.example.smap_app_project_grp_13_carlog.Deprecated.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;

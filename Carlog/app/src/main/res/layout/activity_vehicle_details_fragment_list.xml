@@ -5,7 +5,7 @@
     android:id="@+id/ActivityVehicleLogsListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.VehicleDetailsActivity">
+    tools:context=".Deprecated.Activities.VehicleDetailsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/LVVDFragmentList"

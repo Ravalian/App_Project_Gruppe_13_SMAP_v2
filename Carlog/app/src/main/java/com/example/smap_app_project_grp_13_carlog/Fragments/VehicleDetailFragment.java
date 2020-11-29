@@ -27,8 +27,6 @@ import java.util.List;
 
 public class VehicleDetailFragment extends Fragment {
 
-
-
     private ListView logList;
     private TextView vName, owner, model, fuel, kml, hp, numseats;
     private Button btnBack, btnNew;
@@ -39,9 +37,11 @@ public class VehicleDetailFragment extends Fragment {
     private VehicleDetailsSelectorInterface InterFace;
     private Constants constants;
 
+
     public VehicleDetailFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class VehicleDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vehicle_detail, container, false);
 
-
+        //Setup for widgets
         logList = (ListView) view.findViewById(R.id.ListView);
         vName = view.findViewById(R.id.TxtRegNum);
         owner = view.findViewById(R.id.TxtOwner);
@@ -59,6 +59,7 @@ public class VehicleDetailFragment extends Fragment {
         hp = view.findViewById(R.id.TxtHorsePower);
         numseats = view.findViewById(R.id.TxtNumOfSeats);
 
+        //Setup for buttons
         btnBack = view.findViewById(R.id.BtnBackVDF);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +67,7 @@ public class VehicleDetailFragment extends Fragment {
                 Back();
             }
         });
+
         btnNew = view.findViewById(R.id.BtnNewVDF);
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +76,7 @@ public class VehicleDetailFragment extends Fragment {
             }
         });
 
+        //Update UI
         updateList();
 
         return view;
@@ -114,7 +117,7 @@ public class VehicleDetailFragment extends Fragment {
     }
 
     private void updateList() {
-        if (InterFace==null){
+        if (InterFace!=null){
             logs = InterFace.getVehicleDetailsList();
         }
         if (logs!=null){
@@ -139,7 +142,7 @@ public class VehicleDetailFragment extends Fragment {
     }
 
     private void onLogSelected(int position){
-        if(InterFace==null){
+        if(InterFace!=null){
             InterFace.onVehicleDetailsSelected(position);
         }
     }

@@ -24,6 +24,10 @@ public class VehicleDetailsAdapter extends BaseAdapter {
         context = c;
     }
 
+    public void setLogs(List<Log> l){
+        VDlogs = l;
+    }
+
     @Override
     public int getCount() {
         if (VDlogs != null) {

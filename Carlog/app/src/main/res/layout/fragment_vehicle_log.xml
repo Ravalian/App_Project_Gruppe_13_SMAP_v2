@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.VehicleLogFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/TxtUsernameDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/TxtName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/TxtDateDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/TxtDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TxtDistanceDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/TxtDistance"
+        app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameDF" />
+
+    <TextView
+        android:id="@+id/TxtDurationDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/TxtDuration"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtDateDF" />
+
+    <TextView
+        android:id="@+id/TxtLogLabelDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/TxtLog"
+        app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtDistanceDF" />
+
+    <TextView
+        android:id="@+id/TxtLogDF"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/TxtLogText"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
+        app:layout_constraintStart_toStartOf="@+id/TxtLogLabelDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtLogLabelDF" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/MapDF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/BtnBackDF"
+        app:layout_constraintEnd_toEndOf="@+id/TxtLogDF"
+        app:layout_constraintStart_toStartOf="@+id/TxtLogDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtLogDF" />
+
+    <Button
+        android:id="@+id/BtnBackDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/btn_Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/BtnNewDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/btn_new"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

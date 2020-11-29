@@ -1,4 +1,4 @@
-package com.example.smap_app_project_grp_13_carlog.Activities;
+package com.example.smap_app_project_grp_13_carlog.Deprecated.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsDetailsFragment;
-import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsListFragment;
+import com.example.smap_app_project_grp_13_carlog.Deprecated.Fragments.VehicleDetailsListFragment;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;

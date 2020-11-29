@@ -1,5 +1,6 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,62 +8,109 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
+import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
+import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link VehicleLogFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Date;
+
+
 public class VehicleLogFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private TextView txtUserName, txtDate, txtDuration, txtDistance, txtLog;
+    private Button btnBack, btnNew;
+    private VehicleDetailsSelectorInterface InterFace;
+    private VehicleDataFirebase vehicle;
+    private Log log;
 
     public VehicleLogFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment VehicleLogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static VehicleLogFragment newInstance(String param1, String param2) {
-        VehicleLogFragment fragment = new VehicleLogFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vehicle_log, container, false);
+        View view = inflater.inflate(R.layout.fragment_vehicle_log, container, false);
+
+        txtDate = view.findViewById(R.id.TxtDateDF);
+        txtDistance = view.findViewById(R.id.TxtDistanceDF);
+        txtDuration = view.findViewById(R.id.TxtDurationDF);
+        txtLog = view.findViewById(R.id.TxtLogDF);
+        txtUserName = view.findViewById(R.id.TxtUsernameDF);
+        
+        btnBack = view.findViewById(R.id.BtnBackDF);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
+        btnNew = view.findViewById(R.id.BtnNewDF);
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newLog();
+            }
+        });
+
+        setupUI();
+
+        return view;
+    }
+
+    private void newLog() {
+    }
+
+    private void back() {
+        InterFace.back();
+    }
+
+    public void UpdateUI(){
+        setupUI();
+    }
+
+    private void setupUI() {
+        if (InterFace!=null){
+            log = InterFace.getCurrentSelection();
+
+        }
+        if (log!=null){
+            android.util.Log.d("Tester", log.userName);
+            txtUserName.setText(log.getUserName());
+            txtLog.setText(log.getLogDescription());
+            txtDuration.setText(""+log.getTime());
+            txtDistance.setText(""+log.getDistance());
+            Date d = new Date(log.getDate());
+            txtDate.setText(""+d.getDate()+"/"+d.getMonth());
+        }
+    }
+
+    @Override
+    public void onAttach(Context activity){
+        super.onAttach(activity);
+
+        try{
+            InterFace = (VehicleDetailsSelectorInterface) activity;
+        } catch (ClassCastException exception){
+            throw new ClassCastException(activity.toString()+" doesn't implement the right Interface (VehicleDetailSelecterInterface)");
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    public void setLog(Log l){
+        log = l;
     }
 }
