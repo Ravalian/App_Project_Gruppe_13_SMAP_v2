@@ -8,12 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
@@ -43,7 +40,7 @@ public class VehicleLogFragment extends Fragment {
 
         txtDate = view.findViewById(R.id.TxtDateDF);
         txtDistance = view.findViewById(R.id.TxtDistanceDF);
-        txtDuration = view.findViewById(R.id.TxtDurationDF);
+        txtDuration = view.findViewById(R.id.TxtNameLabel);
         txtLog = view.findViewById(R.id.TxtLogDF);
         txtUserName = view.findViewById(R.id.TxtUsernameDF);
         
@@ -84,7 +81,6 @@ public class VehicleLogFragment extends Fragment {
 
         }
         if (log!=null){
-            android.util.Log.d("Tester", log.userName);
             txtUserName.setText(log.getUserName());
             txtLog.setText(log.getLogDescription());
             txtDuration.setText(""+log.getTime());

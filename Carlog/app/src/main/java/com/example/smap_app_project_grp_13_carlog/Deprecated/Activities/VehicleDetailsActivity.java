@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
-import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailsDetailsFragment;
+import com.example.smap_app_project_grp_13_carlog.Deprecated.Fragments.VehicleDetailsDetailsFragment;
 import com.example.smap_app_project_grp_13_carlog.Deprecated.Fragments.VehicleDetailsListFragment;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;

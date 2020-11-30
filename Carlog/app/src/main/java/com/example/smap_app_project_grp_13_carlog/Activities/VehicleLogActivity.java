@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 public class VehicleLogActivity extends AppCompatActivity {
@@ -87,7 +86,7 @@ public class VehicleLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (started){
                     started = false;
-                    stop.setText(R.string.btn_save);
+                    stop.setText(R.string.btn_Save);
                     stop();
                 }else {
                     save();
@@ -111,11 +110,12 @@ public class VehicleLogActivity extends AppCompatActivity {
         log.date = now;
         log.vehicle = ID;
         log.logDescription = vehicleLog.getText().toString();
-        String uname = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        log.user = uname;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        log.user = user.getUid();
         log.time = duration;
         log.distance = 1;
-        log.userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        log.userName = user.getDisplayName();
+        android.util.Log.d("Tester", user.getDisplayName());
         vm.saveLog(log);
         finish();
     }

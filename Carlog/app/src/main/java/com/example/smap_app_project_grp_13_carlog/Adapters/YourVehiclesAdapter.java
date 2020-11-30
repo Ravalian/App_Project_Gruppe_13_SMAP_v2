@@ -7,15 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapter.YourVehiclesViewHolder> {
 
@@ -23,6 +20,11 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
         void onYourVehiclesClicked(int YVID);
     }
 
+    private List<VehicleDataFirebase> vehicles;
+
+    public void updateVehicles(List<VehicleDataFirebase> vehicleDataFirebases) {
+        vehicles = vehicleDataFirebases;
+    }
     private IYourVehiclesItemClickedListener listener;
 
     /*
@@ -148,11 +150,14 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
             return null;
         }
     };
-    */
 
-    public YourVehiclesAdapter(IYourVehiclesItemClickedListener listener) {
+*/
+    public YourVehiclesAdapter(List<VehicleDataFirebase> vehicles, IYourVehiclesItemClickedListener listener) {
         this.listener = listener;
+        this.vehicles = vehicles;
     }
+
+
 
     @NonNull
     @Override
@@ -165,6 +170,8 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull YourVehiclesAdapter.YourVehiclesViewHolder holder, int position) {
+        holder.txtVehicleModel.setText(vehicles.get(position).model);
+        holder.txtVehicleMake.setText(vehicles.get(position).make);
 
     }
 
@@ -172,7 +179,8 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
         //ViewHolder ui wiget references
         ImageView img;
-        TextView txtVehicleName;
+        TextView txtVehicleModel;
+        TextView txtVehicleMake;
 
         IYourVehiclesItemClickedListener listener;
 
@@ -182,7 +190,8 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
             //get references from layout file
             img = itemView.findViewById(R.id.imgYVVehicle);
-            txtVehicleName = itemView.findViewById(R.id.txtYVVehicleName);
+            txtVehicleModel = itemView.findViewById(R.id.txtYVVehicleModel);
+            txtVehicleMake = itemView.findViewById(R.id.txtYVVehicleMake);
             listener = YourVehiclesItemClickedListener;
 
             //set click listener for whole list item
@@ -191,12 +200,12 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
         @Override
         public void onClick(View view) {
-            //listener.onYourVehiclesClicked(YVList.get(getAdapterPosition()).getYVID());
+            listener.onYourVehiclesClicked(getAdapterPosition());
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return vehicles.size();
     }
 }

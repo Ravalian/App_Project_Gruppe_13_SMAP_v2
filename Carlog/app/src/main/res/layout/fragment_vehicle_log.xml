@@ -12,46 +12,44 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/TxtName"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/TxtDateDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="@string/TxtDate"
+        android:text="@string/txt_Date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/TxtUsernameDF" />
 
     <TextView
         android:id="@+id/TxtDistanceDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/TxtDistance"
         app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
-        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameDF" />
+        app:layout_constraintTop_toBottomOf="@+id/TxtDistanceLabel" />
 
     <TextView
-        android:id="@+id/TxtDurationDF"
+        android:id="@+id/TxtNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/TxtDuration"
         app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
-        app:layout_constraintTop_toBottomOf="@+id/TxtDateDF" />
+        app:layout_constraintTop_toTopOf="@+id/TxtDistanceDF" />
 
     <TextView
         android:id="@+id/TxtLogLabelDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/TxtLog"
+        android:text="@string/txt_Log"
         app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtDistanceDF" />
 
@@ -60,8 +58,8 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        android:text="@string/TxtLogText"
-        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
+        android:text="@string/txt_Log"
+        app:layout_constraintEnd_toEndOf="@+id/TxtNameLabel"
         app:layout_constraintStart_toStartOf="@+id/TxtLogLabelDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtLogLabelDF" />
 
@@ -94,7 +92,42 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
-        android:text="@string/btn_new"
+        android:text="@string/btn_New"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_Name"
+        app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TxtDistanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/TxtDistance"
+        app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameDF" />
+
+    <TextView
+        android:id="@+id/TxtDurationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxtDuration"
+        app:layout_constraintEnd_toEndOf="@+id/TxtNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/TxtDistanceLabel" />
+
+    <TextView
+        android:id="@+id/TxtDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_Date"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
