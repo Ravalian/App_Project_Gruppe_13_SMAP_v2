@@ -81,7 +81,6 @@ public class VehicleLogFragment extends Fragment {
 
         }
         if (log!=null){
-            android.util.Log.d("Tester", log.userName);
             txtUserName.setText(log.getUserName());
             txtLog.setText(log.getLogDescription());
             txtDuration.setText(""+log.getTime());

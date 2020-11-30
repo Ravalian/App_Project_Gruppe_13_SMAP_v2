@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtFuelType"
         tools:itemCount="10"
-        tools:listitem="@layout/activity_registered_vehicles_list_item" />
+        tools:listitem="@layout/activity_vehicle_details_list_item" />
 
     <ImageView
         android:id="@+id/ImgCar"

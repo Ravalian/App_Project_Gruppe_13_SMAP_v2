@@ -77,10 +77,13 @@ public class Repository {
 
     /////////////////// Firebase Handling /////////////////////
 
+
+        /////////////////////Vehicles/////////////////////
+
     private void setupFirebaseListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reference = database.getReference("/vehicles"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
+        DatabaseReference reference = database.getReference("vehicles"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,16 +101,107 @@ public class Repository {
         });
     }
 
-    private List<VehicleDataFirebase> toVehicles(DataSnapshot snapshot) {
-        ArrayList V = new ArrayList();
-        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
-        while(snapshots.iterator().hasNext()){
-            VehicleDataFirebase ve = snapshots.iterator().next().getValue(VehicleDataFirebase.class);
-            V.add(ve);
-        }
-        return V;
+
+
+    private void fireDatabaseYourVehicles(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("vehicles");
+
+        reference.orderByChild("owner").equalTo(id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                vehicles.setValue(toVehicles(snapshot));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "Couldn't get your cars");
+            }
+        });
     }
 
+    private void getVehicleFromFirebase(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("vehicles");
+        reference.orderByChild("registrationNumber").equalTo(id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                vehicle.setValue(snapshot.getValue(VehicleDataFirebase.class));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "Couldn't get the specified car");
+            }
+        });
+    }
+
+
+        ///////////////////////Logs///////////////////////////
+
+
+    private void setupFireDatabaseYourLogsListener(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = database.getReference("logs");
+
+        reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.setValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.setValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "failed to get your logs");
+            }
+        });
+    }
 
     public void setupFirebaseLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -142,49 +236,6 @@ public class Repository {
         });
     }
 
-    private List<Log> tologs(DataSnapshot snapshot){
-        ArrayList L = new ArrayList();
-
-        if (logs.getValue()!=null) {
-            for (Log l :
-                    logs.getValue()) {
-                L.add(l);
-            }
-        }
-        L.add(snapshot.getValue(Log.class));
-        return L;
-    }
-
-    private void getVehicleFromFirebase(String id) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("/vehicles");
-        reference.orderByChild("registrationNumber").equalTo(id).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                vehicle.setValue(snapshot.getValue(VehicleDataFirebase.class));
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
     //////////////////////////////////////////////////////////
 
 
@@ -315,7 +366,40 @@ public class Repository {
 
     }
 
+    public LiveData<List<Log>> getYourLogs(String id) {
+        setupFireDatabaseYourLogsListener(id);
+        return logs;
+    }
+
+    public LiveData<List<VehicleDataFirebase>> getYourVehicles(String id){
+        fireDatabaseYourVehicles(id);
+        return vehicles;
+    }
+
 
     ////////////////////////////////////////////////////////
+    //////////Private conversion functions//////////////////
 
+    private List<VehicleDataFirebase> toVehicles(DataSnapshot snapshot) {
+        ArrayList V = new ArrayList();
+        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+        while(snapshots.iterator().hasNext()){
+            VehicleDataFirebase ve = snapshots.iterator().next().getValue(VehicleDataFirebase.class);
+            V.add(ve);
+        }
+        return V;
+    }
+
+    private List<Log> tologs(DataSnapshot snapshot){
+        ArrayList L = new ArrayList();
+
+        if (logs.getValue()!=null) {
+            for (Log l :
+                    logs.getValue()) {
+                L.add(l);
+            }
+        }
+        L.add(snapshot.getValue(Log.class));
+        return L;
+    }
 }

@@ -1,164 +1,162 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.example.smap_app_project_grp_13_carlog.Fragments.YourLogsDetailsFragment;
-import com.example.smap_app_project_grp_13_carlog.Fragments.YourLogsListFragment;
+import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
+import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleLogFragment;
+import com.example.smap_app_project_grp_13_carlog.Fragments.YourLogListFragment;
+import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
-import com.example.smap_app_project_grp_13_carlog.Interface.YourLogsSelectorInterface;
+import com.example.smap_app_project_grp_13_carlog.ViewModels.YourLogsVM;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class YourLogsActivity extends AppCompatActivity implements YourLogsSelectorInterface {
+public class YourLogsActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
-    //keeping track of phone mode (portrait or landscape) and user mode (which view the user has selected)
-    public enum PhoneMode {PORTRAIT, LANDSCAPE}
-    public enum UserMode {LIST_VIEW, DETAIL_VIEW}
-    private PhoneMode phoneMode;
-    private UserMode userMode;
 
-    //tags -TOBE moved to Constants.java
-    private static final String LIST_FRAG = "list_fragment";
-    private static final String DETAILS_FRAG = "details_fragment";
 
-    //the actual fragments we use
-    private YourLogsListFragment yourLogsList;
-    private YourLogsDetailsFragment yourLogsDetails;
+    public enum UserMode {LOG_VIEW, LIST_VIEW};
 
-    //containers we use to put out fragments in
+    private YourLogListFragment yourLogListFragment;
+    private VehicleLogFragment vehicleLog;
+
     private LinearLayout listContainer;
-    private LinearLayout detailsContainer;
+    private LinearLayout logContainer;
 
-    //list of logs
-    private ArrayList<Log> yourlogs;
-    private int selectedLogIndex;
+    private List<Log> logList;
+    private int selectedLog;
+
+    private YourLogsVM vm;
+    private String id;
+    private Constants constants;
+    private UserMode um;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_your_logs_mulitpane);
+        setContentView(R.layout.activity_your_logs2);
 
-        //get container views
-        listContainer = (LinearLayout)findViewById(R.id.YL_list_container);
-        detailsContainer = (LinearLayout)findViewById(R.id.YL_details_container);
+        listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
+        logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
 
-        //determine orientation
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            phoneMode = PhoneMode.PORTRAIT;
-        } else {
-            phoneMode = PhoneMode.LANDSCAPE;
+        listContainer.setVisibility(View.VISIBLE);
+        logContainer.setVisibility(View.GONE);
+
+        if (yourLogListFragment==null) {
+            yourLogListFragment = new YourLogListFragment();
+        }
+        if (vehicleLog==null) {
+            vehicleLog = new VehicleLogFragment();
         }
 
-        if (savedInstanceState == null) {
-            //no persisted state, start the app in list view mode and selected index = 0
-            selectedLogIndex = 0;
-            userMode = UserMode.LIST_VIEW;
+        id = getIntent().getStringExtra(constants.ID);
+        um = UserMode.LIST_VIEW;
+        selectedLog = 0;
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
+                .add(R.id.LogDetailContainer, vehicleLog, "Detail_fragment")
+                .commit();
+        vm = new ViewModelProvider(this).get(YourLogsVM.class);
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        vm.getLogs(id).observe(this, new Observer<List<Log>>() {
+            @Override
+            public void onChanged(List<Log> logs) {
+                logList = logs;
+                yourLogListFragment.setLogs(logList);
+                vehicleLog.setLog(logList.get(selectedLog));
 
-            //initialize fragments
-            yourLogsList = new YourLogsListFragment();
-            yourLogsDetails = new YourLogsDetailsFragment();
+                updateFragmentState(um);
+            }
+        });
+    }
 
-            yourLogsList.setLogs(yourlogs);
-            yourLogsDetails.setLogs(yourlogs.get(selectedLogIndex));
-
-            //add the first two fragments to container (one will be invisible if in portrait mode)
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.YL_list_container, yourLogsList, LIST_FRAG)
-                    .add(R.id.YL_details_container, yourLogsDetails, DETAILS_FRAG)
-                    .commit();
+    private void updateFragmentState(UserMode tm) {
+        if(tm == UserMode.LIST_VIEW) {
+            um = UserMode.LIST_VIEW;
+            yourLogListFragment.update();
+            switchFragment(tm);
+        } if(tm == UserMode.LOG_VIEW) {
+            um = UserMode.LOG_VIEW;
+            switchFragment(tm);
         } else {
-            //got restarted with persisted state, probably due to orientation change
-            selectedLogIndex = savedInstanceState.getInt("Your_log_position");
-            userMode = (UserMode) savedInstanceState.getSerializable("User_mode");
-
-            if (userMode == null) {
-                userMode = UserMode.LIST_VIEW; //default value if none saved
-            }
-
-            //check if FragmentManager already holds instance of Fragments, else create them
-            yourLogsList = (YourLogsListFragment)getSupportFragmentManager().findFragmentByTag(LIST_FRAG);
-            if (yourLogsList == null) {
-                yourLogsList = new YourLogsListFragment();
-            }
-            yourLogsDetails = (YourLogsDetailsFragment)getSupportFragmentManager().findFragmentByTag(DETAILS_FRAG);
-            if (yourLogsDetails == null) {
-                yourLogsDetails = new YourLogsDetailsFragment();
-            }
+            //ignore
         }
+    }
 
-        updateFragmentViewState(userMode);
+    private void switchFragment(UserMode tm) {
+        if (tm == UserMode.LIST_VIEW){
+            listContainer.setVisibility(View.VISIBLE);
+            logContainer.setVisibility(View.GONE);
+            changeContainerFragment(UserMode.LIST_VIEW);
+        } else if (tm == UserMode.LOG_VIEW){
+            listContainer.setVisibility(View.GONE);
+            logContainer.setVisibility(View.VISIBLE);
+            changeContainerFragment(UserMode.LOG_VIEW);
+        }
+    }
+
+    private void changeContainerFragment(UserMode targetMode) {
+        switch(targetMode) {
+
+            case LOG_VIEW:
+
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.animator.slide_in, R.animator.slide_out)
+                        .replace(R.id.LogDetailContainer, vehicleLog, "Detail_fragment")
+                        .commit();
+                vehicleLog.UpdateUI();
+                break;
+        }
     }
 
     @Override
-    public void onBackPressed() {
-        if (phoneMode == PhoneMode.LANDSCAPE) {
-            finish();
-        } else {
-            if (userMode == UserMode.LIST_VIEW) {
-                //return to prives activity
-                finish();
-            } else if (userMode == UserMode.DETAIL_VIEW) {
-                //go back to list mode if in detail mode
-                updateFragmentViewState(UserMode.LIST_VIEW);
+    public void onVehicleDetailsSelected(int position) {
+        if (logList!=null) {
+            Log log = logList.get(position);
+            if (log!=null) {
+                selectedLog = position;
+                vehicleLog.setLog(log);
             }
         }
+        updateFragmentState(UserMode.LOG_VIEW);
+
     }
 
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt("log_position", selectedLogIndex);
-        outState.putSerializable("user_mode", userMode);
-        super.onSaveInstanceState(outState);
+    @Override
+    public ArrayList<Log> getVehicleDetailsList() {
+        return (ArrayList<Log>) logList;
     }
 
-    private void updateFragmentViewState(UserMode targetMode) {
-        //update view
-        if (targetMode == UserMode.DETAIL_VIEW) {
-            userMode = UserMode.DETAIL_VIEW;
-            switchFragment(targetMode);
-        } if (targetMode == UserMode.LIST_VIEW) {
-            userMode = UserMode.LIST_VIEW;
-            switchFragment(targetMode);
-        }
-    }
-
-    private boolean switchFragment(UserMode targetMode) {
-        if (phoneMode == PhoneMode.LANDSCAPE.PORTRAIT) {
-            if (targetMode == UserMode.LIST_VIEW) {
-                listContainer.setVisibility(View.VISIBLE);
-                detailsContainer.setVisibility(View.GONE);
-            } else if (targetMode == UserMode.DETAIL_VIEW) {
-                listContainer.setVisibility(View.GONE);
-                detailsContainer.setVisibility(View.VISIBLE);
-            }
-        }
-        return true;
-    }
-
-    public void onYourLogSelected(int position) {
-        if (yourLogsDetails != null) {
-            Log selectedLog = yourlogs.get(position);
-            if (selectedLog != null) {
-                selectedLogIndex = position;
-                yourLogsDetails.setLogs(selectedLog);
-            }
-        }
-        updateFragmentViewState(UserMode.DETAIL_VIEW);
-    }
-
-    //ved ikke om den skal bruges sådan her eller det er firebase
-    public ArrayList<Log> getYourLogsList() { return yourlogs; }
-
+    @Override
     public Log getCurrentSelection() {
-        if (yourlogs != null) {
-            return yourlogs.get(selectedLogIndex);
+        if (logList!=null) {
+            return logList.get(selectedLog);
         } else {
             return null;
+        }
+    }
+
+    @Override
+    public void back() {
+        onBackPressed();
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (um == UserMode.LOG_VIEW) {
+            updateFragmentState(UserMode.LIST_VIEW);
+        } else {
+            this.finish();
         }
     }
 }
