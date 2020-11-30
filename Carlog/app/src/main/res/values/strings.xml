@@ -84,4 +84,10 @@
     <string name="TxtDuration">Duration</string>
     <string name="TxtLog">Log</string>
     <string name="TxtLogText">Log</string>
+    <string name="RegisterVechicleNoInput">Please enter a vehicle registration number!</string>
+    <string name="RegisterVehicleTooLongInput">The registration number should 7 characters.</string>
+    <string name="RegisterVehicleSelectImageADOption1">Take Photo</string>
+    <string name="RegisterVehicleSelectImageADOption2">Choose from Gallery</string>
+    <string name="RegisterVehicleSelectImageADOption3">Cancel</string>
+    <string name="RegisterVehicleSelectImageTitle">Add Photo!</string>
 </resources>
