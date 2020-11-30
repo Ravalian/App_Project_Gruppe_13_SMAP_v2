@@ -177,7 +177,7 @@ public class Repository {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = database.getReference("logs");
 
-        reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("owner").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 logs.setValue(tologs(snapshot));

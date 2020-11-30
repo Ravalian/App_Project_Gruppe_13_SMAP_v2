@@ -21,6 +21,8 @@ import com.firebase.ui.auth.data.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+//Inspired deeply from SMAP E20 L7 - Kasper Løvborg
+
 public class VehicleDetailActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
     public enum UserMode {LOG_VIEW, LIST_VIEW};
