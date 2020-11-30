@@ -16,7 +16,7 @@
     <string name="btn_ActivityUserInterface_YourVehicles">Your Vehicles</string>
     <string name="btn_ActivityUserInterface_RegisterVehicle">Register Vehicle</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registered Vehicles</string>
-
+    <string name="yourVehicles">Your Vehicles</string>
     <!--Activity vehicle details-->
     <string name="txt_VehicleName">Vehicle name</string>
 
@@ -36,6 +36,7 @@
     <string name="txt_GoogleMaps">Google maps</string>
 
     <!--Activity your vehicles-->
+
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
@@ -67,4 +68,5 @@
     <string name="TxtDistance">Distance</string>
     <string name="TxtDuration">Duration</string>
     <string name="txt_Log">Log</string>
+
 </resources>

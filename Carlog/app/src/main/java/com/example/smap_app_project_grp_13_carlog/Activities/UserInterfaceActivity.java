@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class UserInterfaceActivity extends AppCompatActivity {
 
     //Ui widgets
-    private Button btnlogout, btnregisterVehicle, btnregisteredVehicle, btnYourLogs;
+    private Button btnlogout, btnregisterVehicle, btnregisteredVehicle, btnYourLogs, btnYourVehicles;
 
     //Firebase
     FirebaseAuth mAuth;
@@ -63,6 +63,19 @@ public class UserInterfaceActivity extends AppCompatActivity {
                 goToRegisteredVehicles();
             }
         });
+
+        btnYourVehicles = findViewById(R.id.UI_YourVehiclesBtn);
+        btnYourVehicles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToYourVehicles();
+            }
+        });
+    }
+
+    private void GoToYourVehicles() {
+        Intent intent = new Intent(this, YourVehiclesActivity.class);
+        startActivity(intent);
     }
 
     private void GoToYourLogs() {
