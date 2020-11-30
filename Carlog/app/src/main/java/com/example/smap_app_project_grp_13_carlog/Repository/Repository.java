@@ -69,7 +69,7 @@ public class Repository {
             vehicles = new MutableLiveData<>();
             logs = new MutableLiveData<>();
             vehicle = new MutableLiveData<>();
-            setupFirebaseListener();
+
         } else{
             return;
         }
@@ -107,7 +107,7 @@ public class Repository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("vehicles");
 
-        reference.orderByChild("user").equalTo(id).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("owner").equalTo(id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 vehicles.setValue(ToVehicles(snapshot));
@@ -311,7 +311,7 @@ public class Repository {
             vehicleAlreadyRegistered = false;
         } else{
             VehicleDataFirebase newVehicle = new VehicleDataFirebase();
-            newVehicle.setOwner(user.getDisplayName()); // this has to the the UserID from the Firebase Authentication
+            newVehicle.setOwner(user.getUid()); // this has to the the UserID from the Firebase Authentication
             newVehicle.setRegistrationNumber(vehicleDataAPI.getRegistrationNumber());
             newVehicle.setTotalWeight(vehicleDataAPI.getTotalWeight());
             newVehicle.setSeats(vehicleDataAPI.getSeats());
@@ -339,6 +339,7 @@ public class Repository {
     ////////////////////Get functions to VMs////////////////
 
     public MutableLiveData<List<VehicleDataFirebase>> getVehicles(){
+        setupFirebaseListener();
         return vehicles;
     }
 

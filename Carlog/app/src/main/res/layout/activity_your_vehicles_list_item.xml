@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/your_vehicles_list_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgYVVehicle"
@@ -16,17 +16,29 @@
         android:contentDescription="@string/img_ActivityAllListItem_ImgOfVehicle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars"/>
+        tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txtYVVehicleName"
+        android:id="@+id/txtYVVehicleModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgYVVehicle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgYVVehicle"
-        app:layout_constraintTop_toTopOf="@+id/imgYVVehicle"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/txt_VehicleName" />
+
+    <TextView
+        android:id="@+id/txtYVVehicleMake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtYVVehicleModel"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

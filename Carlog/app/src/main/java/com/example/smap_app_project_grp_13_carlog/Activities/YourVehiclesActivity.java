@@ -6,18 +6,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.YourVehiclesAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
-import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.YourVehiclesVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,14 +41,15 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
-        vm.getVehicles().observe(this, new Observer<List<VehicleDataFirebase>>() {
+        vm.getYourVehicles("test").observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
                 //Setup UI if there are no adapter
                 if (adapter==null){
+                    Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(0).getRegistrationNumber());
                     setupUI(vehicleDataFirebases);
                 }
-                Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(1).getRegistrationNumber());
+                Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(0).getRegistrationNumber());
                 //Update data
                 adapter.updateVehicles(vehicleDataFirebases);
                 vehicles = vehicleDataFirebases;
@@ -88,6 +88,8 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
     @Override
     public void onYourVehiclesClicked(int YVID) {
-
+        Intent intent = new Intent(this, VehicleDetailActivity.class);
+        intent.putExtra(constants.ID, vehicles.get(YVID).registrationNumber);
+        startActivity(intent);
     }
 }
