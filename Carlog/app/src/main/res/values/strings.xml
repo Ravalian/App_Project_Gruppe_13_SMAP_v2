@@ -67,7 +67,6 @@
     <string name="txt_Date">Date</string>
     <string name="TxtDistance">Distance</string>
     <string name="TxtDuration">Duration</string>
-<<<<<<< HEAD
     <string name="TxtLog">Log</string>
     <string name="TxtLogText">Log</string>
     <string name="RegisterVechicleNoInput">Please enter a vehicle registration number!</string>
@@ -76,7 +75,6 @@
     <string name="RegisterVehicleSelectImageADOption2">Choose from Gallery</string>
     <string name="RegisterVehicleSelectImageADOption3">Cancel</string>
     <string name="RegisterVehicleSelectImageTitle">Add Photo!</string>
-=======
     <string name="txt_Log">Log</string>
 
 >>>>>>> 374134f957d850b8a845263d4186059a11af47b3
