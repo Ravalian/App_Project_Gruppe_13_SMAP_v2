@@ -21,9 +21,9 @@ public class YourVehiclesVM extends AndroidViewModel {
         repository = new Repository(application);
     }
 
-    public LiveData<List<VehicleDataFirebase>> getVehicles() {
+    public LiveData<List<VehicleDataFirebase>> getYourVehicles(String userID) {
         if (vehicles==null){
-            vehicles = repository.getVehicles();
+            vehicles = repository.getYourVehicles(userID);
         }
         return vehicles;
 
