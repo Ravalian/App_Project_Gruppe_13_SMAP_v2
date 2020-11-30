@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -61,10 +62,10 @@ public class VehicleDetailsAdapter extends BaseAdapter {
 
         VDlog = VDlogs.get(position);
         if (VDlog != null) {
-            Long date = VDlog.getDate();
+            Date date = new Date(VDlog.getDate());
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtVDListItemDate);
-            txtDate.setText((CharSequence) new Date(VDlog.getDate()).toString());
+            txtDate.setText(new SimpleDateFormat("EEEE").format(date.getDay()) +" "+date.getDate()+"/"+date.getMonth());
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtVDListItemUser);
             txtUser.setText(VDlog.getUserName());

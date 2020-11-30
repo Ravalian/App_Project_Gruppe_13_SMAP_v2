@@ -41,7 +41,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
-        vm.getYourVehicles("test").observe(this, new Observer<List<VehicleDataFirebase>>() {
+        vm.getYourVehicles(FirebaseAuth.getInstance().getCurrentUser().getUid()).observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
                 //Setup UI if there are no adapter

@@ -107,7 +107,7 @@ public class Repository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("vehicles");
 
-        reference.orderByChild("owner").equalTo(id).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("ownerID").equalTo(id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 vehicles.setValue(ToVehicles(snapshot));
@@ -177,7 +177,7 @@ public class Repository {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = database.getReference("logs");
 
-        reference.orderByChild("owner").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 logs.setValue(tologs(snapshot));
@@ -293,12 +293,14 @@ public class Repository {
 
         //Check if the car is already in the firebase database
         //this has to be done on a unique key, this will be reg nr. (number plate)
-        for(VehicleDataFirebase vehicle : vehicles.getValue()){
-            if(vehicle.getRegistrationNumber().equals(vehicleDataAPI.getRegistrationNumber())){
-                //the vehicle is already in the database
-                //set boolean to true
-                android.util.Log.d(Constants.REPOTAG, "Do we enter here?");
-                vehicleAlreadyRegistered = true;
+        if (vehicles.getValue()!=null) {
+            for (VehicleDataFirebase vehicle : vehicles.getValue()) {
+                if (vehicle.getRegistrationNumber().equals(vehicleDataAPI.getRegistrationNumber())) {
+                    //the vehicle is already in the database
+                    //set boolean to true
+                    android.util.Log.d(Constants.REPOTAG, "Do we enter here?");
+                    vehicleAlreadyRegistered = true;
+                }
             }
         }
 
@@ -311,7 +313,8 @@ public class Repository {
             vehicleAlreadyRegistered = false;
         } else{
             VehicleDataFirebase newVehicle = new VehicleDataFirebase();
-            newVehicle.setOwner(user.getUid()); // this has to the the UserID from the Firebase Authentication
+            newVehicle.setOwner(user.getDisplayName()); // this has to the the UserID from the Firebase Authentication
+            newVehicle.setOwnerID(user.getUid());
             newVehicle.setRegistrationNumber(vehicleDataAPI.getRegistrationNumber());
             newVehicle.setTotalWeight(vehicleDataAPI.getTotalWeight());
             newVehicle.setSeats(vehicleDataAPI.getSeats());

@@ -65,6 +65,11 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         um = UserMode.LIST_VIEW;
         selectedLog = 0;
 
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.ListContainer, vehicleLogList, "list_fragment")
+                .add(R.id.LogContainer, vehicleLog, "log_fragment")
+                .commit();
+
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
@@ -73,10 +78,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 vehicleLogList.setVehicle(vehicleDataFirebase);
 
 
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.ListContainer, vehicleLogList, "list_fragment")
-                        .add(R.id.LogContainer, vehicleLog, "log_fragment")
-                        .commit();
+
             }
         });
         vm.getLogs(id).observe(this, new Observer<List<Log>>() {
