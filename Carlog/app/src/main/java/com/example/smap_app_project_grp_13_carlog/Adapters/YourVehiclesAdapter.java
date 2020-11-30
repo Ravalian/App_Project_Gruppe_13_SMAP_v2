@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 
 import java.util.Collection;
@@ -23,6 +24,11 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
         void onYourVehiclesClicked(int YVID);
     }
 
+    private List<VehicleDataFirebase> vehicles;
+
+    public void updateVehicles(List<VehicleDataFirebase> vehicleDataFirebases) {
+        vehicles = vehicleDataFirebases;
+    }
     private IYourVehiclesItemClickedListener listener;
 
     /*
@@ -148,11 +154,14 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
             return null;
         }
     };
-    */
 
-    public YourVehiclesAdapter(IYourVehiclesItemClickedListener listener) {
+*/
+    public YourVehiclesAdapter(List<VehicleDataFirebase> vehicles, IYourVehiclesItemClickedListener listener) {
         this.listener = listener;
+        this.vehicles = vehicles;
     }
+
+
 
     @NonNull
     @Override
@@ -165,6 +174,7 @@ public class YourVehiclesAdapter extends RecyclerView.Adapter<YourVehiclesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull YourVehiclesAdapter.YourVehiclesViewHolder holder, int position) {
+        holder.txtVehicleName.setText(vehicles.get(position).registrationNumber);
 
     }
 

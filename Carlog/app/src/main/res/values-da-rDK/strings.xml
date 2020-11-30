@@ -17,6 +17,7 @@
     <string name="btn_ActivityUserInterface_YourVehicles">Dine køretøjer</string>
     <string name="btn_ActivityUserInterface_RegisterVehicle">Registrer køretøj</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registrerede køretøjer</string>
+    <string name="yourVehicles">Dine Køretøjer</string>
 
     <!--Activity vehicle details-->
     <string name="txt_VehicleName">Køretøjets navn</string>
