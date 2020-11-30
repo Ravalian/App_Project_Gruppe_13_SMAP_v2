@@ -31,7 +31,7 @@
         android:layout_toRightOf="@+id/imgYLFragDVehicle"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="14sp"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_LogName" />
+        tools:text="@string/txt_LogName" />
 
     <TextView
         android:id="@+id/txtYLFragDDate"
@@ -43,7 +43,7 @@
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/imgYLFragDVehicle"
         android:layout_toRightOf="@+id/imgYLFragDVehicle"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_LogDate" />
+        tools:text="@string/txt_LogDate" />
 
     <TextView
         android:id="@+id/txtYLFragDDistance"
@@ -83,7 +83,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="73dp"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_Log" />
+        tools:text="@string/txt_Log" />
 
     <TextView
         android:id="@+id/txtYLFragDLogDescription"
@@ -117,6 +117,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/txt_ActivityYourLogsFragDetails_GoogleMaps" />
+        android:contentDescription="@string/txt_GoogleMaps" />
 
 </RelativeLayout>

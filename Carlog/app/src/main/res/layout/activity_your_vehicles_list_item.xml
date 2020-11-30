@@ -27,6 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgYVVehicle"
         app:layout_constraintTop_toTopOf="@+id/imgYVVehicle"
-        tools:text="@string/txt_ActivityRegisteredVehicles_VehicleName" />
+        tools:text="@string/txt_VehicleName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

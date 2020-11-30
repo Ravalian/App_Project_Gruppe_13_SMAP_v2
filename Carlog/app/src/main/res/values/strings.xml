@@ -2,8 +2,7 @@
     <string name="app_name">Carlog</string>
 
     <!--Activity login-->
-    <string name="txt_ActivityLogin_Welcome">Welcome to Carlog</string>
-    <string name="btn_ActivityLogin_Login">Login</string>
+    <string name="txt_Welcome">Welcome to Carlog</string>
     <string name="btn_ActivityLogin_SignUp">Sign UP</string>
 
     <!--Activity register vehicle-->
@@ -12,51 +11,36 @@
     <string name="btn_Back">Back</string>
 
     <!--Activity registered vehicles-->
-    <string name="txt_ActivityRegisteredVehicles_VehicleName">Vehicle Name</string>
 
     <!--Activity user interface-->
     <string name="btn_ActivityUserInterface_YourVehicles">Your Vehicles</string>
-    <string name="btn_ActivityUserInterface_YourLogs">Your Logs</string>
     <string name="btn_ActivityUserInterface_RegisterVehicle">Register Vehicle</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registered Vehicles</string>
-    <string name="btn_ActivityUserInterface_Logout">Logout</string>
 
     <!--Activity vehicle details-->
-    <string name="txt_ActivityVehicleDetails_Vehicle_Name">Vehicle name</string>
-    <string name="btn_ActivityVehicleDetails_Back">Back</string>
-    <string name="txt_ActivityVehicleDetails_Date">Date</string>
-    <string name="txt_ActivityVehicleDetails_Name">Name</string>
+    <string name="txt_VehicleName">Vehicle name</string>
 
     <!--Activity vehicle log-->
 
     <!--Activity your logs-->
-    <string name="txt_ActivityYourLogs_YourLogs">Your logs</string>
-
-    <string name="txt_ActivityYourLogs_Date">Date</string>
-    <string name="txt_ActivityYourLogs_Name">Name</string>
+    <string name="txt_YourLogs">Your logs</string>
 
     <!--Activity your logs fragment list-->
-    <string name="txt_ActivityYourLogsFragList_YourLogs">Your Logs</string>
-    <string name="txt_ActivityYourLogsFragList_LogDate">Log date</string>
+    <string name="txt_LogDate">Log date</string>
 
     <!--Activity your logs fragment details-->
-    <string name="txt_ActivityYourLogsFragDetails_LogName">Log name</string>
-    <string name="txt_ActivityYourLogsFragDetails_LogDate">Log date</string>
+    <string name="txt_LogName">Log name</string>
     <string name="txt_ActivityYourLogsFragDetails_LogDistance">Log distance</string>
     <string name="txt_ActivityYourLogsFragDetails_LogTime">Log time</string>
-    <string name="txt_ActivityYourLogsFragDetails_Log">Log</string>
     <string name="txt_ActivityYourLogsFragDetails_LogDescription">Log description...</string>
-    <string name="txt_ActivityYourLogsFragDetails_GoogleMaps">Google maps</string>
+    <string name="txt_GoogleMaps">Google maps</string>
 
     <!--Activity your vehicles-->
-    <string name="txt_ActivityYourVehicles_VehicleName">Vehicle Name</string>
-    <string name="btn_ActivityYourVehicles_Back">Back</string>
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img of vehicle</string>
     <string name="Loginbtn">Login</string>
-    <string name="welcome">Welcome To Carlog</string>
-    <string name="LogoutBtn">Logout</string>
+    <string name="btn_Logout">Logout</string>
 
 
     <string name="RegisterVHAddBtn">Add Vehicle</string>
@@ -72,16 +56,15 @@
     <string name="UI_RegisteredVehiclesBtn">Registered Vehicles</string>
     <string name="txt_ActivityRegisteredVehicles_OwnerName">Owner Name</string>
     <string name="txtWriteLog">Write Log</string>
-    <string name="btn_start">Start</string>
+    <string name="btn_Start">Start</string>
     <string name="btn_Stop">Stop</string>
-    <string name="btn_save">Save</string>
+    <string name="btn_Save">Save</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btn_new" >New</string>
-    <string name="TxtName">Name</string>
-    <string name="TxtDate">Date</string>
+    <string name="btn_New" >New</string>
+    <string name="txt_Name">Name</string>
+    <string name="txt_Date">Date</string>
     <string name="TxtDistance">Distance</string>
     <string name="TxtDuration">Duration</string>
-    <string name="TxtLog">Log</string>
-    <string name="TxtLogText">Log</string>
+    <string name="txt_Log">Log</string>
 </resources>

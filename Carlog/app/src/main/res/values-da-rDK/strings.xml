@@ -3,9 +3,8 @@
     <string name="app_name">Carlog</string>
 
     <!--Activity login-->
-    <string name="txt_ActivityLogin_Welcome">Velkommen til Carlog</string>
-    <string name="btn_ActivityLogin_Login">Log på</string>
-    <string name="btn_ActivityLogin_SignUp">Tilmelde</string>
+    <string name="txt_Welcome">Velkommen til Carlog</string>
+    <string name="btn_ActivityLogin_SignUp">Tilmeld</string>
 
     <!--Activity register vehicle-->
     <string name="txt_ActivityRegisterVehicle_LicencePlate">Indtast din nummerplade</string>
@@ -13,32 +12,37 @@
     <string name="btn_Back">Tilbage</string>
 
     <!--Activity registered vehicles-->
-    <string name="txt_ActivityRegisteredVehicles_VehicleName">Køretøjets navn</string>
 
     <!--Activity user interface-->
     <string name="btn_ActivityUserInterface_YourVehicles">Dine køretøjer</string>
-    <string name="btn_ActivityUserInterface_YourLogs">Dine logfiler</string>
     <string name="btn_ActivityUserInterface_RegisterVehicle">Registrer køretøj</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registrerede køretøjer</string>
 
     <!--Activity vehicle details-->
-    <string name="txt_ActivityVehicleDetails_Vehicle_Name">Køretøjets navn</string>
-    <string name="txt_ActivityVehicleDetails_Date">Dato</string>
-    <string name="txt_ActivityVehicleDetails_Name">Navn</string>
-    <string name="btn_ActivityVehicleDetails_Back">Tilbage</string>
+    <string name="txt_VehicleName">Køretøjets navn</string>
 
     <!--Activity vehicle log-->
 
     <!--Activity your logs-->
-    <string name="txt_ActivityYourLogs_YourLogs">Dine logfiler</string>
+    <string name="txt_YourLogs">Dine logfiler</string>
 
     <!--Activity your vehicles-->
-    <string name="txt_ActivityYourVehicles_VehicleName">Køretøjets navn</string>
 
     <!--Activity all list item -->
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img af køretøj</string>
-    <string name="btn_ActivityUserInterface_Logout">Logud</string>
     <string name="btn_Stop">Stop</string>
-    <string name="btn_save">Gem</string>
-    <string name="btn_new">Ny</string>
+    <string name="btn_Save">Gem</string>
+    <string name="btn_New">Ny</string>
+    <string name="txt_LogDate">Note Dato</string>
+    <string name="txt_LogName">Note navn</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogDistance">Note distance</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogTime">Note tid</string>
+    <string name="txt_ActivityYourLogsFragDetails_LogDescription">Note beskrivelse</string>
+    <string name="txt_GoogleMaps">Google maps</string>
+    <string name="btn_Start">Start</string>
+    <string name="Loginbtn">Log på</string>
+    <string name="txt_Date">Dato</string>
+    <string name="txt_Log">Note</string>
+    <string name="btn_Logout">Log ud</string>
+    <string name="txt_Name">Navn</string>
 </resources>
