@@ -106,10 +106,10 @@ public class Repository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("vehicles");
 
-        reference.orderByChild("owner").equalTo(id).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("user").equalTo(id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                vehicles.setValue(toVehicles(snapshot));
+                vehicles.setValue(ToVehicles(snapshot));
             }
 
             @Override
@@ -133,6 +133,8 @@ public class Repository {
             }
         });
     }
+
+
 
     private void getVehicleFromFirebase(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -230,7 +232,7 @@ public class Repository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                android.util.Log.d("Error", "It did not work");
+                android.util.Log.d("Error", "Couldn't get the logs to this car");
             }
         });
     }
@@ -345,14 +347,6 @@ public class Repository {
     }
 
     public MutableLiveData<VehicleDataFirebase> getvehicle(String id) {
-        //MutableLiveData<VehicleDataFirebase> v = new MutableLiveData<>();
-        /*for (VehicleDataFirebase vehicle:
-             vehicles.getValue()) {
-            Log.d("Tester", vehicle.getRegistrationNumber()+" og "+id);
-            if (vehicle.getRegistrationNumber()==id){
-                v.setValue(vehicle);
-            }
-        }*/
         getVehicleFromFirebase(id);
         return vehicle;
     }
@@ -360,7 +354,6 @@ public class Repository {
 
     public void saveLog(Log log) {
         String ID = LogDatabase.push().getKey(); //https://firebase.google.com/docs/database/admin/save-data#getting-the-unique-key-generated-by-push
-        android.util.Log.d("Tester", "Er der en dato? "+log.date);
         LogDatabase.child(ID).setValue(log);
 
     }
@@ -399,6 +392,19 @@ public class Repository {
             }
         }
         L.add(snapshot.getValue(Log.class));
+        return L;
+    }
+
+    private List<VehicleDataFirebase> ToVehicles(DataSnapshot snapshot) {
+        ArrayList L = new ArrayList();
+
+        if (vehicles.getValue()!=null) {
+            for (VehicleDataFirebase l :
+                    vehicles.getValue()) {
+                L.add(l);
+            }
+        }
+        L.add(snapshot.getValue(VehicleDataFirebase.class));
         return L;
     }
 }
