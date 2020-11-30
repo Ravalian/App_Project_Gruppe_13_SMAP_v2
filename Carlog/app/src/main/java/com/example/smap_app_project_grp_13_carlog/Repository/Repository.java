@@ -107,6 +107,38 @@ public class Repository {
         return V;
     }
 
+    private void setupFireDatabaseYourLogsListener(String id) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = database.getReference("logs");
+
+        reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.setValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                logs.setValue(tologs(snapshot));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "failed to get your logs");
+            }
+        });
+    }
 
     public void setupFirebaseLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -184,6 +216,7 @@ public class Repository {
             }
         });
     }
+
     //////////////////////////////////////////////////////////
 
 
@@ -312,6 +345,11 @@ public class Repository {
         android.util.Log.d("Tester", "Er der en dato? "+log.date);
         LogDatabase.child(ID).setValue(log);
 
+    }
+
+    public LiveData<List<Log>> getYourLogs(String id) {
+        setupFireDatabaseYourLogsListener(id);
+        return logs;
     }
 
 

@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/txt_ActivityVehicleDetails_Date" />
+        tools:text="@string/txt_LogDate" />
 
     <TextView
         android:id="@+id/txtVDListItemUser"
@@ -26,6 +26,6 @@
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/txt_ActivityVehicleDetails_Name" />
+        tools:text="@string/txt_Name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
