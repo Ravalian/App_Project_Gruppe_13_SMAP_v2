@@ -85,6 +85,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
                 vehicle = vehicleDataFirebase;
                 vehicleLogList.setVehicle(vehicleDataFirebase);
+                updateFragmentState(um);
 
             }
         });
