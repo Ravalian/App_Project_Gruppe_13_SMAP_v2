@@ -1,10 +1,13 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -49,7 +52,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         setContentView(R.layout.activity_vehicle_detail);
 
         listContainer = (LinearLayout)findViewById(R.id.ListContainer);
-        logContainer = (LinearLayout)findViewById(R.id.LogContainer);
+        logContainer = findViewById(R.id.LogContainer);
 
         listContainer.setVisibility(View.VISIBLE);
         logContainer.setVisibility(View.GONE);
@@ -66,18 +69,22 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         selectedLog = 0;
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.ListContainer, vehicleLogList, "list_fragment")
-                .add(R.id.LogContainer, vehicleLog, "log_fragment")
+                .add(R.id.ListContainer, vehicleLog, "log_fragment")
+                .replace(R.id.ListContainer, vehicleLogList, "list_fragment")
                 .commit();
 
+        listContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateFragmentState(UserMode.LIST_VIEW);
+            }
+        });
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
                 vehicle = vehicleDataFirebase;
                 vehicleLogList.setVehicle(vehicleDataFirebase);
-
-
 
             }
         });
@@ -102,23 +109,10 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         if (um==UserMode.LOG_VIEW) {
             updateFragmentState(UserMode.LIST_VIEW);
         } else {
-            this.finish();
+            finish();
         }
     }
 
-    private void updateFragmentState(UserMode tm) {
-        if(tm == UserMode.LIST_VIEW) {
-            um = UserMode.LIST_VIEW;
-            vehicleLogList.update();
-            switchFragment(tm);
-        } if(tm == UserMode.LOG_VIEW) {
-            um = UserMode.LOG_VIEW;
-            switchFragment(tm);
-        } else {
-            //ignore
-        }
-
-    }
 
     @Override
     public void onVehicleDetailsSelected(int position) {
@@ -130,18 +124,24 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             }
         }
         updateFragmentState(UserMode.LOG_VIEW);
+        //vehicleLog.UpdateUI();
     }
 
-    private void switchFragment(UserMode um) {
-        if (um==UserMode.LIST_VIEW){
-            listContainer.setVisibility(View.VISIBLE);
-            logContainer.setVisibility(View.GONE);
-            changeContainerFragment(UserMode.LIST_VIEW);
-        } else if (um==UserMode.LOG_VIEW){
-            listContainer.setVisibility(View.GONE);
-            logContainer.setVisibility(View.VISIBLE);
-            changeContainerFragment(UserMode.LOG_VIEW);
+    private void updateFragmentState(UserMode tm) {
+       if (tm!=UserMode.LIST_VIEW&&tm!=UserMode.LOG_VIEW){
+            //ignore
+            return;
         }
+        um = tm;
+        switchFragment(tm);
+
+    }
+
+    private void switchFragment(UserMode tm) {
+        if (tm==UserMode.LIST_VIEW){
+            vehicleLogList.update();
+        }
+        changeContainerFragment(tm);
     }
 
     @Override
@@ -160,20 +160,20 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
     private void changeContainerFragment(UserMode targetMode){
         switch(targetMode) {
-            /*case DETAIL_VIEW:
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.DetailContainer, vehicleDetails, "detail_fragment")
-                        .commit();
-
-                break;*/
             case LOG_VIEW:
 
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.animator.slide_in, R.animator.slide_out)
-                        .replace(R.id.LogContainer, vehicleLog, "log_fragment")
+                        .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
+                        .replace(R.id.ListContainer, vehicleLog, "log_fragment")
                         .commit();
-                vehicleLog.UpdateUI();
+                //vehicleLog.UpdateUI();
+                break;
+            case LIST_VIEW:
+
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
+                        .replace(R.id.ListContainer, vehicleLogList, "list_fragment")
+                        .commit();
                 break;
         }
     }

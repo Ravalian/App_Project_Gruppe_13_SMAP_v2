@@ -51,13 +51,13 @@ public class VehicleLogFragment extends Fragment {
                 back();
             }
         });
-        btnNew = view.findViewById(R.id.BtnNewDF);
+        /*btnNew = view.findViewById(R.id.BtnNewDF);
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newLog();
             }
-        });
+        });*/
 
         setupUI();
 
