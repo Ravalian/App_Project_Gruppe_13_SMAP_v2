@@ -39,6 +39,14 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_vehicles);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
+        btnBack = findViewById(R.id.btnYVBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Back();
+            }
+        });
+
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
@@ -47,10 +55,10 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
                 //Setup UI if there are no adapter
                 if (adapter==null){
-                    Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(0).getRegistrationNumber());
+                    Log.d(constants.YOURVEHICLETAG, vehicleDataFirebases.get(0).getRegistrationNumber());
                     setupUI(vehicleDataFirebases);
                 }
-                Log.d(constants.REGISTEREDTAG, vehicleDataFirebases.get(0).getRegistrationNumber());
+                Log.d(constants.YOURVEHICLETAG, vehicleDataFirebases.get(0).getRegistrationNumber());
                 //Update data
                 adapter.updateVehicles(vehicleDataFirebases);
                 vehicles = vehicleDataFirebases;
@@ -59,7 +67,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-            Log.d(constants.REGISTEREDTAG, user.getEmail());
+            Log.d(constants.YOURVEHICLETAG, user.getEmail());
         }
         //init ui
     }
@@ -74,18 +82,16 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
         txtYourVehicles = findViewById(R.id.txtYourVehicles);
 
-        btnBack = findViewById(R.id.btnYVBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Back();
-            }
-        });
+
     }
 
     private void Back() {
         finish();
+
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+
+
+
     }
 
     @Override
