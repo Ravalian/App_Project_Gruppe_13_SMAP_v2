@@ -39,6 +39,13 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_vehicles);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
+        btnBack = findViewById(R.id.btnYVBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Back();
+            }
+        });
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
@@ -74,13 +81,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
         txtYourVehicles = findViewById(R.id.txtYourVehicles);
 
-        btnBack = findViewById(R.id.btnYVBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Back();
-            }
-        });
+
     }
 
     private void Back() {
