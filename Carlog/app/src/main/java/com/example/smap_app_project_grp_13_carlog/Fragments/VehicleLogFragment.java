@@ -1,5 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,62 +9,120 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
+import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link VehicleLogFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class VehicleLogFragment extends Fragment {
+import java.util.Date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
 
+    private TextView txtUserName, txtDate, txtDuration, txtDistance, txtLog;
+    private Button btnBack;
+    private VehicleDetailsSelectorInterface InterFace;
+    private Log log;
+    private MapView map;
+    private GoogleMap gmap;
 
     public VehicleLogFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment VehicleLogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static VehicleLogFragment newInstance(String param1, String param2) {
-        VehicleLogFragment fragment = new VehicleLogFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vehicle_log, container, false);
+        View view = inflater.inflate(R.layout.fragment_vehicle_log, container, false);
+
+        txtDate = view.findViewById(R.id.TxtDateDF);
+        txtDistance = view.findViewById(R.id.TxtDistanceDF);
+        txtDuration = view.findViewById(R.id.TxtNameLabel);
+        txtLog = view.findViewById(R.id.TxtLogDF);
+        txtUserName = view.findViewById(R.id.TxtUsernameDF);
+        map = view.findViewById(R.id.MapDF);
+        map.onCreate(savedInstanceState);
+        map.getMapAsync(this);
+
+        btnBack = view.findViewById(R.id.BtnBackDF);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
+
+        setupUI();
+        return view;
+    }
+
+    private void back() {
+        InterFace.back();
+    }
+
+    private void setupUI() {
+        if (InterFace != null) {
+            log = InterFace.getCurrentSelection();
+
+        }
+        if (log != null) {
+            txtUserName.setText(log.getUserName());
+            txtLog.setText(log.getLogDescription());
+            txtDuration.setText("T: " + log.getTime()/120 + " M: " + log.getTime()/60 + " S: " + log.getTime()%60 );
+            txtDistance.setText("" + log.getDistance());
+            Date d = new Date(log.getDate());
+            txtDate.setText("" + d.getDate() + "/" + d.getMonth());
+        }
+    }
+
+    public void setLog(Log l) {
+        log = l;
+    }
+
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+
+        try {
+            InterFace = (VehicleDetailsSelectorInterface) activity;
+        } catch (ClassCastException exception) {
+            throw new ClassCastException(activity.toString() + " doesn't implement the right Interface (VehicleDetailSelecterInterface)");
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        map.onResume();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gmap = googleMap;
+        com.example.smap_app_project_grp_13_carlog.Models.LatLng s = log.getPositions().get(0);
+        LatLng start = new LatLng(s.getLatitude(), s.getLongitude());
+        s = log.getPositions().get(1);
+        LatLng stop = new LatLng(s.getLatitude(), s.getLongitude());
+
+
+        gmap.addMarker(new MarkerOptions()
+                .position(start)
+                .title("Starting point"));
+        gmap.addMarker(new MarkerOptions()
+                .position(stop)
+                .title("Destination"));
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(stop));
     }
 }

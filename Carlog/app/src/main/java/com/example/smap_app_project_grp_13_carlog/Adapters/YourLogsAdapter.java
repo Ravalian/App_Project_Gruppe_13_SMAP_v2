@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import java.util.Date;
 public class YourLogsAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Logs> yourlogs;
-    Logs yourlog = null;
+    ArrayList<Log> yourlogs;
+    Log yourlog = null;
 
-    public YourLogsAdapter(Context c, ArrayList<Logs> yourlogsList) {
+    public YourLogsAdapter(Context c, ArrayList<Log> yourlogsList) {
         yourlogs = yourlogsList;
         context = c;
     }
@@ -57,10 +57,10 @@ public class YourLogsAdapter extends BaseAdapter {
 
         yourlog = yourlogs.get(position);
         if (yourlog != null) {
-            Long date = yourlog.getDate();
+            Date date = new Date(yourlog.getDate());
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtYLListItemDate);
-            txtDate.setText((CharSequence) new Date(yourlog.getDate()));
+            txtDate.setText(date.getDay()+" "+date.getDate()+"/"+date.getMonth());
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtYLListItemName);
             txtUser.setText(yourlog.getuser());

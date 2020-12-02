@@ -12,24 +12,21 @@ import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
 import java.util.List;
 
-public class VehicleLogVM extends AndroidViewModel {
-
-    LiveData<List<VehicleDataFirebase>> vehicle;
+public class YourLogsVM extends AndroidViewModel {
+    LiveData<List<Log>> logs;
     Repository repository;
+    //VehicleDataFirebase vehicle;
 
-    public VehicleLogVM(@NonNull Application application) {
+    public YourLogsVM(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
     }
 
-    public LiveData<List<VehicleDataFirebase>> getVehicle() {
-        if (vehicle==null){
-            vehicle = repository.getVehicles();
+    public LiveData<List<Log>> getLogs(String id) {
+        if (logs==null){
+            logs = repository.getYourLogs(id);
         }
-        return vehicle;
+        return logs;
     }
 
-    public void saveLog(Log log) {
-        repository.saveLog(log);
-    }
 }

@@ -1,5 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Models;
 
+import android.util.Pair;
+
 public class VehicleDataFirebase {
 
     //!!! TODO
@@ -29,6 +31,7 @@ public class VehicleDataFirebase {
     public String enginePower;
     public String fuelType;
     public String registeredUser;
+    public String ownerID;
 
     //Get and set methods for each value
     public String getOwner() {
@@ -158,5 +161,14 @@ public class VehicleDataFirebase {
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
     }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
+
 
 }

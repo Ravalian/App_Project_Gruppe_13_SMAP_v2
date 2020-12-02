@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgYLListItem"
         app:layout_constraintStart_toEndOf="@+id/imgYLListItem"
         app:layout_constraintTop_toTopOf="@+id/imgYLListItem"
-        tools:text="@string/txt_ActivityYourLogs_Date" />
+        tools:text="@string/txt_Date" />
 
     <TextView
         android:id="@+id/txtYLListItemName"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtYLListItemDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtYLListItemDate"
-        tools:text="@string/txt_ActivityYourLogs_Name" />
+        tools:text="@string/txt_Name" />
 
     <ImageView
         android:id="@+id/imgYLListItem"

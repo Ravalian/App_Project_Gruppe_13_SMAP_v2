@@ -7,26 +7,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.TimeoutError;
-import com.example.smap_app_project_grp_13_carlog.Models.Logs;
+import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class VehicleDetailsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Logs> VDlogs;
-    private Logs VDlog = null;
+    private List<Log> VDlogs;
+    private Log VDlog = null;
 
-    public VehicleDetailsAdapter(Context c, List<Logs> VDlogsList) {
+    public VehicleDetailsAdapter(Context c, List<Log> VDlogsList) {
         VDlogs = VDlogsList;
         context = c;
+    }
+
+    public void setLogs(List<Log> l){
+        VDlogs = l;
     }
 
     @Override
@@ -62,13 +62,13 @@ public class VehicleDetailsAdapter extends BaseAdapter {
 
         VDlog = VDlogs.get(position);
         if (VDlog != null) {
-            Long date = VDlog.getDate();
+            Date date = new Date(VDlog.getDate());
 
             TextView txtDate = (TextView) convertView.findViewById(R.id.txtVDListItemDate);
-            txtDate.setText((CharSequence) new Date(VDlog.getDate()).toString());
+            txtDate.setText(new SimpleDateFormat("EEEE").format(date.getDay()) +" "+date.getDate()+"/"+date.getMonth());
 
             TextView txtUser = (TextView) convertView.findViewById(R.id.txtVDListItemUser);
-            txtUser.setText(VDlog.getuser());
+            txtUser.setText(VDlog.getUserName());
         }
         return convertView;
     }
