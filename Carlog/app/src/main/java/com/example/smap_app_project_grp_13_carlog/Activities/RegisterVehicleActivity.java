@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -29,16 +30,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.smap_app_project_grp_13_carlog.BuildConfig;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisterVehicleActivityVM;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterVehicleActivity extends AppCompatActivity {
 
@@ -54,6 +60,8 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     private Boolean sendInputToVM = false;
     private String Document_img1 = "";
     private int imgMaxSize = 400; //Change in MaxSize here to fit the imageview on the page
+    private String mCurrentPhotoPath;
+    private Uri photoURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +182,13 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
     }
 
+    //////////// Image Handling //////////////////////////////
+    // This next part contains information from different
+    // sources all mixed together.
+    // Links to sources has been provided, but the code has
+    //
+    /////////////////////////////////////////////////////////
+
     //Inspiration for image upload: http://www.codeplayon.com/2018/11/android-image-upload-to-server-from-camera-and-gallery/
     private void SelectImage() {
         final CharSequence[] options = {getString(R.string.RegisterVehicleSelectImageADOption1), getString(R.string.RegisterVehicleSelectImageADOption2), getString(R.string.RegisterVehicleSelectImageADOption3)};
@@ -185,8 +200,26 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                 //Take a Photo with the camera
                 if(options[item].equals(getString(R.string.RegisterVehicleSelectImageADOption1))){
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                    //File file = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+
+                    //Inspiration taken from: https://inthecheesefactory.com/blog/how-to-share-access-to-file-with-fileprovider-on-android-nougat/en
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+                    if(photoFile != null){
+                        try{
+                            photoURI = FileProvider.getUriForFile(RegisterVehicleActivity.this, BuildConfig.APPLICATION_ID + ".provider", createImageFile());
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    //Uri photoURI = Uri.fromFile(file);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(intent, Constants.REGISTERVHACTSELECTIMGOPTION1);
                 }
                 //Find a picture from phone gallery
@@ -203,6 +236,20 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         builder.show();
     }
 
+    private File createImageFile() throws IOException {
+        //Create an Image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,   //Prefix
+                ".jpg",   //Suffix
+                storageDir);    //Directory
+        // Save a File: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -216,10 +263,13 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                File newFile = new File(imageUri.getPath());
                 try {
+                    Log.d("TESTING", "Contents of mCurrentPath: " + mCurrentPhotoPath);
+                    InputStream ims = new FileInputStream(newFile);
                     Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                    bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), bitmapOptions);
+                    bitmap = BitmapFactory.decodeStream(ims);
                     bitmap = getResizedBitmap(bitmap, imgMaxSize);
                     registerVHImageView.setImageBitmap(bitmap);
                     BitmapToString(bitmap);
@@ -267,6 +317,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         image.compress(Bitmap.CompressFormat.PNG, 60, baos);
         byte[] b = baos.toByteArray();
         Document_img1 = Base64.encodeToString(b, Base64.DEFAULT);
+        Log.d("Testing", "Contents of bitmapString: " + Document_img1);
         return Document_img1;
     }
 

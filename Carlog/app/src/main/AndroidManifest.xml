@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <!--uses-permission android:name="android.permission.CAMERA" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
 
     <permission android:name="com.example.permission.MAPS_RECIEVE"
         android:protectionLevel="signature"/>
@@ -20,31 +20,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.SMAP_App_Project_Grp_13_Carlog">
-
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps" />
+        <activity android:name=".Activities.YourLogsActivity"></activity>
         <activity android:name=".Activities.VehicleDetailActivity" />
-        <activity android:name=".Activities.YourLogsActivity" />
+        <activity android:name=".Deprecated.Activities.YourLogsActivity" />
         <activity android:name=".Activities.YourVehiclesActivity" />
         <activity android:name=".Activities.VehicleLogActivity" />
+        <activity android:name=".Deprecated.Activities.VehicleDetailsActivity" />
         <activity android:name=".Activities.UserInterfaceActivity" />
         <activity android:name=".Activities.RegisterVehicleActivity" />
         <activity android:name=".Activities.RegisteredVehiclesActivity" />
@@ -55,6 +38,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MapsApiKey}"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
