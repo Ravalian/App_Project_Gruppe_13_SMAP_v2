@@ -11,6 +11,7 @@ public class Constants {
     public static final String REPOTAG = "REPOSOTORYTAG";
     public static final String REGISTEREDTAG = "REGISTEREDTAG";
     public static final String REGISTERVHACTTAG = "RegisterVehicleTag";
+    public static final String YOURVEHICLETAG = "YourVehicleTag";
 
     //Intent tags
     public static final String ID = "ID";
