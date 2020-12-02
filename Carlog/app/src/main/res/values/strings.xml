@@ -17,8 +17,13 @@
     <string name="btn_ActivityUserInterface_RegisterVehicle">Register Vehicle</string>
     <string name="btn_ActivityUserInterface_RegisteredVehicles">Registered Vehicles</string>
     <string name="yourVehicles">Your Vehicles</string>
+
     <!--Activity vehicle details-->
     <string name="txt_VehicleName">Vehicle name</string>
+    <string name="txt_hp">hp</string>
+    <string name="txt_kml">Km/L</string>
+    <string name="txt_seats">seats</string>
+
 
     <!--Activity vehicle log-->
 

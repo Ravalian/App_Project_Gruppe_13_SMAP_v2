@@ -136,9 +136,9 @@ public class VehicleDetailFragment extends Fragment {
             owner.setText(vehicle.getOwner());
             model.setText(vehicle.getModel());
             fuel.setText(vehicle.getFuelType());
-            hp.setText(vehicle.getEnginePower());
-            kml.setText("9999999km/l");
-            numseats.setText(vehicle.getSeats());
+            hp.setText(vehicle.getEnginePower() + " "  + getString(R.string.txt_hp));
+            kml.setText("999" + " "  + getString(R.string.txt_kml));
+            numseats.setText(vehicle.getSeats() + " " + getString(R.string.txt_seats));
         }
     }
 
