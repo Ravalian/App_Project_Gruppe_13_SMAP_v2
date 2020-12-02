@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--uses-permission android:name="android.permission.CAMERA" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
 
@@ -22,12 +21,11 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.SMAP_App_Project_Grp_13_Carlog">
-        <activity android:name=".Activities.YourLogsActivity"></activity>
+
+        <activity android:name=".Activities.YourLogsActivity" />
         <activity android:name=".Activities.VehicleDetailActivity" />
-        <activity android:name=".Deprecated.Activities.YourLogsActivity" />
         <activity android:name=".Activities.YourVehiclesActivity" />
         <activity android:name=".Activities.VehicleLogActivity" />
-        <activity android:name=".Deprecated.Activities.VehicleDetailsActivity" />
         <activity android:name=".Activities.UserInterfaceActivity" />
         <activity android:name=".Activities.RegisterVehicleActivity" />
         <activity android:name=".Activities.RegisteredVehiclesActivity" />

@@ -163,6 +163,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         else {
             //if no error occur, set boolean to send data.
             sendInputToVM = true;
+            Toast.makeText(this,"The vehicle has been add", Toast.LENGTH_SHORT).show();
         }
         //        Extra Validation               //
         // Can we make any more validation?
