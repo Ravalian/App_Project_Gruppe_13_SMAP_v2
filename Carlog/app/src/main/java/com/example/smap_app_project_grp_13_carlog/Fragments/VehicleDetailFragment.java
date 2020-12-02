@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.smap_app_project_grp_13_carlog.Activities.VehicleDetailActivity;
 import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
@@ -154,4 +155,5 @@ public class VehicleDetailFragment extends Fragment {
     public void setVehicle(VehicleDataFirebase v){
         vehicle=v;
     }
+
 }

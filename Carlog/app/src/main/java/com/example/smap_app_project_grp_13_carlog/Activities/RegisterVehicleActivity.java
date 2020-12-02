@@ -67,6 +67,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_vehicle);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         //Setup viewmodel
         registerVehicleActivityVM = new ViewModelProvider(this).get(RegisterVehicleActivityVM.class);
@@ -178,6 +179,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     //What happens when cancel btn
     private void Cancel() {
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
     }
 
     //////////// Image Handling //////////////////////////////

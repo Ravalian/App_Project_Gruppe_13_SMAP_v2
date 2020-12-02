@@ -41,6 +41,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered_vehicles);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);                //Inspired by https://www.geeksforgeeks.org/how-to-add-slide-animation-between-activities-in-android/
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(RegisteredVehiclesActivityVM.class);
@@ -87,6 +88,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
 
     private void Back() {
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
     }
 
     @Override

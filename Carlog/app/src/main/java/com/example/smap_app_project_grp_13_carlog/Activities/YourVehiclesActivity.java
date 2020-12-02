@@ -38,10 +38,11 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_vehicles);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
-        vm.getYourVehicles("test").observe(this, new Observer<List<VehicleDataFirebase>>() {
+        vm.getYourVehicles(FirebaseAuth.getInstance().getCurrentUser().getUid()).observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
                 //Setup UI if there are no adapter
@@ -84,6 +85,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
     private void Back() {
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
     }
 
     @Override

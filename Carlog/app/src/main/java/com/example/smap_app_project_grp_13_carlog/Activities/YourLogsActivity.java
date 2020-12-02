@@ -43,7 +43,8 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_your_logs2);
+        setContentView(R.layout.activity_your_logs);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
         logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
@@ -62,8 +63,8 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         um = UserMode.LIST_VIEW;
         selectedLog = 0;
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
-                .add(R.id.LogDetailContainer, vehicleLog, "Detail_fragment")
+                .add(R.id.YourLogsContainer, vehicleLog, "Detail_fragment")
+                .replace(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
                 .commit();
         vm = new ViewModelProvider(this).get(YourLogsVM.class);
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -94,12 +95,10 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
 
     private void switchFragment(UserMode tm) {
         if (tm == UserMode.LIST_VIEW){
-            listContainer.setVisibility(View.VISIBLE);
-            logContainer.setVisibility(View.GONE);
+
             changeContainerFragment(UserMode.LIST_VIEW);
         } else if (tm == UserMode.LOG_VIEW){
-            listContainer.setVisibility(View.GONE);
-            logContainer.setVisibility(View.VISIBLE);
+
             changeContainerFragment(UserMode.LOG_VIEW);
         }
     }
@@ -109,12 +108,20 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
 
             case LOG_VIEW:
 
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.animator.slide_in, R.animator.slide_out)
-                        .replace(R.id.LogDetailContainer, vehicleLog, "Detail_fragment")
+                getSupportFragmentManager().beginTransaction()                                                      //Inspired by https://developer.android.com/guide/fragments/animate
+                        .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
+                        .replace(R.id.YourLogsContainer, vehicleLog, "Detail_fragment")
                         .commit();
-                vehicleLog.UpdateUI();
+                //vehicleLog.UpdateUI();
                 break;
+            case LIST_VIEW:
+
+                getSupportFragmentManager().beginTransaction()                                                      //Inspierd by https://developer.android.com/guide/fragments/animate
+                        .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
+                        .replace(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
+                        .commit();
+                break;
+
         }
     }
 
@@ -157,6 +164,7 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
             updateFragmentState(UserMode.LIST_VIEW);
         } else {
             this.finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         }
     }
 }
