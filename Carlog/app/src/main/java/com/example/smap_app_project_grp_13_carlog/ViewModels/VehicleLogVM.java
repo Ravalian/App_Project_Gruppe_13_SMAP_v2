@@ -14,7 +14,7 @@ import java.util.List;
 
 public class VehicleLogVM extends AndroidViewModel {
 
-    LiveData<List<VehicleDataFirebase>> vehicle;
+    LiveData<VehicleDataFirebase> vehicle;
     Repository repository;
 
     public VehicleLogVM(@NonNull Application application) {
@@ -22,13 +22,15 @@ public class VehicleLogVM extends AndroidViewModel {
         repository = new Repository(application);
     }
 
-    public LiveData<List<VehicleDataFirebase>> getVehicle() {
+    //Retrieve the current vehicle
+    public LiveData<VehicleDataFirebase> getVehicle(String ID) {
         if (vehicle==null){
-            vehicle = repository.getVehicles();
+            vehicle = repository.getvehicle(ID);
         }
         return vehicle;
     }
 
+    //Save the log
     public void saveLog(Log log) {
         repository.saveLog(log);
     }

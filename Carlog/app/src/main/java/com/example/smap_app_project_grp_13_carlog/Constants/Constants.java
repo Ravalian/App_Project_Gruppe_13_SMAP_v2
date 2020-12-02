@@ -11,9 +11,14 @@ public class Constants {
     public static final String REPOTAG = "REPOSOTORYTAG";
     public static final String REGISTEREDTAG = "REGISTEREDTAG";
     public static final String REGISTERVHACTTAG = "RegisterVehicleTag";
+    public static final String YOURVEHICLETAG = "YourVehicleTag";
 
     //Intent tags
     public static final String ID = "ID";
 
     public static final int RC_SIGN_IN = 8;
+
+    //Fragment tags
+    public static final String FRAG_LOG = "log_fragment";
+    public static final String FRAG_LIST = "list_fragment";
 }
