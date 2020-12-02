@@ -1,5 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Models;
 
+import android.util.Pair;
+
 public class VehicleDataFirebase {
 
     //!!! TODO
@@ -167,5 +169,6 @@ public class VehicleDataFirebase {
     public void setOwnerID(String ownerID) {
         this.ownerID = ownerID;
     }
+
 
 }

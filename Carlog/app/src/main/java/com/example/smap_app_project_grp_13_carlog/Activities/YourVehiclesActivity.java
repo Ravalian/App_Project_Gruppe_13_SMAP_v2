@@ -38,6 +38,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_vehicles);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
@@ -84,6 +85,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
     private void Back() {
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
     }
 
     @Override

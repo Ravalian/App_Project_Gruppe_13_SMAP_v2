@@ -1,6 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,22 +16,29 @@ import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelect
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
 
 
-public class VehicleLogFragment extends Fragment {
+public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
 
     private TextView txtUserName, txtDate, txtDuration, txtDistance, txtLog;
-    private Button btnBack, btnNew;
+    private Button btnBack;
     private VehicleDetailsSelectorInterface InterFace;
-    private VehicleDataFirebase vehicle;
     private Log log;
+    private MapView map;
+    private GoogleMap gmap;
 
     public VehicleLogFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +51,10 @@ public class VehicleLogFragment extends Fragment {
         txtDuration = view.findViewById(R.id.TxtNameLabel);
         txtLog = view.findViewById(R.id.TxtLogDF);
         txtUserName = view.findViewById(R.id.TxtUsernameDF);
-        
+        map = view.findViewById(R.id.MapDF);
+        map.onCreate(savedInstanceState);
+        map.getMapAsync(this);
+
         btnBack = view.findViewById(R.id.BtnBackDF);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,62 +62,67 @@ public class VehicleLogFragment extends Fragment {
                 back();
             }
         });
-        /*btnNew = view.findViewById(R.id.BtnNewDF);
-        btnNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newLog();
-            }
-        });*/
 
         setupUI();
-
         return view;
-    }
-
-    private void newLog() {
     }
 
     private void back() {
         InterFace.back();
     }
 
-    public void UpdateUI(){
-        setupUI();
-    }
-
     private void setupUI() {
-        if (InterFace!=null){
+        if (InterFace != null) {
             log = InterFace.getCurrentSelection();
 
         }
-        if (log!=null){
+        if (log != null) {
             txtUserName.setText(log.getUserName());
             txtLog.setText(log.getLogDescription());
-            txtDuration.setText(""+log.getTime());
-            txtDistance.setText(""+log.getDistance());
+            txtDuration.setText("T: " + log.getTime()/120 + " M: " + log.getTime()/60 + " S: " + log.getTime()%60 );
+            txtDistance.setText("" + log.getDistance());
             Date d = new Date(log.getDate());
-            txtDate.setText(""+d.getDate()+"/"+d.getMonth());
+            txtDate.setText("" + d.getDate() + "/" + d.getMonth());
         }
     }
 
+    public void setLog(Log l) {
+        log = l;
+    }
+
     @Override
-    public void onAttach(Context activity){
+    public void onAttach(Context activity) {
         super.onAttach(activity);
 
-        try{
+        try {
             InterFace = (VehicleDetailsSelectorInterface) activity;
-        } catch (ClassCastException exception){
-            throw new ClassCastException(activity.toString()+" doesn't implement the right Interface (VehicleDetailSelecterInterface)");
+        } catch (ClassCastException exception) {
+            throw new ClassCastException(activity.toString() + " doesn't implement the right Interface (VehicleDetailSelecterInterface)");
         }
     }
 
+
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
+        map.onResume();
     }
 
-    public void setLog(Log l){
-        log = l;
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gmap = googleMap;
+        com.example.smap_app_project_grp_13_carlog.Models.LatLng s = log.getPositions().get(0);
+        LatLng start = new LatLng(s.getLatitude(), s.getLongitude());
+        s = log.getPositions().get(1);
+        LatLng stop = new LatLng(s.getLatitude(), s.getLongitude());
+
+
+        gmap.addMarker(new MarkerOptions()
+                .position(start)
+                .title("Starting point"));
+        gmap.addMarker(new MarkerOptions()
+                .position(stop)
+                .title("Destination"));
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(stop));
     }
 }

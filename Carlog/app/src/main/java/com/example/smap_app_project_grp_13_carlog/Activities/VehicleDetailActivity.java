@@ -20,6 +20,7 @@ import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
 import com.firebase.ui.auth.data.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_detail);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         listContainer = (LinearLayout)findViewById(R.id.ListContainer);
         logContainer = findViewById(R.id.LogContainer);
@@ -76,7 +78,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         listContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateFragmentState(UserMode.LIST_VIEW);
+                //updateFragmentState(UserMode.LIST_VIEW);
             }
         });
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
@@ -86,7 +88,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 vehicle = vehicleDataFirebase;
                 vehicleLogList.setVehicle(vehicleDataFirebase);
                 updateFragmentState(um);
-
             }
         });
         vm.getLogs(id).observe(this, new Observer<List<Log>>() {
@@ -111,6 +112,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             updateFragmentState(UserMode.LIST_VIEW);
         } else {
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         }
     }
 
@@ -125,7 +127,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             }
         }
         updateFragmentState(UserMode.LOG_VIEW);
-        //vehicleLog.UpdateUI();
     }
 
     private void updateFragmentState(UserMode tm) {
@@ -167,7 +168,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                         .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
                         .replace(R.id.ListContainer, vehicleLog, "log_fragment")
                         .commit();
-                //vehicleLog.UpdateUI();
                 break;
             case LIST_VIEW:
 

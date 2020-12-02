@@ -43,7 +43,8 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_your_logs2);
+        setContentView(R.layout.activity_your_logs);
+        overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
         listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
         logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
@@ -163,6 +164,7 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
             updateFragmentState(UserMode.LIST_VIEW);
         } else {
             this.finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         }
     }
 }
