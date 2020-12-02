@@ -30,8 +30,7 @@
         android:layout_toEndOf="@+id/imgVDFragDVehicle"
         android:layout_toRightOf="@+id/imgVDFragDVehicle"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_LogName" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/txtVDFragDDate"
@@ -42,8 +41,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/imgVDFragDVehicle"
-        android:layout_toRightOf="@+id/imgVDFragDVehicle"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_LogDate" />
+        android:layout_toRightOf="@+id/imgVDFragDVehicle"/>
 
     <TextView
         android:id="@+id/txtVDFragDDistance"
@@ -57,8 +55,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_toEndOf="@+id/txtYLFragDUser"
-        android:layout_toRightOf="@+id/txtYLFragDUser"
         tools:text="@string/txt_ActivityYourLogsFragDetails_LogDistance" />
 
     <TextView
@@ -82,15 +78,13 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        tools:text="@string/txt_ActivityYourLogsFragDetails_Log" />
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/txtVDFragDLogDescription"
         android:layout_width="wrap_content"
         android:layout_height="175dp"
         android:layout_above="@+id/mapVDFragDGoogle"
-        android:layout_below="@+id/txtYLFragDLog"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
@@ -116,7 +110,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/txt_ActivityYourLogsFragDetails_GoogleMaps" />
+        android:layout_marginBottom="16dp" />
 
 </RelativeLayout>
