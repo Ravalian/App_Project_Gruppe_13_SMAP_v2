@@ -47,6 +47,7 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
             }
         });
 
+
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
         vm.getYourVehicles(FirebaseAuth.getInstance().getCurrentUser().getUid()).observe(this, new Observer<List<VehicleDataFirebase>>() {

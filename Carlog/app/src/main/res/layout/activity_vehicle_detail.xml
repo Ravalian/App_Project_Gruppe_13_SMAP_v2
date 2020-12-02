@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
     tools:context=".Activities.VehicleDetailActivity">
 
@@ -12,7 +11,6 @@
         android:id="@+id/ListContainer"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#000000"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"
@@ -27,7 +25,6 @@
         android:id="@+id/LogContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
         android:clickable="false"
         android:fadingEdge="vertical"
         android:orientation="horizontal"
