@@ -46,6 +46,10 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         setContentView(R.layout.activity_your_logs);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
+        id = getIntent().getStringExtra(constants.ID);
+        um = UserMode.LIST_VIEW;
+        selectedLog = 0;
+
         listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
         logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
 
@@ -59,12 +63,10 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
             vehicleLog = new VehicleLogFragment();
         }
 
-        id = getIntent().getStringExtra(constants.ID);
-        um = UserMode.LIST_VIEW;
-        selectedLog = 0;
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.YourLogsContainer, vehicleLog, "Detail_fragment")
-                .replace(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
+                .add(R.id.YourLogsContainer, vehicleLog, constants.FRAG_LOG)
+                .replace(R.id.YourLogsContainer, yourLogListFragment, constants.FRAG_LIST)
                 .commit();
         vm = new ViewModelProvider(this).get(YourLogsVM.class);
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -107,21 +109,18 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         switch(targetMode) {
 
             case LOG_VIEW:
-
                 getSupportFragmentManager().beginTransaction()                                                      //Inspired by https://developer.android.com/guide/fragments/animate
                         .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
-                        .replace(R.id.YourLogsContainer, vehicleLog, "Detail_fragment")
+                        .replace(R.id.YourLogsContainer, vehicleLog, constants.FRAG_LOG)
                         .commit();
-                //vehicleLog.UpdateUI();
                 break;
-            case LIST_VIEW:
 
+            case LIST_VIEW:
                 getSupportFragmentManager().beginTransaction()                                                      //Inspierd by https://developer.android.com/guide/fragments/animate
                         .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
-                        .replace(R.id.YourLogsContainer, yourLogListFragment, "List_fragment")
+                        .replace(R.id.YourLogsContainer, yourLogListFragment, constants.FRAG_LIST)
                         .commit();
                 break;
-
         }
     }
 
@@ -155,7 +154,6 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
     @Override
     public void back() {
         onBackPressed();
-
     }
 
     @Override

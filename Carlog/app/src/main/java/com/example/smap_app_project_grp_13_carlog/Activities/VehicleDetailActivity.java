@@ -29,14 +29,17 @@ import java.util.List;
 
 public class VehicleDetailActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
+    //Enum to keep track of which fragment is in use
     public enum UserMode {LOG_VIEW, LIST_VIEW};
 
+    //Fragments
     private VehicleDetailFragment vehicleLogList;
     private VehicleLogFragment vehicleLog;
 
+    //Container to hold fragments
     private LinearLayout listContainer;
-    private LinearLayout logContainer;
 
+    //Local variables
     private List<Log> logList;
     private int selectedLog;
     private VehicleDataFirebase vehicle;
@@ -45,42 +48,34 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     private Constants constants;
     private UserMode um;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_detail);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
 
+        //Initialize local variables
+        id = getIntent().getStringExtra(constants.ID);
+        um = UserMode.LIST_VIEW;
+        selectedLog = 0;
+
+        //Initialize container
         listContainer = (LinearLayout)findViewById(R.id.ListContainer);
-        logContainer = findViewById(R.id.LogContainer);
-
         listContainer.setVisibility(View.VISIBLE);
-        logContainer.setVisibility(View.GONE);
 
+        //Initialize fragments
         if (vehicleLogList==null) {
             vehicleLogList = new VehicleDetailFragment();
         }
         if (vehicleLog==null) {
             vehicleLog = new VehicleLogFragment();
         }
-
-        id = getIntent().getStringExtra(constants.ID);
-        um = UserMode.LIST_VIEW;
-        selectedLog = 0;
-
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.ListContainer, vehicleLog, "log_fragment")
-                .replace(R.id.ListContainer, vehicleLogList, "list_fragment")
+                .add(R.id.ListContainer, vehicleLog, constants.FRAG_LOG)
+                .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                 .commit();
 
-        listContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //updateFragmentState(UserMode.LIST_VIEW);
-            }
-        });
+        //Setup for LiveData of the current vehicle and its logs
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
@@ -108,6 +103,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
     @Override
     public void onBackPressed(){
+
+        //Switch to List fragment if in Log fragment else go back with a custom animation
         if (um==UserMode.LOG_VIEW) {
             updateFragmentState(UserMode.LIST_VIEW);
         } else {
@@ -119,6 +116,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
     @Override
     public void onVehicleDetailsSelected(int position) {
+
+        //Go to Log fragment if a log has been chosen and the logs have been loaded
         if (logList!=null) {
             Log log = logList.get(position);
             if (log!=null) {
@@ -126,10 +125,14 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 vehicleLog.setLog(log);
             }
         }
-        updateFragmentState(UserMode.LOG_VIEW);
+        if (um != UserMode.LOG_VIEW) {
+            updateFragmentState(UserMode.LOG_VIEW);
+        }
     }
 
     private void updateFragmentState(UserMode tm) {
+
+        //Switch usermode
        if (tm!=UserMode.LIST_VIEW&&tm!=UserMode.LOG_VIEW){
             //ignore
             return;
@@ -140,6 +143,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     }
 
     private void switchFragment(UserMode tm) {
+
+        //Update List fragment if going to List fragment
         if (tm==UserMode.LIST_VIEW){
             vehicleLogList.update();
         }
@@ -161,22 +166,23 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     }
 
     private void changeContainerFragment(UserMode targetMode){
-        switch(targetMode) {
-            case LOG_VIEW:
 
+        //Swap fragments
+        switch(targetMode) {
+
+            case LOG_VIEW:
                 getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
-                        .replace(R.id.ListContainer, vehicleLog, "log_fragment")
+                        .replace(R.id.ListContainer, vehicleLog, constants.FRAG_LOG)
                         .commit();
                 break;
-            case LIST_VIEW:
 
+            case LIST_VIEW:
                 getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
-                        .replace(R.id.ListContainer, vehicleLogList, "list_fragment")
+                        .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                         .commit();
                 break;
         }
     }
-
 }

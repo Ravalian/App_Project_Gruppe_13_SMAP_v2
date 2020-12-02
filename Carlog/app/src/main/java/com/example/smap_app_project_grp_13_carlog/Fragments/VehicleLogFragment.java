@@ -1,7 +1,6 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,7 +19,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
@@ -46,6 +43,7 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vehicle_log, container, false);
 
+        //UI setup
         txtDate = view.findViewById(R.id.TxtDateDF);
         txtDistance = view.findViewById(R.id.TxtDistanceDF);
         txtDuration = view.findViewById(R.id.TxtNameLabel);
@@ -55,6 +53,7 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
         map.onCreate(savedInstanceState);
         map.getMapAsync(this);
 
+        //Button setup
         btnBack = view.findViewById(R.id.BtnBackDF);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +62,7 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        setupUI();
+        updateUI();
         return view;
     }
 
@@ -71,10 +70,11 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
         InterFace.back();
     }
 
-    private void setupUI() {
+    private void updateUI() {
+
+        //Updates UI if a log is selected
         if (InterFace != null) {
             log = InterFace.getCurrentSelection();
-
         }
         if (log != null) {
             txtUserName.setText(log.getUserName());
@@ -101,7 +101,6 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -111,18 +110,21 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
+
+        //Getting starting position
         com.example.smap_app_project_grp_13_carlog.Models.LatLng s = log.getPositions().get(0);
         LatLng start = new LatLng(s.getLatitude(), s.getLongitude());
+        //Getting ending position
         s = log.getPositions().get(1);
         LatLng stop = new LatLng(s.getLatitude(), s.getLongitude());
 
-
+        //Adding markers to the map and zooming to destination marker
         gmap.addMarker(new MarkerOptions()
                 .position(start)
                 .title("Starting point"));
         gmap.addMarker(new MarkerOptions()
                 .position(stop)
                 .title("Destination"));
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(stop));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(stop, 7));
     }
 }

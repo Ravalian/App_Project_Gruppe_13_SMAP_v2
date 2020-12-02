@@ -135,8 +135,6 @@ public class Repository {
         });
     }
 
-
-
     private void getVehicleFromFirebase(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("vehicles");
@@ -412,4 +410,6 @@ public class Repository {
         L.add(snapshot.getValue(VehicleDataFirebase.class));
         return L;
     }
+
+
 }
