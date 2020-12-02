@@ -10,6 +10,7 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,12 @@ import com.example.smap_app_project_grp_13_carlog.BuildConfig;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisterVehicleActivityVM;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -62,12 +69,21 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     private int imgMaxSize = 400; //Change in MaxSize here to fit the imageview on the page
     private String mCurrentPhotoPath;
     private Uri photoURI;
+    private Uri savedUri;
+
+    //Firebase Storage
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_vehicle);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
+
+        //Setup Firebase Storage
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         //Setup viewmodel
         registerVehicleActivityVM = new ViewModelProvider(this).get(RegisterVehicleActivityVM.class);
@@ -172,7 +188,8 @@ public class RegisterVehicleActivity extends AppCompatActivity {
 
         //Only send the data to viewmodel in case the error is not set on the input
         if(sendInputToVM){
-            registerVehicleActivityVM.addVehicletoFirebase(vehicleInput);
+            registerVehicleActivityVM.addVehicletoFirebase(vehicleInput); //Send data to Api request for vehicle
+            uploadImage(vehicleInput); //Upload image of vehicle on Firebase Storage
         }
     }
 
@@ -185,7 +202,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     //////////// Image Handling //////////////////////////////
     // This next part contains information from different
     // sources all mixed together.
-    // Links to sources has been provided, but the code has
+    // Links to sources has been provided
     //
     /////////////////////////////////////////////////////////
 
@@ -256,14 +273,8 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         if( resultCode == RESULT_OK){
             //Return from option 1 = Take Photo!
             if(requestCode == Constants.REGISTERVHACTSELECTIMGOPTION1){
-                File file = new File(Environment.getExternalStorageDirectory().toString());
-                for (File temp : file.listFiles()){
-                    if(temp.getName().equals("temp.jpg")){
-                        file = temp;
-                        break;
-                    }
-                }
                 Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                SaveImageUri(imageUri);
                 File newFile = new File(imageUri.getPath());
                 try {
                     Log.d("TESTING", "Contents of mCurrentPath: " + mCurrentPhotoPath);
@@ -274,7 +285,6 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     registerVHImageView.setImageBitmap(bitmap);
                     BitmapToString(bitmap);
                     String path = android.os.Environment.getExternalStorageDirectory() + File.separator + "Phoenix" + File.separator + "default";
-                    file.delete();
                     OutputStream outFile = null;
                     File newfile = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
                     try{
@@ -296,6 +306,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
             //Return from option 2 = find image in gallery
             else if(requestCode == Constants.REGISTERVHACTSELECTIMGOPTION2) {
                 Uri selectedImage = data.getData();
+                SaveImageUri(selectedImage);
                 String[] filepath = {MediaStore.Images.Media.DATA};
                 Cursor c = getContentResolver().query(selectedImage, filepath, null, null, null);
                 c.moveToFirst();
@@ -309,6 +320,12 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                 BitmapToString(thumbnail);
             }
         }
+    }
+
+    //Saving Image URI to use for image upload to Firebase
+    private void SaveImageUri(Uri ImageURI) {
+        //Saving the Uri in an variable for later use:
+        savedUri = ImageURI;
     }
 
     //Convert bitmap to a string
@@ -335,5 +352,55 @@ public class RegisterVehicleActivity extends AppCompatActivity {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    //Inspiration: https://www.geeksforgeeks.org/android-how-to-upload-an-image-on-firebase-storage/
+    //Upload image to firebase storage
+    private void uploadImage(String vehicleRegistrationNr) {
+        //Only run this if an Uri is saved on savedUri variable
+        if(savedUri != null){
+
+            //Progress bar for when uploading
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            //Defining the child of the storageReference
+            StorageReference ref = storageReference.child("images/" + vehicleRegistrationNr);
+            
+            //adding Listeners on upload or failure of image
+            ref.putFile(savedUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //Image Uploaded successfully 
+                            progressDialog.dismiss(); //Dismissing the dialog
+                            Toast.makeText(RegisterVehicleActivity.this, "Image Uploaded!", Toast.LENGTH_SHORT).show();
+
+                            //On success reroute to user interface
+                            Intent intent = new Intent(RegisterVehicleActivity.this, UserInterfaceActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //Image upload failed
+                            progressDialog.dismiss(); //Dismissing the dialog
+                            Toast.makeText(RegisterVehicleActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            //Progress Listener for loading
+                            //percentage on the dialog box
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded " + (int)progress + "%");
+                        }
+                    });
+        }
+
     }
 }
