@@ -165,7 +165,7 @@ public class VehicleDetailFragment extends Fragment {
             }
 
              */
-
+            //Inspiration: https://stackoverflow.com/questions/46652380/getting-image-from-firebase-storage-using-glide
             storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override

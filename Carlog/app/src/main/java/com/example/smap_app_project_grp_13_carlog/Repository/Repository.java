@@ -17,12 +17,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
+import com.example.smap_app_project_grp_13_carlog.Models.UserRTDB;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataAPI;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 
 import com.example.smap_app_project_grp_13_carlog.R;
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +38,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,11 +50,13 @@ public class Repository {
     private MutableLiveData<List<VehicleDataFirebase>> vehicles;
     private MutableLiveData<List<Log>> logs;
     private MutableLiveData<VehicleDataFirebase> vehicle;
+    private MutableLiveData<List<UserRTDB>> users;
 
 
     //Firebase
     private DatabaseReference mDatabase;
     private DatabaseReference LogDatabase;
+    private DatabaseReference userDatabase;
 
     //Networking
     private String BaseAPIURL = "https://v1.motorapi.dk/vehicles/";
@@ -66,9 +72,11 @@ public class Repository {
             application = app;
             mDatabase = FirebaseDatabase.getInstance().getReference("/vehicles");
             LogDatabase = FirebaseDatabase.getInstance().getReference("/logs");
+            userDatabase = FirebaseDatabase.getInstance().getReference("/users");
             vehicles = new MutableLiveData<>();
             logs = new MutableLiveData<>();
             vehicle = new MutableLiveData<>();
+            users = new MutableLiveData<>();
 
         } else{
             return;
@@ -238,6 +246,50 @@ public class Repository {
 
     //////////////////////////////////////////////////////////
 
+    ////////////////////////// Public User Database /////////////////////////////////
+    //All user are stored in the DB so they can be accessed by other user to register
+
+    //Get Users from Firbase
+    public void GetUsersFromRTDB(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //This is called when initialised and when data is changed.
+                users.setValue(toUsers(snapshot));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "failed to read value"); //Jeg er ikke sikker på hvad dette er, det er i demo 2.
+            }
+        });
+    }
+
+
+    //Method for adding users to database
+    public void AddUserToFirebaseRTDB(FirebaseUser user){
+
+        //Check if the user is already registered
+        if(users != null){
+            for(UserRTDB eachUser : users.getValue()){
+                if(eachUser.userId.equals(user.getUid())){
+                    //User is already registered in the DB
+                    return;
+                }
+            }
+        }
+
+        //Create a new user containing the information
+        UserRTDB DbUser = new UserRTDB(user.getUid(), user.getDisplayName());
+
+        //Add repository function which creates this user in DB
+        userDatabase.child(DbUser.getUserId()).setValue(DbUser);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////// API REQUESTS /////////////////////
     // website used for api data: https://www.motorapi.dk/ //
@@ -408,6 +460,18 @@ public class Repository {
             }
         }
         L.add(snapshot.getValue(VehicleDataFirebase.class));
+        return L;
+    }
+
+    private List<UserRTDB> toUsers(DataSnapshot snapshot) {
+        ArrayList L = new ArrayList();
+
+        if (users.getValue()!=null){
+            for(UserRTDB i : users.getValue()) {
+                L.add(i);
+            }
+        }
+        L.add(snapshot.getValue(UserRTDB.class));
         return L;
     }
 
