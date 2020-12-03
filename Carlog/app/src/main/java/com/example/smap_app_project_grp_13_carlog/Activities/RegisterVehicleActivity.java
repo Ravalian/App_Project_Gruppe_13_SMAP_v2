@@ -285,6 +285,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     bitmap = getResizedBitmap(bitmap, imgMaxSize);
                     registerVHImageView.setImageBitmap(bitmap);
                     BitmapToString(bitmap);
+                    /*
                     String path = android.os.Environment.getExternalStorageDirectory() + File.separator + "Phoenix" + File.separator + "default";
                     OutputStream outFile = null;
                     File newfile = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
@@ -300,6 +301,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     } catch (Exception e){
                         e.printStackTrace();
                     }
+                    */
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -330,6 +332,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     }
 
     //Convert bitmap to a string
+    //////// Not in use atm, but keeping it for now ////////////
     private String BitmapToString(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 60, baos);
