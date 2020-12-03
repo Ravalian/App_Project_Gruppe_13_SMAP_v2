@@ -39,7 +39,7 @@ public class VehicleDetailFragment extends Fragment {
 
     private ListView logList;
     private TextView vName, owner, model, fuel, hp, numseats;
-    private Button btnBack, btnNew;
+    private Button btnBack, btnNew, btnReg;
     private VehicleDetailsAdapter adapter;
     private List<Log> logs;
     private VehicleDataFirebase vehicle;
@@ -71,6 +71,7 @@ public class VehicleDetailFragment extends Fragment {
         numseats = view.findViewById(R.id.TxtNumOfSeats);
         vehicleImg = view.findViewById(R.id.ImgCar);
 
+
         //Setup firebase storage
         storage = FirebaseStorage.getInstance();
 
@@ -91,10 +92,22 @@ public class VehicleDetailFragment extends Fragment {
             }
         });
 
+        btnReg = view.findViewById(R.id.BtnRegVDF);
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerUser();
+            }
+        });
+        btnReg.setText(R.string.btn_regnewuser);
+
         //Update UI
         updateList();
 
         return view;
+    }
+
+    private void registerUser() {
     }
 
     private void newLog() {
@@ -181,7 +194,12 @@ public class VehicleDetailFragment extends Fragment {
         logs = (List<Log>) logList;
     }
 
-    public void setVehicle(VehicleDataFirebase v){
+    public void setVehicle(VehicleDataFirebase v, boolean owner){
         vehicle=v;
+        if (owner){
+            btnReg.setVisibility(View.VISIBLE);
+        } else {
+            btnReg.setVisibility(View.GONE);
+        }
     }
 }

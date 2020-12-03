@@ -6,8 +6,11 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Build;
 import android.os.IBinder;
+import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -89,10 +92,11 @@ public class ForegroundService extends Service {
     private void displayNotification(Log log) {
 
         Notification updatenotofication = new NotificationCompat.Builder(getApplicationContext(), NOTIFICATION_CHANNEL)
-                .setContentTitle(log.userName+" Posted a log on " + new Date(log.getDate()))
+                .setContentTitle(log.userName + " " + getString(R.string.not_Have) + " " + log.getvehicle())
                 .setContentText(log.getLogDescription())
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
+                .setColor( Color.rgb(255, 0, 0))
                 .build();
         notificationManager.notify(NOTIFICATION_NOTIFICATION_ID, updatenotofication);
         //android.util.Log.d("Tester", log);

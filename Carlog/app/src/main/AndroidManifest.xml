@@ -8,24 +8,28 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-    <permission android:name="com.example.permission.MAPS_RECIEVE"
-        android:protectionLevel="signature"/>
-    <uses-permission android:name="com.example.permossion.MAPS_RECIEVE"/>
+    <permission
+        android:name="com.example.permission.MAPS_RECIEVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.permossion.MAPS_RECIEVE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.SMAP_App_Project_Grp_13_Carlog">
+        <activity android:name=".Activities.AddUserActivity"></activity>
+
         <service
             android:name=".Services.ForegroundService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity android:name=".Activities.YourLogsActivity" />
         <activity android:name=".Activities.VehicleDetailActivity" />
@@ -41,12 +45,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MapsApiKey}"/>
+            android:value="${MapsApiKey}" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -54,7 +60,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

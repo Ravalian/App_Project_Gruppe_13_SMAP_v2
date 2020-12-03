@@ -114,4 +114,14 @@
         android:text="@string/btn_Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/BtnRegVDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/BtnNewVDF"
+        app:layout_constraintStart_toEndOf="@+id/BtnBackVDF"
+        app:layout_constraintTop_toTopOf="@+id/BtnBackVDF"
+        tools:text="@string/btn_regnewuser" />
 </androidx.constraintlayout.widget.ConstraintLayout>

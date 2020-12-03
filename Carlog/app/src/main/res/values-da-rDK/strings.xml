@@ -67,4 +67,6 @@
     <string name="RegisterVehicleSelectImageADOption2">Vælg fra Galleri</string>
     <string name="RegisterVehicleSelectImageADOption3">Annullerer</string>
     <string name="RegisterVehicleSelectImageTitle">Tilføj billede!</string>
+    <string name="not_Have">har tilføjet en note til bilen:</string>
+    <string name="btn_regnewuser">Registrer ny bruger</string>
 </resources>

@@ -17,6 +17,7 @@ import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
     private String id;
     private Constants constants;
     private UserMode um;
+    private boolean owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +87,14 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
+                if (vehicleDataFirebase.getOwnerID().contains(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    owner = true;
+                }
+                else{
+                    owner = false;
+                }
                 vehicle = vehicleDataFirebase;
-                vehicleLogList.setVehicle(vehicleDataFirebase);
+                vehicleLogList.setVehicle(vehicleDataFirebase, owner);
                 updateFragmentState(um);
             }
         });
