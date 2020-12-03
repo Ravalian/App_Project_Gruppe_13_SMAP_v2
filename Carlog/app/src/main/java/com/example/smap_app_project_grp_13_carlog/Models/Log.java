@@ -93,6 +93,7 @@ public class Log {
     public String getVehicleOwner(){
         return this.vehicleOwner;
     }
+
     public void setVehicleOwner(String id){
         this.vehicleOwner = id;
     }

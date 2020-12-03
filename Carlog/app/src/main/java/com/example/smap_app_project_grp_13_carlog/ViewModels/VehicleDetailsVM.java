@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.smap_app_project_grp_13_carlog.Activities.VehicleDetailActivity;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
@@ -16,10 +17,13 @@ public class VehicleDetailsVM extends AndroidViewModel {
     LiveData<List<Log>> logs;
     LiveData<VehicleDataFirebase> vehicle;
     Repository repository;
+    private VehicleDetailActivity.UserMode um;
+    private int selectedLog;
 
     public VehicleDetailsVM(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
+        selectedLog = 0;
     }
 
     public LiveData<List<Log>> getLogs(String id) {
@@ -38,5 +42,13 @@ public class VehicleDetailsVM extends AndroidViewModel {
             vehicle=repository.getvehicle(id);
         }
         return vehicle;
+    }
+
+    public int getSelectedLog() {
+        return selectedLog;
+    }
+
+    public void setSelectedLog(int position) {
+        selectedLog = position;
     }
 }

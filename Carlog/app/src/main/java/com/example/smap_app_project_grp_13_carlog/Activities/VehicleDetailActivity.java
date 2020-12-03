@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Fragments.VehicleDetailFragment;
@@ -50,8 +51,9 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
         //Initialize local variables
         id = getIntent().getStringExtra(constants.ID);
-        um = UserMode.LIST_VIEW;
-        selectedLog = 0;
+
+
+
 
         //Initialize container
         listContainer = (LinearLayout)findViewById(R.id.ListContainer);
@@ -66,11 +68,21 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.ListContainer, vehicleLog, constants.FRAG_LOG)
-                .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
+                .add(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                 .commit();
 
         //Setup for LiveData of the current vehicle and its logs
         vm = new ViewModelProvider(this).get(VehicleDetailsVM.class);
+        if (vm.getSelectedLog() == 0){
+            selectedLog = 0;
+            um = UserMode.LIST_VIEW;
+        }
+        else
+        {
+            selectedLog = vm.getSelectedLog();
+            logList = vm.getLogs(id).getValue();
+            vehicleLog.setLog(logList.get(selectedLog));
+        }
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
@@ -85,6 +97,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 logList = logs;
                 vehicleLogList.setLogs(logList);
                 vehicleLog.setLog(logList.get(selectedLog));
+
+
 
                 updateFragmentState(um);
             }
@@ -115,6 +129,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             Log log = logList.get(position);
             if (log!=null) {
                 selectedLog = position;
+                vm.setSelectedLog(position);
                 vehicleLog.setLog(log);
             }
         }
