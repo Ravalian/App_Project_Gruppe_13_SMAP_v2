@@ -46,4 +46,25 @@
     <string name="txt_Log">Note</string>
     <string name="btn_Logout">Log ud</string>
     <string name="txt_Name">Navn</string>
+    <string name="RegisterVHAddBtn">Tilføj køretøj</string>
+    <string name="RegisterVehicleTitletxt">Registrer dit køretøj</string>
+    <string name="RegisterVehicleInputFieldHeader">Indtast køretøjets registreringsskilt:</string>
+    <string name="RegisterVehicleInputHint">Registreringsskilt</string>
+    <string name="RegisterVehicleImageHeader">Billede af køretøjet</string>
+    <string name="RegisterVehicleUploadBtn">Upload billede</string>
+    <string name="UI_RegisterVehicleBtn">Registrer køretøj</string>
+    <string name="CancelBtn">Annullerer</string>
+    <string name="VehicleAlreadyRegisteredString">Køretøjet er allerede registreret</string>
+    <string name="EnterReqNrString">Indtast venligst et køretøjs registreringsnr.</string>
+    <string name="UI_RegisteredVehiclesBtn">Registrerede køretøjer</string>
+    <string name="txt_ActivityRegisteredVehicles_OwnerName">Ejerens navn</string>
+    <string name="txtWriteLog">Skriv log</string>
+    <string name="TxtDistance">Afstand</string>
+    <string name="TxtDuration">Varighed</string>
+    <string name="RegisterVechicleNoInput">Indtast et køretøjs registreringsnummer!</string>
+    <string name="RegisterVehicleTooLongInput">Registreringsnummeret skal bestå af 7 tegn.</string>
+    <string name="RegisterVehicleSelectImageADOption1">Tag et billede</string>
+    <string name="RegisterVehicleSelectImageADOption2">Vælg fra Galleri</string>
+    <string name="RegisterVehicleSelectImageADOption3">Annullerer</string>
+    <string name="RegisterVehicleSelectImageTitle">Tilføj billede!</string>
 </resources>

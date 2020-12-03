@@ -24,6 +24,5 @@ public class RegisteredVehiclesActivityVM extends AndroidViewModel {
             vehicles = repository.getVehicles();
         }
         return vehicles;
-
     }
 }

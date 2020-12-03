@@ -8,21 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.RegisteredVehiclesAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
-
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegisteredVehiclesActivity extends AppCompatActivity implements RegisteredVehiclesAdapter.IRegisteredVehiclesItemClickedListener {
@@ -59,7 +53,6 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
         });
     }
 
-
     private void setupUI(List<VehicleDataFirebase> vehicleDataFirebases) {
 
         //set up recyclerview with adapter and layout manager
@@ -93,5 +86,4 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
         intent.putExtra(constants.ID, vehicles.get(position).getRegistrationNumber());
         startActivity(intent);
     }
-
 }

@@ -20,6 +20,7 @@ import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.YourVehiclesVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -46,7 +47,6 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
                 Back();
             }
         });
-
 
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
@@ -81,17 +81,12 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
 
         txtYourVehicles = findViewById(R.id.txtYourVehicles);
-
-
     }
 
     private void Back() {
         finish();
 
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-
-
-
     }
 
     @Override

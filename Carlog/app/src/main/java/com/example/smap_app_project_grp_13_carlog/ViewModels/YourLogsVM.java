@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
-import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class YourLogsVM extends AndroidViewModel {
     LiveData<List<Log>> logs;
     Repository repository;
-    //VehicleDataFirebase vehicle;
 
     public YourLogsVM(@NonNull Application application) {
         super(application);
@@ -28,5 +26,4 @@ public class YourLogsVM extends AndroidViewModel {
         }
         return logs;
     }
-
 }

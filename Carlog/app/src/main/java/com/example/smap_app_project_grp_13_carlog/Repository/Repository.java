@@ -49,7 +49,6 @@ public class Repository {
     private MutableLiveData<Log> newLog;
     private MutableLiveData<VehicleDataAPI> newestVehicle;
 
-
     //Firebase
     private DatabaseReference mDatabase;
     private DatabaseReference LogDatabase;
@@ -60,8 +59,6 @@ public class Repository {
     private VehicleDataAPI vehicleDataAPI;
     private String ACCESS_TOKEN = "pl2ycyljhhb2zxveesxl5xajupkm4v3n";
     private Boolean vehicleAlreadyRegistered = false;
-
-
 
     public Repository (Application app) {
         if (application==null) {
@@ -81,8 +78,7 @@ public class Repository {
 
     /////////////////// Firebase Handling /////////////////////
 
-
-        /////////////////////Vehicles/////////////////////
+    ///////////////////      Vehicles     /////////////////////
 
     private void setupFirebaseListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -104,11 +100,6 @@ public class Repository {
             }
         });
     }
-
-
-
-
-
 
     private void fireDatabaseYourVehicles(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -173,9 +164,7 @@ public class Repository {
         });
     }
 
-
         ///////////////////////Logs///////////////////////////
-
 
     private void setupFireDatabaseYourLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -278,7 +267,6 @@ public class Repository {
     }
 
     //////////////////////////////////////////////////////////
-
 
     ////////////////////// API REQUESTS /////////////////////
     // website used for api data: https://www.motorapi.dk/ //
@@ -420,6 +408,7 @@ public class Repository {
 
 
     ////////////////////////////////////////////////////////
+
     //////////Private conversion functions//////////////////
 
     private List<VehicleDataFirebase> toVehicles(DataSnapshot snapshot) {
@@ -457,7 +446,4 @@ public class Repository {
         L.add(snapshot.getValue(VehicleDataFirebase.class));
         return L;
     }
-
-
-
 }

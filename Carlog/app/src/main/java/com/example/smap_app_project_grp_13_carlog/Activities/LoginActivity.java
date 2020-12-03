@@ -17,7 +17,6 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-
     FirebaseAuth mAuth;
 
     @Override

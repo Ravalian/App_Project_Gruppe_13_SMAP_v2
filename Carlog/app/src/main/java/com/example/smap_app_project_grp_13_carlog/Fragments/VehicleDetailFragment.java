@@ -1,13 +1,12 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,11 +51,9 @@ public class VehicleDetailFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-
     public VehicleDetailFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,8 +113,6 @@ public class VehicleDetailFragment extends Fragment {
         updateList();
     }
 
-
-
     @Override
     public void onAttach(Context activity){
         super.onAttach(activity);
@@ -156,14 +151,6 @@ public class VehicleDetailFragment extends Fragment {
             hp.setText(vehicle.getEnginePower());
             numseats.setText(vehicle.getSeats());
 
-            /*
-            storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
-            if(storageReference != null){
-                GlideApp.with(this).load(storageReference).into(vehicleImg);
-            }
-
-             */
-
             storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
@@ -194,5 +181,4 @@ public class VehicleDetailFragment extends Fragment {
     public void setVehicle(VehicleDataFirebase v){
         vehicle=v;
     }
-
 }
