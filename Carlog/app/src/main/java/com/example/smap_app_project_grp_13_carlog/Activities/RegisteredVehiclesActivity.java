@@ -21,6 +21,8 @@ import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +37,15 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
     private Constants constants;
     private RegisteredVehiclesActivityVM vm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered_vehicles);
         overridePendingTransition(R.anim.slide_in, R.anim.fade_out);                //Inspired by https://www.geeksforgeeks.org/how-to-add-slide-animation-between-activities-in-android/
+
+
+
 
         //Setup for LiveData of the registered vehicles
         vm = new ViewModelProvider(this).get(RegisteredVehiclesActivityVM.class);
