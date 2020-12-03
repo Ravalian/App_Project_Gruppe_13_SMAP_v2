@@ -304,7 +304,7 @@ public class Repository {
     public void AddUserToFirebaseRTDB(FirebaseUser user){
 
         //Check if the user is already registered
-        if(users != null){
+        if(users.getValue() != null){
             for(UserRTDB eachUser : users.getValue()){
                 if(eachUser.userId.equals(user.getUid())){
                     //User is already registered in the DB
