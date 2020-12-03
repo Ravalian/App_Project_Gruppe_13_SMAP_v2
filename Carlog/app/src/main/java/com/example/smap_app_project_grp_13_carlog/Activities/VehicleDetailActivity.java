@@ -68,7 +68,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.ListContainer, vehicleLog, constants.FRAG_LOG)
-                .add(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
+                .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                 .commit();
 
         //Setup for LiveData of the current vehicle and its logs
@@ -82,6 +82,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             selectedLog = vm.getSelectedLog();
             logList = vm.getLogs(id).getValue();
             vehicleLog.setLog(logList.get(selectedLog));
+            um = vm.getUM();
         }
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
@@ -146,6 +147,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             return;
         }
         um = tm;
+       vm.setUM(um);
         switchFragment(tm);
 
     }

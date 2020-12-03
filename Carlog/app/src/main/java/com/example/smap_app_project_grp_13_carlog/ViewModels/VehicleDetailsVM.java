@@ -51,4 +51,12 @@ public class VehicleDetailsVM extends AndroidViewModel {
     public void setSelectedLog(int position) {
         selectedLog = position;
     }
+
+    public VehicleDetailActivity.UserMode getUM() {
+        return um;
+    }
+
+    public void setUM(VehicleDetailActivity.UserMode um) {
+        this.um = um;
+    }
 }
