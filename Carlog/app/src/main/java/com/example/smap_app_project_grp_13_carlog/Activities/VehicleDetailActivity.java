@@ -52,9 +52,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         //Initialize local variables
         id = getIntent().getStringExtra(constants.ID);
 
-
-
-
         //Initialize container
         listContainer = (LinearLayout)findViewById(R.id.ListContainer);
         listContainer.setVisibility(View.VISIBLE);
@@ -84,6 +81,7 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
             vehicleLog.setLog(logList.get(selectedLog));
             um = vm.getUM();
         }
+
         vm.getVehicle(id).observe(this, new Observer<VehicleDataFirebase>() {
             @Override
             public void onChanged(VehicleDataFirebase vehicleDataFirebase) {
@@ -98,8 +96,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 logList = logs;
                 vehicleLogList.setLogs(logList);
                 vehicleLog.setLog(logList.get(selectedLog));
-
-
 
                 updateFragmentState(um);
             }

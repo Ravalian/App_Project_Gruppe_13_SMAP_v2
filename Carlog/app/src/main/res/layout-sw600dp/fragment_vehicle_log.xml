@@ -7,6 +7,16 @@
     tools:context=".Fragments.VehicleLogFragment">
 
     <TextView
+        android:id="@+id/TxtUsernameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/TxtUsernameDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,18 +24,40 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:text="@string/txt_Name"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtUsernameLabel" />
+
+    <TextView
+        android:id="@+id/TxtDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_Date"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TxtDateDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/txt_Date"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/TxtUsernameDF" />
+
+    <TextView
+        android:id="@+id/TxtDistanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/TxtDistance"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
+        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameDF" />
 
     <TextView
         android:id="@+id/TxtDistanceDF"
@@ -33,14 +65,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/TxtDistance"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtDistanceLabel" />
+
+    <TextView
+        android:id="@+id/TxtDurationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxtDuration"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
+        app:layout_constraintTop_toTopOf="@+id/TxtDistanceLabel" />
 
     <TextView
         android:id="@+id/TxtDurationDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TxtDuration"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
         app:layout_constraintTop_toTopOf="@+id/TxtDistanceDF" />
 
@@ -48,8 +91,9 @@
         android:id="@+id/TxtLogLabelDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/txt_Log"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtDistanceDF" />
 
@@ -59,63 +103,36 @@
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:text="@string/txt_Log"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
         app:layout_constraintStart_toStartOf="@+id/TxtLogLabelDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtLogLabelDF" />
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/MapDF"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/BtnBackDF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TxtLogDF" />
-
-    <TextView
-        android:id="@+id/TxtUsernameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/txt_Name"
-        app:layout_constraintStart_toStartOf="@+id/TxtUsernameDF"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TxtDistanceLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/TxtDistance"
-        app:layout_constraintStart_toStartOf="@+id/TxtDistanceDF"
-        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameDF" />
-
-    <TextView
-        android:id="@+id/TxtDurationLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TxtDuration"
-        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
-        app:layout_constraintTop_toTopOf="@+id/TxtDistanceLabel" />
-
-    <TextView
-        android:id="@+id/TxtDateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/txt_Date"
-        app:layout_constraintEnd_toEndOf="@+id/TxtDateDF"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/BtnBackDF"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btn_Back"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/MapDF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
