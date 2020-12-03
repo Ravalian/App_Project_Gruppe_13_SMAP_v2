@@ -158,10 +158,28 @@ public class VehicleDetailFragment extends Fragment {
             kml.setText("9999999km/l");
             numseats.setText(vehicle.getSeats());
 
+            /*
             storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
             if(storageReference != null){
                 GlideApp.with(this).load(storageReference).into(vehicleImg);
             }
+
+             */
+
+            storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
+            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    String imageUrl = uri.toString();
+                    Glide.with(VehicleDetailFragment.this).load(imageUrl).into(vehicleImg);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //Handle errors
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
