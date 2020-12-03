@@ -1,6 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.ViewModels;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 
 import androidx.lifecycle.AndroidViewModel;
 
@@ -13,6 +14,7 @@ public class RegisterVehicleActivityVM extends AndroidViewModel {
 
     //Internal data
     private Application wmapp;
+    private Bitmap image;
 
     public RegisterVehicleActivityVM(Application app){
         super(app);
@@ -23,5 +25,15 @@ public class RegisterVehicleActivityVM extends AndroidViewModel {
     //Method to add vehicle to firebase
     public void addVehicletoFirebase(String VehicleVIN){
         repository.GetVehiclefromAPI(VehicleVIN);
+    }
+
+    //Image setter
+    public void setImage(Bitmap vehicleimage) {
+        image = vehicleimage;
+    }
+
+    //Image getter
+    public Bitmap getImage(){
+        return image;
     }
 }
