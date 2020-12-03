@@ -30,7 +30,6 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
     private VehicleLogFragment vehicleLog;
 
     private LinearLayout listContainer;
-    private LinearLayout logContainer;
 
     private List<Log> logList;
     private int selectedLog;
@@ -51,10 +50,8 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         selectedLog = 0;
 
         listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
-        logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
 
         listContainer.setVisibility(View.VISIBLE);
-        logContainer.setVisibility(View.GONE);
 
         if (yourLogListFragment==null) {
             yourLogListFragment = new YourLogListFragment();

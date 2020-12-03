@@ -148,7 +148,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
         //Update List fragment if going to List fragment
         if (tm==UserMode.LIST_VIEW){
-            vehicleLogList.update();
         }
         changeContainerFragment(tm);
     }
@@ -184,6 +183,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                         .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
                         .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                         .commit();
+                vehicleLogList.update();
+
                 break;
         }
     }

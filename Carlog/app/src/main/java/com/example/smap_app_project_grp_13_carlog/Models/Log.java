@@ -23,6 +23,7 @@ public class Log {
     public int time, distance;
     public String userName;
     public ArrayList<LatLng> positions;
+    public String vehicleOwner;
 
 
 
@@ -104,6 +105,13 @@ public class Log {
 
     public void setPositions(ArrayList<LatLng> positions){
         this.positions = positions;
+    }
+
+    public String getVehicleOwner(){
+        return this.vehicleOwner;
+    }
+    public void setVehicleOwner(String id){
+        this.vehicleOwner = id;
     }
 
 

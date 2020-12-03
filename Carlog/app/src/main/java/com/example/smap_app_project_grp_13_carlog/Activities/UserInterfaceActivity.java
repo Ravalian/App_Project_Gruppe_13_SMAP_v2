@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.smap_app_project_grp_13_carlog.R;
+import com.example.smap_app_project_grp_13_carlog.Services.ForegroundService;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +29,7 @@ public class UserInterfaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_interface);
+
 
         //Setup Login button
         btnlogout = findViewById(R.id.btnlogout);
@@ -71,6 +73,14 @@ public class UserInterfaceActivity extends AppCompatActivity {
                 GoToYourVehicles();
             }
         });
+        startService();
+
+    }
+
+    private void startService(){
+        android.util.Log.d("Tester", "Hejsa");
+        Intent serviceIntent = new Intent(this, ForegroundService.class);
+        startService(serviceIntent);
     }
 
     private void GoToYourVehicles() {
