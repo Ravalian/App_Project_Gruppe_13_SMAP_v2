@@ -39,7 +39,7 @@ import java.util.List;
 public class VehicleDetailFragment extends Fragment {
 
     private ListView logList;
-    private TextView vName, owner, model, fuel, kml, hp, numseats;
+    private TextView vName, owner, model, fuel, hp, numseats;
     private Button btnBack, btnNew;
     private VehicleDetailsAdapter adapter;
     private List<Log> logs;
@@ -70,7 +70,6 @@ public class VehicleDetailFragment extends Fragment {
         owner = view.findViewById(R.id.TxtOwner);
         model = view.findViewById(R.id.TxtModel);
         fuel = view.findViewById(R.id.TxtFuelType);
-        kml = view.findViewById(R.id.TxtKmPrL);
         hp = view.findViewById(R.id.TxtHorsePower);
         numseats = view.findViewById(R.id.TxtNumOfSeats);
         vehicleImg = view.findViewById(R.id.ImgCar);
@@ -154,9 +153,9 @@ public class VehicleDetailFragment extends Fragment {
             owner.setText(vehicle.getOwner());
             model.setText(vehicle.getModel());
             fuel.setText(vehicle.getFuelType());
-            hp.setText(vehicle.getEnginePower() + " "  + getString(R.string.txt_hp));
-            kml.setText("999" + " "  + getString(R.string.txt_kml));
-            numseats.setText(vehicle.getSeats() + " " + getString(R.string.txt_seats));
+            hp.setText(vehicle.getEnginePower());
+            numseats.setText(vehicle.getSeats());
+            numseats.setText(vehicle.getSeats());
 
             /*
             storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());

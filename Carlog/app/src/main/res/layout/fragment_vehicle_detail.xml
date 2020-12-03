@@ -75,14 +75,6 @@
         app:layout_constraintTop_toTopOf="@+id/TxtModel" />
 
     <TextView
-        android:id="@+id/TxtKmPrL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/TxtHorsePower"
-        app:layout_constraintTop_toTopOf="@+id/TxtFuelType" />
-
-    <TextView
         android:id="@+id/TxtOwner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
