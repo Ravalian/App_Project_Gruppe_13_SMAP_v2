@@ -366,7 +366,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
             progressDialog.show();
 
             //Defining the child of the storageReference
-            StorageReference ref = storageReference.child("images/" + vehicleRegistrationNr);
+            StorageReference ref = storageReference.child("images/" + vehicleRegistrationNr.toUpperCase());
             
             //adding Listeners on upload or failure of image
             ref.putFile(savedUri)
