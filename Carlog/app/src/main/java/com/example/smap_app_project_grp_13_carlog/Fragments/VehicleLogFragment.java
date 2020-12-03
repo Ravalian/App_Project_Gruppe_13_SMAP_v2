@@ -1,10 +1,9 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
-import android.content.Context;
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
-
 
 public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
 

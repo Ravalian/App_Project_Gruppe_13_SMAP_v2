@@ -47,7 +47,6 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
             }
         });
 
-
         //Setup viewmodel and get data
         vm = new ViewModelProvider(this).get(YourVehiclesVM.class);
         vm.getYourVehicles(FirebaseAuth.getInstance().getCurrentUser().getUid()).observe(this, new Observer<List<VehicleDataFirebase>>() {
@@ -81,17 +80,12 @@ public class YourVehiclesActivity extends AppCompatActivity implements YourVehic
 
 
         txtYourVehicles = findViewById(R.id.txtYourVehicles);
-
-
     }
 
     private void Back() {
         finish();
 
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-
-
-
     }
 
     @Override

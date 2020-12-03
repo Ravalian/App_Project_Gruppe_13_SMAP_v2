@@ -22,8 +22,6 @@ import java.util.List;
 
 public class YourLogsActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
-
-
     public enum UserMode {LOG_VIEW, LIST_VIEW};
 
     private YourLogListFragment yourLogListFragment;
@@ -62,7 +60,6 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         if (vehicleLog==null) {
             vehicleLog = new VehicleLogFragment();
         }
-
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.YourLogsContainer, vehicleLog, constants.FRAG_LOG)

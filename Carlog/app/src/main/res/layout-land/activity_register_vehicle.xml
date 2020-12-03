@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/RegisterVHAddBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -33,6 +33,8 @@
         android:id="@+id/RegisterVehicleInputField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
         android:layout_marginTop="72dp"
         android:ems="10"
         android:hint="@string/RegisterVehicleInputHint"
@@ -55,14 +57,14 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/RegisterVehicleUploadBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/RegisterVehicleInputField"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterVehicleInputField"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterVehicleTitletxt"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -77,11 +79,11 @@
         android:id="@+id/RegisterVehicleUploadBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/RegisterVehicleUploadBtn"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterVHAddBtn"
-        app:layout_constraintEnd_toEndOf="@+id/RegisterVehicleImage"
-        app:layout_constraintStart_toStartOf="@+id/RegisterVehicleImage" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/RegisterVHAddBtn"
+        app:layout_constraintStart_toEndOf="@+id/RegisterVehicleCancelBtn" />
 
     <Button
         android:id="@+id/RegisterVehicleCancelBtn"
@@ -89,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/CancelBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,18 +1,15 @@
 package com.example.smap_app_project_grp_13_carlog.Fragments;
 
-import android.content.Context;
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
-
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
@@ -20,7 +17,6 @@ import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.R;
 
 import java.util.List;
-
 
 public class YourLogListFragment extends Fragment {
 
@@ -33,8 +29,6 @@ public class YourLogListFragment extends Fragment {
     public YourLogListFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

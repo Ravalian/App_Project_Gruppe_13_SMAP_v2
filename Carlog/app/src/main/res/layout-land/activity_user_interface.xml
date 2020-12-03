@@ -20,9 +20,9 @@
         android:id="@+id/UI_YourVehiclesBtn"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:text="@string/yourVehicles"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,20 +41,28 @@
         android:id="@+id/UI_RegisterVehicleBtn"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
         android:text="@string/UI_RegisterVehicleBtn"
-        app:layout_constraintEnd_toEndOf="@+id/btnUIYourLogs"
-        app:layout_constraintStart_toStartOf="@+id/btnUIYourLogs"
-        app:layout_constraintTop_toBottomOf="@+id/btnUIYourLogs" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/UI_YourVehiclesBtn" />
 
     <Button
         android:id="@+id/UI_RegisteredVehiclesBtn"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
         android:text="@string/UI_RegisteredVehiclesBtn"
         app:layout_constraintEnd_toEndOf="@+id/UI_RegisterVehicleBtn"
         app:layout_constraintStart_toStartOf="@+id/UI_RegisterVehicleBtn"
-        app:layout_constraintTop_toBottomOf="@+id/UI_RegisterVehicleBtn" />
+        app:layout_constraintTop_toTopOf="@+id/btnUIYourLogs" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.500684"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

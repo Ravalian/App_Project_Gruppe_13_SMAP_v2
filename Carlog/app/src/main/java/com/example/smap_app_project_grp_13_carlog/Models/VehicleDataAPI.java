@@ -292,5 +292,4 @@ public class VehicleDataAPI {
     public void setRegistrationZipcode(Object registrationZipcode) {
         this.registrationZipcode = registrationZipcode;
     }
-
 }

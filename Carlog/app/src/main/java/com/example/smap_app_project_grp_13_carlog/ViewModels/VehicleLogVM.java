@@ -10,8 +10,6 @@ import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
-import java.util.List;
-
 public class VehicleLogVM extends AndroidViewModel {
 
     LiveData<VehicleDataFirebase> vehicle;
