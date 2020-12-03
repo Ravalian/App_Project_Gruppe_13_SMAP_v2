@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/txt_Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/TxtUsernameLabel" />
 
     <TextView
         android:id="@+id/TxtDateDF"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TxtDistanceLabel" />
 
     <TextView
-        android:id="@+id/TxtNameLabel"
+        android:id="@+id/TxtDurationDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TxtDuration"
@@ -59,7 +59,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:text="@string/txt_Log"
-        app:layout_constraintEnd_toEndOf="@+id/TxtNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
         app:layout_constraintStart_toStartOf="@+id/TxtLogLabelDF"
         app:layout_constraintTop_toBottomOf="@+id/TxtLogLabelDF" />
 
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TxtLogDF" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/TxtUsernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TxtDuration"
-        app:layout_constraintEnd_toEndOf="@+id/TxtNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/TxtDurationDF"
         app:layout_constraintTop_toTopOf="@+id/TxtDistanceLabel" />
 
     <TextView

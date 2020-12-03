@@ -97,8 +97,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 vehicleLogList.setLogs(logList);
                 vehicleLog.setLog(logList.get(selectedLog));
 
-
-
                 updateFragmentState(um);
             }
         });
