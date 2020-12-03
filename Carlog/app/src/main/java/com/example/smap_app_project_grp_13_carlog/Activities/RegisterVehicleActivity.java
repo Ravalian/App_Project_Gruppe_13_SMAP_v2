@@ -254,13 +254,15 @@ public class RegisterVehicleActivity extends AppCompatActivity {
 
     private File createImageFile() throws IOException {
         //Create an Image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
         File image = File.createTempFile(
                 imageFileName,   //Prefix
                 ".jpg",   //Suffix
                 storageDir);    //Directory
+        */
+        File image = new File(getExternalFilesDir(null), "tempFile.jpg");
         // Save a File: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         return image;
