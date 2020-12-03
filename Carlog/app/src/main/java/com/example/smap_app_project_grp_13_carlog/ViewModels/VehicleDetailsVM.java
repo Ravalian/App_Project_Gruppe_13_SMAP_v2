@@ -16,12 +16,10 @@ public class VehicleDetailsVM extends AndroidViewModel {
     LiveData<List<Log>> logs;
     LiveData<VehicleDataFirebase> vehicle;
     Repository repository;
-    //VehicleDataFirebase vehicle;
 
     public VehicleDetailsVM(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        //repository.setupFirebaseLogsListener(id);
     }
 
     public LiveData<List<Log>> getLogs(String id) {

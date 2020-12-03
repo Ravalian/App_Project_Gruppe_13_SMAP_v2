@@ -1,13 +1,10 @@
 package com.example.smap_app_project_grp_13_carlog.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -19,16 +16,11 @@ import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.VehicleDetailsVM;
-import com.firebase.ui.auth.data.model.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //Inspired deeply from SMAP E20 L7 - Kasper Løvborg
-
 public class VehicleDetailActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
     //Enum to keep track of which fragment is in use
@@ -115,7 +107,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
         }
     }
 
-
     @Override
     public void onVehicleDetailsSelected(int position) {
 
@@ -148,7 +139,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
         //Update List fragment if going to List fragment
         if (tm==UserMode.LIST_VIEW){
-            vehicleLogList.update();
         }
         changeContainerFragment(tm);
     }
@@ -184,6 +174,8 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                         .setCustomAnimations(R.anim.fade_in, R.anim.slide_out, R.anim.slide_in, R.anim.fade_out)
                         .replace(R.id.ListContainer, vehicleLogList, constants.FRAG_LIST)
                         .commit();
+                vehicleLogList.update();
+
                 break;
         }
     }

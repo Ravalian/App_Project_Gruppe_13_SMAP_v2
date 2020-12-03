@@ -22,15 +22,12 @@ import java.util.List;
 
 public class YourLogsActivity extends AppCompatActivity implements VehicleDetailsSelectorInterface {
 
-
-
     public enum UserMode {LOG_VIEW, LIST_VIEW};
 
     private YourLogListFragment yourLogListFragment;
     private VehicleLogFragment vehicleLog;
 
     private LinearLayout listContainer;
-    private LinearLayout logContainer;
 
     private List<Log> logList;
     private int selectedLog;
@@ -51,10 +48,8 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         selectedLog = 0;
 
         listContainer = (LinearLayout)findViewById(R.id.YourLogsContainer);
-        logContainer = (LinearLayout)findViewById(R.id.LogDetailContainer);
 
         listContainer.setVisibility(View.VISIBLE);
-        logContainer.setVisibility(View.GONE);
 
         if (yourLogListFragment==null) {
             yourLogListFragment = new YourLogListFragment();
@@ -62,7 +57,6 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
         if (vehicleLog==null) {
             vehicleLog = new VehicleLogFragment();
         }
-
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.YourLogsContainer, vehicleLog, constants.FRAG_LOG)

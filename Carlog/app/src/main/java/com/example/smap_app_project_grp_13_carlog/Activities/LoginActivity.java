@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Setup Login Button
         loginBtn = findViewById(R.id.btnlogin);
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == Constants.RC_SIGN_IN) {
             //IdpResponse response = IdpResponse.fromResultIntent(data);
             user = FirebaseAuth.getInstance().getCurrentUser();
-
             if (resultCode == RESULT_OK && user != null) {
                 // Successfully signed in
                 loginActivityVM.addUserToFirebaseRTDB(user);

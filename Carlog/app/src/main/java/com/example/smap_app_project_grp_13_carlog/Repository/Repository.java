@@ -50,8 +50,9 @@ public class Repository {
     private MutableLiveData<List<VehicleDataFirebase>> vehicles;
     private MutableLiveData<List<Log>> logs;
     private MutableLiveData<VehicleDataFirebase> vehicle;
+    private MutableLiveData<Log> newLog;
+    private MutableLiveData<VehicleDataAPI> newestVehicle;
     private MutableLiveData<List<UserRTDB>> users;
-
 
     //Firebase
     private DatabaseReference mDatabase;
@@ -65,8 +66,6 @@ public class Repository {
     private String ACCESS_TOKEN = "pl2ycyljhhb2zxveesxl5xajupkm4v3n";
     private Boolean vehicleAlreadyRegistered = false;
 
-
-
     public Repository (Application app) {
         if (application==null) {
             application = app;
@@ -76,6 +75,9 @@ public class Repository {
             vehicles = new MutableLiveData<>();
             logs = new MutableLiveData<>();
             vehicle = new MutableLiveData<>();
+            newLog = new MutableLiveData<>();
+            newestVehicle = new MutableLiveData<>();
+
             users = new MutableLiveData<>();
 
         } else{
@@ -85,8 +87,7 @@ public class Repository {
 
     /////////////////// Firebase Handling /////////////////////
 
-
-        /////////////////////Vehicles/////////////////////
+    ///////////////////      Vehicles     /////////////////////
 
     private void setupFirebaseListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,8 +109,6 @@ public class Repository {
             }
         });
     }
-
-
 
     private void fireDatabaseYourVehicles(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -174,9 +173,7 @@ public class Repository {
         });
     }
 
-
         ///////////////////////Logs///////////////////////////
-
 
     private void setupFireDatabaseYourLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -215,6 +212,7 @@ public class Repository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = database.getReference("logs"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
+        android.util.Log.d("Tester", id);
 
         reference.orderByChild("vehicle").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
@@ -240,6 +238,39 @@ public class Repository {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 android.util.Log.d("Error", "Couldn't get the logs to this car");
+            }
+        });
+    }
+
+    private void firebaseGetLogToYourVehicles(String uid) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("logs");
+
+        android.util.Log.d("Tester", uid);
+        reference.orderByChild("vehicleOwner").equalTo(uid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                newLog.postValue(snapshot.getValue(Log.class));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -423,8 +454,15 @@ public class Repository {
         return vehicles;
     }
 
+    public LiveData<Log> getLogsToCars(String uid) {
+        firebaseGetLogToYourVehicles(uid);
+        return newLog;
+    }
+
+
 
     ////////////////////////////////////////////////////////
+
     //////////Private conversion functions//////////////////
 
     private List<VehicleDataFirebase> toVehicles(DataSnapshot snapshot) {

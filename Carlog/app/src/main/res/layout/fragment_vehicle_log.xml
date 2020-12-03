@@ -67,11 +67,10 @@
         android:id="@+id/MapDF"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/BtnBackDF"
-        app:layout_constraintEnd_toEndOf="@+id/TxtLogDF"
-        app:layout_constraintStart_toStartOf="@+id/TxtLogDF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtLogDF" />
 
     <TextView

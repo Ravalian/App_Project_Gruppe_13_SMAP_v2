@@ -15,7 +15,6 @@ public class Constants {
 
     //Intent tags
     public static final String ID = "ID";
-
     public static final int RC_SIGN_IN = 8;
 
     //Fragment tags

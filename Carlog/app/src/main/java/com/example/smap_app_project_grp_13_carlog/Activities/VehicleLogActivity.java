@@ -30,9 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-
 
 public class VehicleLogActivity extends AppCompatActivity implements LocationListener {
 
@@ -144,6 +141,7 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
         log.distance = (int)distance;
         log.userName = user.getDisplayName();
         log.setPositions(positions);
+        log.setVehicleOwner(vehicle.ownerID);
         vm.saveLog(log);
         back();
     }
@@ -189,9 +187,9 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
     }
 
     private double getDestance(Location before, Location after){
-        final double R = 6371000;
-        final double lat1 = before.getLatitude()*3.14157/180;
-        final double lat2 = after.getLatitude()*3.14157/180;
+        final double R = 6378135;
+        final double lat1 = before.getLatitude()*Math.PI/180;
+        final double lat2 = after.getLatitude()*Math.PI/180;
         final double dlong = (after.getLongitude()-before.getLongitude())*3.14157/180;
         final double a = Math.sin((lat2-lat1)/2)*Math.sin((lat2-lat1)/2)+Math.cos(lat1)*Math.cos(lat2)*Math.sin((dlong)/2)*Math.sin((dlong)/2);
         final double c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));

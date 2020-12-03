@@ -5,10 +5,12 @@ public class LatLng {
     public LatLng(){
 
     }
+
     public LatLng(Double Lat, Double Long){
         this.latitude = Lat;
         this.longitude = Long;
     }
+
     public double latitude;
     public double longitude;
 

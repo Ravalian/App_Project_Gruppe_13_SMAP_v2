@@ -1,13 +1,6 @@
 package com.example.smap_app_project_grp_13_carlog.Models;
 
-
-
-import android.util.Pair;
-import android.widget.ListView;
-
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class Log {
 
@@ -23,16 +16,7 @@ public class Log {
     public int time, distance;
     public String userName;
     public ArrayList<LatLng> positions;
-
-
-
-    /*public Logs(String logid, Long datetime, int Distance, int Time, String LogDescription ) {
-        logID = logid;
-        date = datetime;
-        distance = Distance;
-        time = Time;
-        logDescription = LogDescription;
-    }*/
+    public String vehicleOwner;
 
     public String getLogID() {
         return logID;
@@ -106,5 +90,11 @@ public class Log {
         this.positions = positions;
     }
 
+    public String getVehicleOwner(){
+        return this.vehicleOwner;
+    }
+    public void setVehicleOwner(String id){
+        this.vehicleOwner = id;
+    }
 
 }
