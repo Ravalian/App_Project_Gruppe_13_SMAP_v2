@@ -72,4 +72,7 @@
     <string name="txt_UserName">Navn</string>
     <string name="txt_UserID">ID</string>
     <string name="btn_Add">Tilføj</string>
+    <string name="addedusers">Tilføjet Brugere</string>
+    <string name="numOfSeats">Antal af sæder:</string>
+    <string name="horsePower">Hestekræfter:</string>
 </resources>
