@@ -105,6 +105,12 @@ public class AddUserActivity extends AppCompatActivity implements addUserAdapter
         for (UserRTDB u:
              users) {
             if (u.userName.contains(nameInput.getText().toString().trim())){
+                for (UserRTDB us:
+                     addedUsers) {
+                    if (us.getUserName().trim().contains(nameInput.getText().toString().trim())){
+                        return;
+                    }
+                }
                 addedUsers.add(u);
                 vehicle.addRegisteredUser(u);
 
