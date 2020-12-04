@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_back_AU"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Add_AU"
+        app:layout_constraintTop_toBottomOf="@+id/AddedUsersTxt"
         tools:itemCount="12"
         tools:listitem="@layout/add_user_item" />
 
@@ -52,4 +52,14 @@
         android:text="@string/btn_Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/AddedUsersTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/addedusers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Add_AU" />
 </androidx.constraintlayout.widget.ConstraintLayout>
