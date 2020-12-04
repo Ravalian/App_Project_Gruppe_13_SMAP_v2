@@ -564,7 +564,6 @@ public class Repository {
         if (vehicles.getValue()!=null) {
             for (VehicleDataFirebase l :
                     vehicles.getValue()) {
-                android.util.Log.d("Tester", "Hejsa der");
                 L.add(l);
             }
         }

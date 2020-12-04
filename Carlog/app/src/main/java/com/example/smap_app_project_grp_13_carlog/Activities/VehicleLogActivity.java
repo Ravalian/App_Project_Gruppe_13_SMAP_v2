@@ -96,9 +96,17 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stop.setText(R.string.btn_Stop);
-                started = true;
-                start();
+
+                if (currentLocation!=null) {
+                    stop.setText(R.string.btn_Stop);
+                    started = true;
+                    start();
+                } else {
+                    started = false;
+                    maketoast();
+
+                }
+
             }
         });
 
@@ -128,10 +136,17 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
         });
     }
 
+    private void maketoast() {
+        Toast.makeText(this, "You have to move just a bit", Toast.LENGTH_LONG).show();
+    }
+
     private void save() {
 
         //Save the log and go back
         Log log = new Log();
+        if (startTime==null){
+            startTime = System.currentTimeMillis();
+        }
         log.date = startTime;
         log.vehicle = ID;
         log.logDescription = vehicleLog.getText().toString();
@@ -140,6 +155,11 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
         log.time = duration;
         log.distance = (int)distance;
         log.userName = user.getDisplayName();
+        if (positions.size()==0){
+            positions = new ArrayList<>();
+            positions.add(new LatLng(0.0,0.0));
+            positions.add(new LatLng(0.0,0.0));
+        }
         log.setPositions(positions);
         log.setVehicleOwner(vehicle.ownerID);
         vm.saveLog(log);
@@ -164,14 +184,11 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
     private void start() {
 
         //Starts the recording if currentLocation is set, else makes a toast
-        if (currentLocation!=null) {
-            startTime = System.currentTimeMillis();
-            LatLng start = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-            positions.add(start);
-        } else {
-            started = false;
-            Toast.makeText(this, "You have to move just a bit", Toast.LENGTH_LONG);
-        }
+
+        startTime = System.currentTimeMillis();
+        LatLng start = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        positions.add(start);
+
     }
 
     private void updateUI() {
