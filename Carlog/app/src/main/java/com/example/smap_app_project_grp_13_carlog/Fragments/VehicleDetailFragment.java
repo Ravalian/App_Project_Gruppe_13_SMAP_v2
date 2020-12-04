@@ -123,7 +123,7 @@ public class VehicleDetailFragment extends Fragment {
 
     public void update(boolean o){
         if (o){
-
+            btnReg.setVisibility(View.VISIBLE);
 
         } else {
             btnReg.setVisibility(View.GONE);
@@ -204,7 +204,7 @@ public class VehicleDetailFragment extends Fragment {
         isOwner = o;
         vehicle=v;
         if (isOwner){
-
+            btnReg.setVisibility(View.VISIBLE);
 
         } else {
             btnReg.setVisibility(View.GONE);
