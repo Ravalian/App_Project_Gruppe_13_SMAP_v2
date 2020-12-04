@@ -79,7 +79,6 @@
     <string name="txt_UserName" >Name</string>
     <string name="txt_UserID">ID</string>
     <string name="btn_Add">Add</string>
-    <string name="">Added Users</string>
     <string name="addedusers">Added Users</string>
 
     <!-- TODO: Remove or change this text -->
