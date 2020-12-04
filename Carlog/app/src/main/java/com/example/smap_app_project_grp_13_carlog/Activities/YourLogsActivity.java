@@ -151,6 +151,11 @@ public class YourLogsActivity extends AppCompatActivity implements VehicleDetail
     }
 
     @Override
+    public void registerUsers() {
+
+    }
+
+    @Override
     public void onBackPressed(){
         if (um == UserMode.LOG_VIEW) {
             updateFragmentState(UserMode.LIST_VIEW);

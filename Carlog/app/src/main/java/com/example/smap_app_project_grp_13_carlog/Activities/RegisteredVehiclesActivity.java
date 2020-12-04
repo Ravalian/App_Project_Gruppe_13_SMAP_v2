@@ -16,6 +16,7 @@ import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
 import com.example.smap_app_project_grp_13_carlog.ViewModels.RegisteredVehiclesActivityVM;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class RegisteredVehiclesActivity extends AppCompatActivity implements Reg
 
         //Setup for LiveData of the registered vehicles
         vm = new ViewModelProvider(this).get(RegisteredVehiclesActivityVM.class);
-        vm.getVehicles().observe(this, new Observer<List<VehicleDataFirebase>>() {
+        vm.getRegisteredVehicles(FirebaseAuth.getInstance().getCurrentUser().getUid()).observe(this, new Observer<List<VehicleDataFirebase>>() {
             @Override
             public void onChanged(List<VehicleDataFirebase> vehicleDataFirebases) {
 

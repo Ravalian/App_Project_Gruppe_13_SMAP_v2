@@ -69,4 +69,6 @@
     <string name="RegisterVehicleSelectImageTitle">Tilføj billede!</string>
     <string name="not_Have">har tilføjet en note til bilen:</string>
     <string name="btn_regnewuser">Registrer ny bruger</string>
+    <string name="txt_UserName">Navn</string>
+    <string name="txt_UserID">ID</string>
 </resources>

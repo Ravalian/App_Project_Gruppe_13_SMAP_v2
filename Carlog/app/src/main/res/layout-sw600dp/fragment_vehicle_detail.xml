@@ -12,30 +12,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/ImgCar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/ImgCar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/ListView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@id/TxtRegNum"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/BtnNewVDF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TxtFuelType"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="10"
         tools:listitem="@layout/activity_vehicle_details_list_item" />
 
     <ImageView
         android:id="@+id/ImgCar"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -51,6 +53,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImgCar" />
 
@@ -62,6 +65,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtModel" />
 
@@ -70,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/TxtOwner"
         app:layout_constraintStart_toEndOf="@+id/TxtModel"
         app:layout_constraintTop_toTopOf="@+id/TxtModel" />
@@ -81,7 +86,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/TxtHorsePower" />
 
     <TextView
@@ -90,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/TxtOwner"
         app:layout_constraintTop_toBottomOf="@+id/TxtOwner" />
 
@@ -101,6 +108,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/btn_New"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -112,16 +120,14 @@
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/btn_Back"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/BtnRegVDF"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_Add"
-        app:layout_constraintEnd_toStartOf="@+id/BtnNewVDF"
-        app:layout_constraintStart_toEndOf="@+id/BtnBackVDF"
-        app:layout_constraintTop_toTopOf="@+id/BtnBackVDF" />
-
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

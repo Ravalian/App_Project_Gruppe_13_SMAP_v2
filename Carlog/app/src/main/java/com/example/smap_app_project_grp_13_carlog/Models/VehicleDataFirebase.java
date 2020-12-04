@@ -2,6 +2,9 @@ package com.example.smap_app_project_grp_13_carlog.Models;
 
 import android.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VehicleDataFirebase {
 
     //!!! TODO
@@ -30,7 +33,7 @@ public class VehicleDataFirebase {
     public String engineVolume;
     public String enginePower;
     public String fuelType;
-    public String registeredUser;
+    public List<UserRTDB> registeredUsers;
     public String ownerID;
 
     //Get and set methods for each value
@@ -170,5 +173,17 @@ public class VehicleDataFirebase {
         this.ownerID = ownerID;
     }
 
+    public List<UserRTDB> getRegisteredUsers() {
+        return registeredUsers;
+    }
 
+    public void setRegisteredUsers(List<UserRTDB> registeredUsers) {
+        this.registeredUsers = registeredUsers;
+    }
+    public void addRegisteredUser(UserRTDB id){
+        if (registeredUsers==null){
+            registeredUsers = new ArrayList<UserRTDB>();
+        }
+        registeredUsers.add(id);
+    }
 }

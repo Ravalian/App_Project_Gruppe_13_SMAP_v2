@@ -10,4 +10,5 @@ public interface VehicleDetailsSelectorInterface {
     public ArrayList<Log> getVehicleDetailsList();
     public Log getCurrentSelection();
     public void back();
+    public void registerUsers();
 }

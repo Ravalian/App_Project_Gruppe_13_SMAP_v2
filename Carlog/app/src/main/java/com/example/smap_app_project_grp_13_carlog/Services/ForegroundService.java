@@ -14,6 +14,7 @@ import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Observer;
 
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
@@ -42,9 +43,8 @@ public class ForegroundService extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
-        //displayNotification("se mig");
         repository = new Repository(getApplication());
-        repository.getLogsToCars(FirebaseAuth.getInstance().getCurrentUser().getUid()).observeForever(new Observer<Log>() {
+        repository.getNewestLogToCars(FirebaseAuth.getInstance().getCurrentUser().getUid()).observeForever(new Observer<Log>() {
             @Override
             public void onChanged(Log log) {
                 displayNotification(log);
@@ -67,8 +67,8 @@ public class ForegroundService extends Service {
 
         Notification notification = new NotificationCompat.Builder(this, SERVICE_CHANNEL)
                 .setContentTitle("Car Log")
-                .setContentText("context text")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentText("CarLog is running in the background")
+                .setSmallIcon(R.drawable.ic_custom_carlog_icon_foreground)
                 .setTicker("Hvad er du?")
                 .build();
 
@@ -94,11 +94,9 @@ public class ForegroundService extends Service {
         Notification updatenotofication = new NotificationCompat.Builder(getApplicationContext(), NOTIFICATION_CHANNEL)
                 .setContentTitle(log.userName + " " + getString(R.string.not_Have) + " " + log.getvehicle())
                 .setContentText(log.getLogDescription())
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_custom_carlog_icon_foreground)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setColor( Color.rgb(255, 0, 0))
                 .build();
         notificationManager.notify(NOTIFICATION_NOTIFICATION_ID, updatenotofication);
-        //android.util.Log.d("Tester", log);
     }
 }

@@ -25,4 +25,11 @@ public class RegisteredVehiclesActivityVM extends AndroidViewModel {
         }
         return vehicles;
     }
+
+    public LiveData<List<VehicleDataFirebase>> getRegisteredVehicles(String uid) {
+        if (vehicles==null){
+            vehicles = repository.getRegisteredVehicles(uid);
+        }
+        return vehicles;
+    }
 }

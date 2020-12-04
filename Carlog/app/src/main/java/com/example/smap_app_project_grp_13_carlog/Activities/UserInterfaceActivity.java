@@ -78,7 +78,6 @@ public class UserInterfaceActivity extends AppCompatActivity {
     }
 
     private void startService(){
-        android.util.Log.d("Tester", "Hejsa");
         Intent serviceIntent = new Intent(this, ForegroundService.class);
         startService(serviceIntent);
     }

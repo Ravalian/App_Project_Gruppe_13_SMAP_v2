@@ -91,9 +91,6 @@ public class RegisteredVehiclesAdapter extends RecyclerView.Adapter<RegisteredVe
         ImageView img;
         TextView txtVehicleName, txtOwnerName;
 
-
-
-
         IRegisteredVehiclesItemClickedListener listener;
 
         //constructor

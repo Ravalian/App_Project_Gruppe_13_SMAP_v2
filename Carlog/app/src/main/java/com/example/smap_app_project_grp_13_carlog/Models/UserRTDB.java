@@ -1,5 +1,7 @@
 package com.example.smap_app_project_grp_13_carlog.Models;
 
+import java.util.List;
+
 public class UserRTDB {
 
     //Public constructor
@@ -16,6 +18,7 @@ public class UserRTDB {
     //Values
     public String userId;
     public String userName;
+    //public List<String> vehicleID;
     //public String userEmail; //Database cannot store "." so email is a no go
 
     //Get/set methods

@@ -89,6 +89,9 @@ public class RegisterVehicleActivity extends AppCompatActivity {
 
         //Setup ImageView
         registerVHImageView = findViewById(R.id.RegisterVehicleImage);
+        if(registerVehicleActivityVM.getImage() != null){
+            registerVHImageView.setImageBitmap(registerVehicleActivityVM.getImage());
+        }
 
         //Setup Edittext
         registerInput = findViewById(R.id.RegisterVehicleInputField);
@@ -253,15 +256,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        //Create an Image file name
-        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
-        File image = File.createTempFile(
-                imageFileName,   //Prefix
-                ".jpg",   //Suffix
-                storageDir);    //Directory
-        */
+        //Create a temp file to store the image
         File image = new File(getExternalFilesDir(null), "tempFile.jpg");
         // Save a File: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
@@ -284,7 +279,9 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeStream(ims);
                     bitmap = getResizedBitmap(bitmap, imgMaxSize);
                     registerVHImageView.setImageBitmap(bitmap);
+                    registerVehicleActivityVM.setImage(bitmap);
                     BitmapToString(bitmap);
+                    /*
                     String path = android.os.Environment.getExternalStorageDirectory() + File.separator + "Phoenix" + File.separator + "default";
                     OutputStream outFile = null;
                     File newfile = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
@@ -300,6 +297,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     } catch (Exception e){
                         e.printStackTrace();
                     }
+                    */
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -318,6 +316,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                 thumbnail = getResizedBitmap(thumbnail, imgMaxSize);
                 Log.w(Constants.REGISTERVHACTTAG, picturePath + "");
                 registerVHImageView.setImageBitmap(thumbnail);
+                registerVehicleActivityVM.setImage(thumbnail);
                 BitmapToString(thumbnail);
             }
         }
@@ -330,6 +329,7 @@ public class RegisterVehicleActivity extends AppCompatActivity {
     }
 
     //Convert bitmap to a string
+    //////// Not in use atm, but keeping it for now ////////////
     private String BitmapToString(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 60, baos);

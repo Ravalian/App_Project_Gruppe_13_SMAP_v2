@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -105,8 +106,6 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
                 vehicleLogList.setLogs(logList);
                 vehicleLog.setLog(logList.get(selectedLog));
 
-
-
                 updateFragmentState(um);
             }
         });
@@ -114,6 +113,13 @@ public class VehicleDetailActivity extends AppCompatActivity implements VehicleD
 
     public void back(){
         onBackPressed();
+    }
+
+    @Override
+    public void registerUsers() {
+        Intent intent = new Intent(this,AddUserActivity.class);
+        intent.putExtra(constants.ID, vehicle.getRegistrationNumber());
+        startActivity(intent);
     }
 
     @Override

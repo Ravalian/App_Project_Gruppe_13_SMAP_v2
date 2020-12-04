@@ -44,7 +44,7 @@ public class VehicleLogFragment extends Fragment implements OnMapReadyCallback {
         //UI setup
         txtDate = view.findViewById(R.id.TxtDateDF);
         txtDistance = view.findViewById(R.id.TxtDistanceDF);
-        txtDuration = view.findViewById(R.id.TxtNameLabel);
+        txtDuration = view.findViewById(R.id.TxtDurationDF);
         txtLog = view.findViewById(R.id.TxtLogDF);
         txtUserName = view.findViewById(R.id.TxtUsernameDF);
         map = view.findViewById(R.id.MapDF);

@@ -38,6 +38,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
@@ -91,8 +92,7 @@ public class Repository {
 
     private void setupFirebaseListener() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reference = database.getReference("vehicles"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
+        DatabaseReference reference = database.getReference("vehicles");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -173,11 +173,45 @@ public class Repository {
         });
     }
 
-        ///////////////////////Logs///////////////////////////
+    private void getRegisteredVehiclesFromFirebase(String uid) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("vehicles");
+        android.util.Log.d("Tester", "Hello");
+        reference.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                android.util.Log.d("Tester", ""+snapshot);
+                vehicles.setValue(ToVehiclesSorter(snapshot, uid));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                android.util.Log.d("Tester", ""+snapshot+" 1");
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                android.util.Log.d("Tester", ""+snapshot+" 2");
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                android.util.Log.d("Tester", ""+snapshot+" 3");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                android.util.Log.d("Error", "Couldn't get the specified car");
+            }
+        });
+    }
+
+
+
+    ///////////////////////Logs///////////////////////////
 
     private void setupFireDatabaseYourLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = database.getReference("logs");
 
         reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
@@ -210,9 +244,7 @@ public class Repository {
 
     public void setupFirebaseLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reference = database.getReference("logs"); //in demo: "users/"+userID+"/places" and tell firebase to look at everything under places in specific user with userID
-        android.util.Log.d("Tester", id);
+        DatabaseReference reference = database.getReference("logs");
 
         reference.orderByChild("vehicle").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
@@ -247,10 +279,14 @@ public class Repository {
         DatabaseReference reference = database.getReference("logs");
 
         android.util.Log.d("Tester", uid);
-        reference.orderByChild("vehicleOwner").equalTo(uid).addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("vehicleOwner").equalTo(uid).limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                newLog.postValue(snapshot.getValue(Log.class));
+                if (snapshot.getValue(Log.class).date >= System.currentTimeMillis()-(1000*120*12)) {
+                    newLog.postValue(snapshot.getValue(Log.class));
+                } else {
+                    android.util.Log.d("Tester", snapshot.getValue(Log.class).getLogDescription());
+                }
             }
 
             @Override
@@ -290,11 +326,12 @@ public class Repository {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //This is called when initialised and when data is changed.
                 users.setValue(toUsers(snapshot));
+                //android.util.Log.d("Tester", users.getValue().get(0).userName);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                android.util.Log.d("Error", "failed to read value"); //Jeg er ikke sikker på hvad dette er, det er i demo 2.
+                android.util.Log.d("Error", "failed to get the damn users"); //Jeg er ikke sikker på hvad dette er, det er i demo 2. - Det er en log, så man kan se hvis ens firebase kald fejler  - slet hvis du forstår, ellers spørg Emil
             }
         });
     }
@@ -454,12 +491,25 @@ public class Repository {
         return vehicles;
     }
 
-    public LiveData<Log> getLogsToCars(String uid) {
+    public LiveData<Log> getNewestLogToCars(String uid) {
         firebaseGetLogToYourVehicles(uid);
         return newLog;
     }
 
+    public LiveData<List<UserRTDB>> getUsers() {
+        GetUsersFromRTDB();
+        return users;
+    }
 
+    public void addUsersToVehicle(List<UserRTDB> users, String regId) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("/vehicles/"+regId+"/registeredUsers");
+        database.setValue(users);
+    }
+
+    public LiveData<List<VehicleDataFirebase>> getRegisteredVehicles(String uid) {
+        getRegisteredVehiclesFromFirebase(uid);
+        return vehicles;
+    }
 
     ////////////////////////////////////////////////////////
 
@@ -503,13 +553,36 @@ public class Repository {
 
     private List<UserRTDB> toUsers(DataSnapshot snapshot) {
         ArrayList L = new ArrayList();
+        Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+        while(snapshots.iterator().hasNext()){
+            UserRTDB user = snapshots.iterator().next().getValue(UserRTDB.class);
+            L.add(user);
+        }
+        return L;
+    }
 
-        if (users.getValue()!=null){
-            for(UserRTDB i : users.getValue()) {
-                L.add(i);
+    private List<VehicleDataFirebase> ToVehiclesSorter(DataSnapshot snapshot, String uid) {
+
+        //Keep all the existing vehicles if there are any
+        ArrayList L = new ArrayList();
+        if (vehicles.getValue()!=null) {
+            for (VehicleDataFirebase l :
+                    vehicles.getValue()) {
+                android.util.Log.d("Tester", "Hejsa der");
+                L.add(l);
             }
         }
-        L.add(snapshot.getValue(UserRTDB.class));
+
+        //Add the new vehicle if you are a registered user
+        VehicleDataFirebase ve = snapshot.getValue(VehicleDataFirebase.class);
+        if (ve.registeredUsers!=null){
+            for (UserRTDB u:
+                    ve.registeredUsers) {
+                if (u.getUserId().trim().contains(uid.trim())){
+                    L.add(ve);
+                }
+            }
+        }
         return L;
     }
 

@@ -11,6 +11,7 @@ import com.example.smap_app_project_grp_13_carlog.Models.UserRTDB;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.Repository.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddUserVM extends AndroidViewModel {
@@ -35,8 +36,12 @@ public class AddUserVM extends AndroidViewModel {
     //Save the log
     public LiveData<List<UserRTDB>> getUsers(){
         if (users == null){
-
+            users = repository.getUsers();
         }
         return users;
+    }
+
+    public void addUsersToVehicle(List<UserRTDB> user) {
+        repository.addUsersToVehicle(user, vehicle.getValue().getRegistrationNumber());
     }
 }

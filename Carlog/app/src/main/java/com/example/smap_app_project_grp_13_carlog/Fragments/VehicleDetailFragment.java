@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.smap_app_project_grp_13_carlog.Activities.AddUserActivity;
 import com.example.smap_app_project_grp_13_carlog.Activities.UserInterfaceActivity;
 import com.example.smap_app_project_grp_13_carlog.Activities.VehicleDetailActivity;
 import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
@@ -99,7 +100,7 @@ public class VehicleDetailFragment extends Fragment {
                 registerUser();
             }
         });
-        btnReg.setText(R.string.btn_regnewuser);
+        //btnReg.setText(R.string.btn_regnewuser);
 
         //Update UI
         updateList();
@@ -108,6 +109,7 @@ public class VehicleDetailFragment extends Fragment {
     }
 
     private void registerUser() {
+        InterFace.registerUsers();
     }
 
     private void newLog() {
@@ -197,7 +199,8 @@ public class VehicleDetailFragment extends Fragment {
     public void setVehicle(VehicleDataFirebase v, boolean owner){
         vehicle=v;
         if (owner){
-            btnReg.setVisibility(View.VISIBLE);
+            //btnReg.setVisibility(View.VISIBLE);
+
         } else {
             btnReg.setVisibility(View.GONE);
         }
