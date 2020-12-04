@@ -7,7 +7,37 @@
     tools:context=".Fragments.VehicleDetailFragment">
 
     <TextView
-        android:id="@+id/TxtRegNum"
+        android:id="@+id/numberofseatstxt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/numOfSeats"
+        app:layout_constraintBottom_toBottomOf="@+id/TxtNumOfSeats"
+        app:layout_constraintEnd_toStartOf="@+id/TxtNumOfSeats"
+        app:layout_constraintTop_toTopOf="@+id/TxtNumOfSeats"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/horsepwtxt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="@string/horsePower"
+        app:layout_constraintBottom_toBottomOf="@+id/TxtHorsePower"
+        app:layout_constraintStart_toEndOf="@+id/TxtModel" />
+
+    <Button
+        android:id="@+id/BtnRegVDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_regnewuser"
+        app:layout_constraintBottom_toBottomOf="@+id/BtnNewVDF"
+        app:layout_constraintEnd_toStartOf="@+id/BtnNewVDF"
+        app:layout_constraintStart_toEndOf="@+id/BtnBackVDF"
+        app:layout_constraintTop_toTopOf="@+id/BtnBackVDF" />
+
+    <TextView
+        android:id="@+id/carMake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -24,9 +54,8 @@
         android:id="@+id/ListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@id/TxtRegNum"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/BtnNewVDF"
+        android:layout_below="@id/carMake"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +101,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/TxtOwner"
-        app:layout_constraintStart_toEndOf="@+id/TxtModel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/horsepwtxt2"
         app:layout_constraintTop_toTopOf="@+id/TxtModel" />
 
     <TextView
@@ -91,27 +121,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/TxtOwner"
-        app:layout_constraintTop_toBottomOf="@+id/TxtOwner" />
+        app:layout_constraintEnd_toEndOf="@+id/TxtHorsePower"
+        app:layout_constraintTop_toBottomOf="@+id/TxtHorsePower" />
 
     <Button
         android:id="@+id/BtnNewVDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btn_New"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/BtnBackVDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btn_Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

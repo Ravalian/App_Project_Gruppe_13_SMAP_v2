@@ -15,17 +15,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.smap_app_project_grp_13_carlog.Activities.AddUserActivity;
-import com.example.smap_app_project_grp_13_carlog.Activities.UserInterfaceActivity;
-import com.example.smap_app_project_grp_13_carlog.Activities.VehicleDetailActivity;
 import com.example.smap_app_project_grp_13_carlog.Activities.VehicleLogActivity;
 import com.example.smap_app_project_grp_13_carlog.Adapters.VehicleDetailsAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
 import com.example.smap_app_project_grp_13_carlog.Interface.VehicleDetailsSelectorInterface;
-import com.example.smap_app_project_grp_13_carlog.Models.GlideApp;
 import com.example.smap_app_project_grp_13_carlog.Models.Log;
 import com.example.smap_app_project_grp_13_carlog.Models.VehicleDataFirebase;
 import com.example.smap_app_project_grp_13_carlog.R;
@@ -64,7 +59,7 @@ public class VehicleDetailFragment extends Fragment {
 
         //Setup for widgets
         logList = (ListView) view.findViewById(R.id.ListView);
-        vName = view.findViewById(R.id.TxtRegNum);
+        vName = view.findViewById(R.id.carMake);
         owner = view.findViewById(R.id.TxtOwner);
         model = view.findViewById(R.id.TxtModel);
         fuel = view.findViewById(R.id.TxtFuelType);
