@@ -42,6 +42,7 @@ public class VehicleDetailFragment extends Fragment {
     public ImageView vehicleImg;
     private VehicleDetailsSelectorInterface InterFace;
     private Constants constants;
+    private boolean isOwner;
 
     //Firebase Storage
     private FirebaseStorage storage;
@@ -97,6 +98,7 @@ public class VehicleDetailFragment extends Fragment {
         });
         //btnReg.setText(R.string.btn_regnewuser);
 
+        btnReg.setVisibility(View.GONE);
         //Update UI
         updateList();
 
@@ -119,7 +121,13 @@ public class VehicleDetailFragment extends Fragment {
         InterFace.back();
     }
 
-    public void update(){
+    public void update(boolean o){
+        if (o){
+
+
+        } else {
+            btnReg.setVisibility(View.GONE);
+        }
         updateList();
     }
 
@@ -192,10 +200,11 @@ public class VehicleDetailFragment extends Fragment {
         logs = (List<Log>) logList;
     }
 
-    public void setVehicle(VehicleDataFirebase v, boolean owner){
+    public void setVehicle(VehicleDataFirebase v, boolean o){
+        isOwner = o;
         vehicle=v;
-        if (owner){
-            //btnReg.setVisibility(View.VISIBLE);
+        if (isOwner){
+
 
         } else {
             btnReg.setVisibility(View.GONE);
