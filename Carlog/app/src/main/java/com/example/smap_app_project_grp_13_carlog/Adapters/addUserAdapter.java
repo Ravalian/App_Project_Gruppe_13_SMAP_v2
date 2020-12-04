@@ -61,7 +61,7 @@ public class addUserAdapter extends RecyclerView.Adapter<addUserAdapter.addUserV
     public void onBindViewHolder(@NonNull addUserViewHolder holder, int position) {
 
         holder.txtName.setText(users.get(position).getUserName());
-        holder.txtID.setText(users.get(position).getUserId());
+
     }
 
     public class addUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,7 +69,7 @@ public class addUserAdapter extends RecyclerView.Adapter<addUserAdapter.addUserV
         //ViewHolder ui wiget references
 
         TextView txtName;
-        TextView txtID;
+
 
         IAddUserItemClickedListener listener;
 
@@ -79,7 +79,7 @@ public class addUserAdapter extends RecyclerView.Adapter<addUserAdapter.addUserV
 
             //get references from layout file
             txtName = itemView.findViewById(R.id.txtUserName);
-            txtID = itemView.findViewById(R.id.txtUserID);
+
             listener = clickedListener;
 
             //set click listener for whole list item
