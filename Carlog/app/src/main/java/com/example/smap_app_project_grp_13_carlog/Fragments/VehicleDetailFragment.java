@@ -39,7 +39,7 @@ import java.util.List;
 public class VehicleDetailFragment extends Fragment {
 
     private ListView logList;
-    private TextView vName, owner, model, fuel, hp, numseats;
+    private TextView vName, owner, model, fuel, hp, numseats, make;
     private Button btnBack, btnNew, btnReg;
     private VehicleDetailsAdapter adapter;
     private List<Log> logs;
@@ -71,7 +71,7 @@ public class VehicleDetailFragment extends Fragment {
         hp = view.findViewById(R.id.TxtHorsePower);
         numseats = view.findViewById(R.id.TxtNumOfSeats);
         vehicleImg = view.findViewById(R.id.ImgCar);
-
+        make = view.findViewById(R.id.carMake);
 
         //Setup firebase storage
         storage = FirebaseStorage.getInstance();
@@ -165,6 +165,7 @@ public class VehicleDetailFragment extends Fragment {
             fuel.setText(vehicle.getFuelType());
             hp.setText(vehicle.getEnginePower());
             numseats.setText(vehicle.getSeats());
+            make.setText(vehicle.getMake());
 
             storageReference = storage.getReference().child("images/" + vehicle.getRegistrationNumber());
 

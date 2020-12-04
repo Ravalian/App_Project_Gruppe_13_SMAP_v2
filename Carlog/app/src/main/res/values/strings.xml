@@ -80,6 +80,8 @@
     <string name="txt_UserID">ID</string>
     <string name="btn_Add">Add</string>
     <string name="addedusers">Added Users</string>
+    <string name="numOfSeats">Number of seats:</string>
+    <string name="horsePower">Horsepower:</string>
 
     <!-- TODO: Remove or change this text -->
     <!--string name="hello_blank_fragment">Hello blank fragment</string>
