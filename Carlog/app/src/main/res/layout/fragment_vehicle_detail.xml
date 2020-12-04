@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/ImgCar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
@@ -145,15 +146,5 @@
         app:layout_constraintEnd_toStartOf="@+id/BtnNewVDF"
         app:layout_constraintStart_toEndOf="@+id/BtnBackVDF"
         app:layout_constraintTop_toTopOf="@+id/BtnBackVDF" />
-
-    <TextView
-        android:id="@+id/carMake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/carMake"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ImgCar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
