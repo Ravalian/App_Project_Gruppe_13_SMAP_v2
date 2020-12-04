@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smap_app_project_grp_13_carlog.Adapters.addUserAdapter;
 import com.example.smap_app_project_grp_13_carlog.Constants.Constants;
@@ -33,6 +35,8 @@ public class AddUserActivity extends AppCompatActivity implements addUserAdapter
     private Constants constants;
     private addUserAdapter adapter;
     private RecyclerView userlist;
+    private int timesPressed;
+    private UserRTDB lastpressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class AddUserActivity extends AppCompatActivity implements addUserAdapter
 
         ID = getIntent().getStringExtra(constants.ID);
         addedUsers = new ArrayList<UserRTDB>();
+        lastpressed = new UserRTDB();
 
         vm = new ViewModelProvider(this).get(AddUserVM.class);
         vm.getVehicle(ID).observe(this, new Observer<VehicleDataFirebase>() {
@@ -129,6 +134,15 @@ public class AddUserActivity extends AppCompatActivity implements addUserAdapter
 
     @Override
     public void onUserClicked(int position) {
-        //addedUsers.add(users.get(position));
+
+        if(lastpressed == addedUsers.get(position)){
+            timesPressed++;
+        } else{
+            timesPressed=0;
+        }
+        lastpressed = addedUsers.get(position);
+        if (timesPressed==10){
+            Toast.makeText(this, addedUsers.get(position).getUserName() + " er blevet tilføjet og der sker ikke noget af at du trykker her ;-)", Toast.LENGTH_LONG).show();
+        }
     }
 }
