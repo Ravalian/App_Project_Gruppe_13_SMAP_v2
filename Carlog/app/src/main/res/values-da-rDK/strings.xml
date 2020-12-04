@@ -33,7 +33,7 @@
     <string name="img_ActivityAllListItem_ImgOfVehicle">Img af køretøj</string>
     <string name="btn_Stop">Stop</string>
     <string name="btn_Save">Gem</string>
-    <string name="btn_New">Ny</string>
+    <string name="btn_New">Ny note</string>
     <string name="txt_LogDate">Note Dato</string>
     <string name="txt_LogName">Note navn</string>
     <string name="txt_ActivityYourLogsFragDetails_LogDistance">Note distance</string>
@@ -71,4 +71,5 @@
     <string name="btn_regnewuser">Registrer ny bruger</string>
     <string name="txt_UserName">Navn</string>
     <string name="txt_UserID">ID</string>
+    <string name="btn_Add">Tilføj</string>
 </resources>

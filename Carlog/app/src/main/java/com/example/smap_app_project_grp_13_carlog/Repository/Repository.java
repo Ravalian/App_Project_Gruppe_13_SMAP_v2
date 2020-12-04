@@ -176,11 +176,9 @@ public class Repository {
     private void getRegisteredVehiclesFromFirebase(String uid) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("vehicles");
-        android.util.Log.d("Tester", "Hello");
         reference.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                android.util.Log.d("Tester", ""+snapshot);
                 vehicles.setValue(ToVehiclesSorter(snapshot, uid));
             }
 
@@ -213,7 +211,6 @@ public class Repository {
     private void setupFireDatabaseYourLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("logs");
-
         reference.orderByChild("user").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -245,7 +242,6 @@ public class Repository {
     public void setupFirebaseLogsListener(String id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("logs");
-
         reference.orderByChild("vehicle").equalTo(id.trim()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
