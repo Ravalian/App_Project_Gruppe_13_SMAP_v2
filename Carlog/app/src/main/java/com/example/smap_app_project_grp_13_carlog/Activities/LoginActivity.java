@@ -98,8 +98,6 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK && user != null) {
                 // Successfully signed in
                 loginActivityVM.addUserToFirebaseRTDB(user);
-                //String uid = mAuth.getCurrentUser().getUid();
-                //Toast.makeText(this, "User Logged In\n" +uid, Toast.LENGTH_SHORT).show();
                 gotoUserInterface();
             } else {
                 // Sign in failed. If response is null the user canceled the

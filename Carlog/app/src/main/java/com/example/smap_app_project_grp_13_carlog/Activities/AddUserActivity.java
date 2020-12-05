@@ -60,7 +60,6 @@ public class AddUserActivity extends AppCompatActivity implements addUserAdapter
             @Override
             public void onChanged(List<UserRTDB> userRTDBS) {
                 users = userRTDBS;
-                //android.util.Log.d("Tester", "" + userRTDBS.get(0));
                 if (vehicle.registeredUsers!=null){
                     for (UserRTDB u:
                             users) {

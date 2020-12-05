@@ -70,7 +70,7 @@ public class VehicleLogActivity extends AppCompatActivity implements LocationLis
                         Manifest.permission.ACCESS_FINE_LOCATION}, 101);
             }
         } catch (Exception e){
-            android.util.Log.e("Error", e.toString());
+            e.printStackTrace();
         }
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);

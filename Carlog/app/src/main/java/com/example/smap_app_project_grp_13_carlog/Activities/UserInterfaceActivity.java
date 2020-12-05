@@ -105,7 +105,6 @@ public class UserInterfaceActivity extends AppCompatActivity {
 
     //What happens when logout button is pressed
     private void signOut() {
-        Log.d("logout: onComplete", "Do something ");
         if(mAuth == null){
             mAuth = FirebaseAuth.getInstance();
         }

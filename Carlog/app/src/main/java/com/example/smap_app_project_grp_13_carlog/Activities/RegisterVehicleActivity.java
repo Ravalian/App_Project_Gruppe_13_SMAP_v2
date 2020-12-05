@@ -273,7 +273,6 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                 SaveImageUri(imageUri);
                 File newFile = new File(imageUri.getPath());
                 try {
-                    Log.d("TESTING", "Contents of mCurrentPath: " + mCurrentPhotoPath);
                     InputStream ims = new FileInputStream(newFile);
                     Bitmap bitmap;
                     bitmap = BitmapFactory.decodeStream(ims);
@@ -281,23 +280,6 @@ public class RegisterVehicleActivity extends AppCompatActivity {
                     registerVHImageView.setImageBitmap(bitmap);
                     registerVehicleActivityVM.setImage(bitmap);
                     BitmapToString(bitmap);
-                    /*
-                    String path = android.os.Environment.getExternalStorageDirectory() + File.separator + "Phoenix" + File.separator + "default";
-                    OutputStream outFile = null;
-                    File newfile = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    try{
-                        outFile = new FileOutputStream(newfile);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                        outFile.flush();
-                        outFile.close();
-                    }catch (FileNotFoundException e){
-                        e.printStackTrace();
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    */
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -335,7 +317,6 @@ public class RegisterVehicleActivity extends AppCompatActivity {
         image.compress(Bitmap.CompressFormat.PNG, 60, baos);
         byte[] b = baos.toByteArray();
         Document_img1 = Base64.encodeToString(b, Base64.DEFAULT);
-        Log.d("Testing", "Contents of bitmapString: " + Document_img1);
         return Document_img1;
     }
 

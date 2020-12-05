@@ -18,7 +18,6 @@ public class UserRTDB {
     //Values
     public String userId;
     public String userName;
-    //public List<String> vehicleID;
     //public String userEmail; //Database cannot store "." so email is a no go
 
     //Get/set methods

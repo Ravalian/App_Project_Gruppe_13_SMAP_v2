@@ -184,17 +184,17 @@ public class Repository {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                android.util.Log.d("Tester", ""+snapshot+" 1");
+
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                android.util.Log.d("Tester", ""+snapshot+" 2");
+
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                android.util.Log.d("Tester", ""+snapshot+" 3");
+
             }
 
             @Override
@@ -274,14 +274,13 @@ public class Repository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("logs");
 
-        android.util.Log.d("Tester", uid);
         reference.orderByChild("vehicleOwner").equalTo(uid).limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if (snapshot.getValue(Log.class).date >= System.currentTimeMillis()-(1000*120*12)) {
                     newLog.postValue(snapshot.getValue(Log.class));
                 } else {
-                    android.util.Log.d("Tester", snapshot.getValue(Log.class).getLogDescription());
+                    android.util.Log.d(Constants.REPOTAG, snapshot.getValue(Log.class).getLogDescription());
                 }
             }
 
@@ -322,7 +321,6 @@ public class Repository {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //This is called when initialised and when data is changed.
                 users.setValue(toUsers(snapshot));
-                //android.util.Log.d("Tester", users.getValue().get(0).userName);
             }
 
             @Override
