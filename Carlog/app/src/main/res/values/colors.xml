@@ -10,6 +10,7 @@
     <color name="customBackground">#555555</color>
     <color name="customOrange">#FF9800</color>
     <color name="customBlue">#2196F3</color>
+    <color name="CustomGray">#D3D2D2</color>
 
     <!--Activity your logs fragment-->
     <color name="FragmentList_main_color_dark">#26A69A</color>
